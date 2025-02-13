@@ -8,7 +8,7 @@ package com.mycompany.sistema_bancario;
  *
  * @author Darlan
  */
-public class Sistema_bancario {
+public class Main {
 
     public static void main(String[] args) {
         System.out.println("Hello World!");
