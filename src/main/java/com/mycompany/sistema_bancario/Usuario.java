@@ -63,4 +63,9 @@ public class Usuario {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
+
+    // Método que verifica se o login é válido
+    public boolean login(String cpfInserido, String senhaInserida) {
+        return this.cpf.equals(cpfInserido) && this.senha.equals(senhaInserida);
+    }
 }
