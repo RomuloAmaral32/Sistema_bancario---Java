@@ -16,22 +16,24 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Darlan
  */
 public class UsuarioTest {
-    
+
+    private static Usuario usuario;
     public UsuarioTest() {
     }
-    
+
     @BeforeAll
     public static void setUpClass() {
+        usuario = new Usuario("Darlan", "12345678900", "123456", "darlan@email.com", "cliente");
     }
-    
+
     @AfterAll
     public static void tearDownClass() {
     }
-    
+
     @BeforeEach
     public void setUp() {
     }
-    
+
     @AfterEach
     public void tearDown() {
     }
@@ -42,12 +44,9 @@ public class UsuarioTest {
     @Test
     public void testGetNome() {
         System.out.println("getNome");
-        Usuario instance = null;
-        String expResult = "";
-        String result = instance.getNome();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String expResult = "Darlan";
+        String result = usuario.getNome();
+        assertEquals(expResult, result, "O nome do usuário deve ser 'Darlan'.");
     }
 
     /**
@@ -56,11 +55,9 @@ public class UsuarioTest {
     @Test
     public void testSetNome() {
         System.out.println("setNome");
-        String nome = "";
-        Usuario instance = null;
-        instance.setNome(nome);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String nome = "Darlan silva";
+        usuario.setNome(nome);
+        assertEquals(nome, usuario.getNome(), "O nome do usuário deve ser 'Darlan silva'.");
     }
 
     /**
@@ -69,12 +66,9 @@ public class UsuarioTest {
     @Test
     public void testGetCpf() {
         System.out.println("getCpf");
-        Usuario instance = null;
-        String expResult = "";
-        String result = instance.getCpf();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String expResult = "12345678900";
+        String result = usuario.getCpf();
+        assertEquals(expResult, result, "O CPF do usuário deve ser '12345678900'.");
     }
 
     /**
@@ -83,11 +77,9 @@ public class UsuarioTest {
     @Test
     public void testSetCpf() {
         System.out.println("setCpf");
-        String cpf = "";
-        Usuario instance = null;
-        instance.setCpf(cpf);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String cpf = "98765432100";
+        usuario.setCpf(cpf);
+        assertEquals(cpf, usuario.getCpf(), "O CPF do usuário deve ser '98765432100'.");
     }
 
     /**
@@ -96,12 +88,9 @@ public class UsuarioTest {
     @Test
     public void testGetSenha() {
         System.out.println("getSenha");
-        Usuario instance = null;
-        String expResult = "";
-        String result = instance.getSenha();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String expResult = "123456";
+        String result = usuario.getSenha();
+        assertEquals(expResult, result, "A senha do usuário deve ser '123456'.");
     }
 
     /**
@@ -110,11 +99,9 @@ public class UsuarioTest {
     @Test
     public void testSetSenha() {
         System.out.println("setSenha");
-        String senha = "";
-        Usuario instance = null;
-        instance.setSenha(senha);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String senha = "senha123";
+        usuario.setSenha(senha);
+        assertEquals(senha, usuario.getSenha(), "A senha do usuário deve ser 'senha123'.");
     }
 
     /**
@@ -123,12 +110,9 @@ public class UsuarioTest {
     @Test
     public void testGetEmail() {
         System.out.println("getEmail");
-        Usuario instance = null;
-        String expResult = "";
-        String result = instance.getEmail();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String expResult = "darlan@email.com";
+        String result = usuario.getEmail();
+        assertEquals(expResult, result, "O email do usuário deve ser 'darlan@email.com'.");
     }
 
     /**
@@ -137,11 +121,9 @@ public class UsuarioTest {
     @Test
     public void testSetEmail() {
         System.out.println("setEmail");
-        String email = "";
-        Usuario instance = null;
-        instance.setEmail(email);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String email = "darlan.silva@email.com";
+        usuario.setEmail(email);
+        assertEquals(email, usuario.getEmail(), "O email do usuário deve ser 'darlan.silva@email.com'.");
     }
 
     /**
@@ -150,12 +132,9 @@ public class UsuarioTest {
     @Test
     public void testGetTipo() {
         System.out.println("getTipo");
-        Usuario instance = null;
-        String expResult = "";
-        String result = instance.getTipo();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String expResult = "cliente";
+        String result = usuario.getTipo();
+        assertEquals(expResult, result, "O tipo do usuário deve ser 'Cliente'.");
     }
 
     /**
@@ -164,11 +143,9 @@ public class UsuarioTest {
     @Test
     public void testSetTipo() {
         System.out.println("setTipo");
-        String tipo = "";
-        Usuario instance = null;
-        instance.setTipo(tipo);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String tipo = "Gerente";
+        usuario.setTipo(tipo);
+        assertEquals(tipo, usuario.getTipo(), "O tipo do usuário deve ser 'Gerente'.");
     }
 
     /**
@@ -176,15 +153,29 @@ public class UsuarioTest {
      */
     @Test
     public void testLogin() {
-        System.out.println("login");
-        String cpfInserido = "";
-        String senhaInserida = "";
-        Usuario instance = null;
-        boolean expResult = false;
-        boolean result = instance.login(cpfInserido, senhaInserida);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        // Arrange (Preparação)
+        Usuario usuario = new Usuario("João Silva", "12345678901", "senha123", "joao@example.com", "cliente");
+        String cpfInserido = "12345678901";
+        String senhaInserida = "senha123";
+
+        // Act (Ação)
+        boolean result = usuario.login(cpfInserido, senhaInserida);
+
+        // Assert (Verificação)
+        assertTrue(result, "O login deve ser bem-sucedido com CPF e senha corretos.");
     }
-    
+
+    @Test
+    public void testLoginInvalido() {
+        // Arrange (Preparação)
+        Usuario usuario = new Usuario("João Silva", "12345678901", "senha123", "joao@example.com", "cliente");
+        String cpfInserido = "99999999999"; // CPF incorreto
+        String senhaInserida = "senhaerrada"; // Senha incorreta
+
+        // Act (Ação)
+        boolean result = usuario.login(cpfInserido, senhaInserida);
+
+        // Assert (Verificação)
+        assertFalse(result, "O login deve falhar com CPF ou senha inválidos.");
+    }
 }
