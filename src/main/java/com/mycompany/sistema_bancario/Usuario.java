@@ -21,10 +21,9 @@ public class Usuario {
     public Usuario(String nome, String cpf, String senha, String email, String tipo) {
         this.nome = nome;
 
-        if(validaCPF(cpf)){     
-          this.cpf = cpf;
-        } 
-        else{
+        if (validaCPF(cpf)) {
+            this.cpf = cpf;
+        } else {
             throw new IllegalArgumentException("CPF invalido");
         }
         this.senha = senha;
@@ -45,10 +44,9 @@ public class Usuario {
     }
 
     public void setCpf(String cpf) {
-        if(validaCPF(cpf)){
+        if (validaCPF(cpf)) {
             this.cpf = cpf;
-        }
-        else{
+        } else {
             throw new IllegalArgumentException("CPF invalido");
         }
     }
@@ -84,10 +82,10 @@ public class Usuario {
     // Método que verifica se o login é válido
     public boolean login(String cpfInserido, String senhaInserida) {
         return this.cpf.equals(cpfInserido) && this.senha.equals(senhaInserida);
-    } 
+    }
 
     private boolean validaCPF(String CPF) {
-        CPF = CPF.replace(".", "").replace("-", ""); 
+        CPF = CPF.replace(".", "").replace("-", "");
 
         if (CPF.length() != 11 || CPF.matches("(\\d)\\1{10}")) {
             return false;
@@ -129,6 +127,16 @@ public class Usuario {
 
             return (dig10 == CPF.charAt(9)) && (dig11 == CPF.charAt(10));
         } catch (InputMismatchException e) {
+            return false;
+        }
+    }
+
+    public boolean verificaSenha(String senhaInserida) {
+        if (this.senha.equals(senhaInserida)) {
+            System.out.println("Senha correta.");
+            return true;
+        } else {
+            System.out.println("Senha incorreta.");
             return false;
         }
     }

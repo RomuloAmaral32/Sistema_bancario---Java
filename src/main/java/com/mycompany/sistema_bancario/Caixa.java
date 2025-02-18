@@ -26,12 +26,12 @@ public class Caixa extends Usuario {
         this.numeroFuncionario = numeroFuncionario;
     }
 
-    public void deposito(double valor) {
+    public void deposito(double valor, String contaCliente) {
         if (valor <= 0) {
             System.out.println("Valor inválido para depósito.");
             return;
         }
-        System.out.println("Depósito de R$" + valor + " realizado com sucesso.");
+        System.out.println("Depósito de R$" + valor + " na conta" + contaCliente + " foi realizado com sucesso.");
     }
 
     public boolean saque(double valor, String contaCliente, String senhaCliente) {
@@ -44,6 +44,7 @@ public class Caixa extends Usuario {
                     .println("Valor máximo para saque é de R$1.000.000,00. Para saques maiores, procurar um gerente.");
             return false;
         }
+        verificaSenha(senhaCliente);
         System.out.println("Saque de R$" + valor + " da conta " + contaCliente + " realizado com sucesso.");
         return true;
     }
@@ -61,5 +62,6 @@ public class Caixa extends Usuario {
         System.out.println("Transferência de R$" + valor + " da conta " + contaCliente + " para a conta " + contaDestino
                 + " realizada com sucesso.");
         return true;
+
     }
 }

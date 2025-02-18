@@ -18,12 +18,13 @@ import static org.junit.jupiter.api.Assertions.*;
 public class UsuarioTest {
 
     private static Usuario usuario;
+
     public UsuarioTest() {
     }
 
     @BeforeAll
     public static void setUpClass() {
-        usuario = new Usuario("Darlan", "12345678900", "123456", "darlan@email.com", "cliente");
+        usuario = new Usuario("Darlan", "24677692084", "123456", "darlan@email.com", "cliente");
     }
 
     @AfterAll
@@ -66,9 +67,9 @@ public class UsuarioTest {
     @Test
     public void testGetCpf() {
         System.out.println("getCpf");
-        String expResult = "12345678900";
+        String expResult = "24677692084";
         String result = usuario.getCpf();
-        assertEquals(expResult, result, "O CPF do usuário deve ser '12345678900'.");
+        assertEquals(expResult, result, "O CPF do usuário deve ser '24677692084'.");
     }
 
     /**
@@ -77,9 +78,9 @@ public class UsuarioTest {
     @Test
     public void testSetCpf() {
         System.out.println("setCpf");
-        String cpf = "98765432100";
+        String cpf = "73502780048";
         usuario.setCpf(cpf);
-        assertEquals(cpf, usuario.getCpf(), "O CPF do usuário deve ser '98765432100'.");
+        assertEquals(cpf, usuario.getCpf(), "O CPF do usuário deve ser '73502780048'.");
     }
 
     /**
@@ -143,7 +144,7 @@ public class UsuarioTest {
     @Test
     public void testSetTipo() {
         System.out.println("setTipo");
-        String tipo = "Gerente";
+        String tipo = "caixa";
         usuario.setTipo(tipo);
         assertEquals(tipo, usuario.getTipo(), "O tipo do usuário deve ser 'Gerente'.");
     }
@@ -154,8 +155,8 @@ public class UsuarioTest {
     @Test
     public void testLogin() {
         // Arrange (Preparação)
-        Usuario usuario = new Usuario("João Silva", "12345678901", "senha123", "joao@example.com", "cliente");
-        String cpfInserido = "12345678901";
+        Usuario usuario = new Usuario("João Silva", "73502780048", "senha123", "joao@example.com", "cliente");
+        String cpfInserido = "73502780048";
         String senhaInserida = "senha123";
 
         // Act (Ação)
@@ -168,8 +169,8 @@ public class UsuarioTest {
     @Test
     public void testLoginInvalido() {
         // Arrange (Preparação)
-        Usuario usuario = new Usuario("João Silva", "12345678901", "senha123", "joao@example.com", "cliente");
-        String cpfInserido = "99999999999"; // CPF incorreto
+        Usuario usuario = new Usuario("João Silva", "73502780048", "senha123", "joao@example.com", "cliente");
+        String cpfInserido = "05484032016"; // CPF incorreto
         String senhaInserida = "senhaerrada"; // Senha incorreta
 
         // Act (Ação)
