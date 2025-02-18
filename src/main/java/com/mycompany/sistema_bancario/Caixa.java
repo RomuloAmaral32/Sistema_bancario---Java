@@ -13,9 +13,9 @@ public class Caixa extends Usuario {
 
     private String numeroFuncionario;
 
-	public Caixa(String nome, String cpf, String senha, String email, String tipo, String numeroFuncionario) {
-        super(nome, cpf, senha, email, tipo); // Chama o construtor da classe base
-        this.numeroFuncionario = numeroFuncionario;	
+    public Caixa(String nome, String cpf, String senha, String email, String tipo, String numeroFuncionario) {
+        super(nome, cpf, senha, email, tipo);
+        this.numeroFuncionario = numeroFuncionario;
     }
 
     public String getNumeroFuncionario() {
@@ -24,5 +24,42 @@ public class Caixa extends Usuario {
 
     public void setNumeroFuncionario(String numeroFuncionario) {
         this.numeroFuncionario = numeroFuncionario;
+    }
+
+    public void deposito(double valor) {
+        if (valor <= 0) {
+            System.out.println("Valor inválido para depósito.");
+            return;
+        }
+        System.out.println("Depósito de R$" + valor + " realizado com sucesso.");
+    }
+
+    public boolean saque(double valor, String contaCliente, String senhaCliente) {
+        if (valor <= 0) {
+            System.out.println("Valor inválido para saque.");
+            return false;
+        }
+        if (valor > 1000000) {
+            System.out
+                    .println("Valor máximo para saque é de R$1.000.000,00. Para saques maiores, procurar um gerente.");
+            return false;
+        }
+        System.out.println("Saque de R$" + valor + " da conta " + contaCliente + " realizado com sucesso.");
+        return true;
+    }
+
+    public boolean transferencia(double valor, String contaCliente, String senhaCliente, String contaDestino) {
+        if (valor <= 0) {
+            System.out.println("Valor inválido para transferência.");
+            return false;
+        }
+        if (valor > 1000000) {
+            System.out.println(
+                    "Valor máximo para transferência é de R$1.000.000,00. Para transferências maiores, procurar um gerente.");
+            return false;
+        }
+        System.out.println("Transferência de R$" + valor + " da conta " + contaCliente + " para a conta " + contaDestino
+                + " realizada com sucesso.");
+        return true;
     }
 }
