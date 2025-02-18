@@ -27,10 +27,9 @@ public class Caixa extends Usuario {
     }
 
     public void deposito(double valor, String contaCliente) {
-        if (valor <= 0) {
-            System.out.println("Valor inválido para depósito.");
-            return;
-        }
+        if (valor <= 0)
+            throw new IllegalArgumentException("Valor inválido para depósito.");
+
         System.out.println("Depósito de R$" + valor + " na conta" + contaCliente + " foi realizado com sucesso.");
     }
 
