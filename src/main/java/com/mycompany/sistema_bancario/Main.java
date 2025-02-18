@@ -1,31 +1,22 @@
 package com.mycompany.sistema_bancario;
 
+import java.util.Scanner;
+
 public class Main {
 
-    public static void main(String[] args) {                        //Main feita somente para visualizar operaçoes e validacoes--(nao é o resultado final)
+    public static void main(String[] args) {
+        Gerente gerente = new Gerente("Carlos Silva", "987.654.321-00", "senha123", "carlos@email.com", "Gerente", 1500000.0);
 
-        Cliente cliente1 = new Cliente("Kauã", "161.586.406-70", "senha123", "kaua@email.com", "Cliente", "12345-6", "Rua A, 123", 1000.0);
-        Cliente cliente2 = new Cliente("João", "161.586.406-70", "senha456", "joao@email.com", "Cliente", "54321-0", "Rua B, 321", 500.0);
-        
-        System.out.println("---- Cliente 1: Kauã ----");
-        cliente1.consultarSaldo(); 
-        
-        System.out.println("\n---- Transferindo de Kauã para João ----");
-        cliente1.transferir(200.0, cliente2); 
-       
-        System.out.println("\n---- Consultando extrato de Kauã ----");
-        cliente1.consultarExtrato(); 
-        
-        System.out.println("\n---- Consultando extrato de João ----");
-        cliente2.consultarExtrato(); 
+        System.out.println("Cadastro de Renda Fixa:");
+        gerente.cadastrarRendaFixa();
 
-        System.out.println("\n---- Sacando da conta de Kauã ----");
-        cliente1.sacar(300.0); 
+        System.out.println("\nCadastro de Renda Variável:");
+        gerente.cadastrarRendaVariavel();
 
-        System.out.println("\n---- Consultando saldo de Kauã ----");
-        cliente1.consultarSaldo();
+        System.out.println("\nExibindo os produtos de Renda Fixa:");
+        gerente.exibirRendaFixa();
 
-        System.out.println("\n---- Consultando extrato de Kauã ----");
-        cliente1.consultarExtrato();
+        System.out.println("\nExibindo os produtos de Renda Variável:");
+        gerente.exibirRendaVariavel();
     }
 }
