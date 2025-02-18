@@ -13,7 +13,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  *
- * @author Darlan
+ * @author Darlan Henrique da Costa Silva
+ * @matricula 202176038
  */
 public class UsuarioTest {
 
