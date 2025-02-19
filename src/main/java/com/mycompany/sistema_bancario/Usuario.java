@@ -79,10 +79,6 @@ public class Usuario {
         }
     }
 
-    public boolean login(String cpfInserido, String senhaInserida) {
-        return this.cpf.equals(cpfInserido) && this.senha.equals(senhaInserida);
-    }
-
     private boolean validaCPF(String CPF) {
         CPF = CPF.replace(".", "").replace("-", "");
 
@@ -131,12 +127,6 @@ public class Usuario {
     }
 
     public boolean verificaSenha(String senhaInserida) {
-        if (this.senha.equals(senhaInserida)) {
-            System.out.println("Senha correta.");
-            return true;
-        } else {
-            System.out.println("Senha incorreta.");
-            return false;
-        }
+        return this.senha.equals(senhaInserida);
     }
 }

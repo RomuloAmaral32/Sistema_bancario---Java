@@ -1,1 +1,17 @@
-[{"nome":"Darlan Silva","cpf":"34014199002","senha":"senha123","email":"darlan@email.com","tipo":"cliente"},{"nome":"Maria Julia","cpf":"47712171068","senha":"senha456","email":"mj@email.com","tipo":"caixa"}]
+[
+  {
+    "nome": "Darlan Silva",
+    "cpf": "34014199002",
+    "senha": "senha123",
+    "email": "darlan@email.com",
+    "tipo": "cliente"
+  },
+  {
+    "nome": "Maria Julia",
+    "cpf": "47712171068",
+    "senha": "senha456",
+    "email": "mj@email.com",
+    "tipo": "caixa",
+    "numeroFuncionario": "001"
+  }
+]

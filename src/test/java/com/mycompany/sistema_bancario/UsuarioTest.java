@@ -149,35 +149,4 @@ public class UsuarioTest {
         usuario.setTipo(tipo);
         assertEquals(tipo, usuario.getTipo(), "O tipo do usuário deve ser 'Gerente'.");
     }
-
-    /**
-     * Test of login method, of class Usuario.
-     */
-    @Test
-    public void testLogin() {
-        // Arrange (Preparação)
-        Usuario usuario = new Usuario("João Silva", "73502780048", "senha123", "joao@example.com", "cliente");
-        String cpfInserido = "73502780048";
-        String senhaInserida = "senha123";
-
-        // Act (Ação)
-        boolean result = usuario.login(cpfInserido, senhaInserida);
-
-        // Assert (Verificação)
-        assertTrue(result, "O login deve ser bem-sucedido com CPF e senha corretos.");
-    }
-
-    @Test
-    public void testLoginInvalido() {
-        // Arrange (Preparação)
-        Usuario usuario = new Usuario("João Silva", "73502780048", "senha123", "joao@example.com", "cliente");
-        String cpfInserido = "05484032016"; // CPF incorreto
-        String senhaInserida = "senhaerrada"; // Senha incorreta
-
-        // Act (Ação)
-        boolean result = usuario.login(cpfInserido, senhaInserida);
-
-        // Assert (Verificação)
-        assertFalse(result, "O login deve falhar com CPF ou senha inválidos.");
-    }
 }

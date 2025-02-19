@@ -10,6 +10,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  *
@@ -18,13 +20,22 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class CaixaTest {
     private static Caixa caixa;
+    private static UsuarioService usuarioService;
 
     public CaixaTest() {
     }
 
     @BeforeEach
     public void setUpClass() {
-        caixa = new Caixa("Darlan", "24677692084", "123456", "darlan@email.com", "caixa", "123");
+        List<Usuario> usuarios = new ArrayList<>();
+        usuarios.add(new Cliente("Joao Carlos", "71832421023", "123456", "joaocarlos@email.com", "cliente", "0001",
+                "Rua A, 1567 - Bias Fortes - MG", 0));
+        usuarios.add(
+                new Cliente("Mariana Silveira", "10295176067", "987654", "marianasilveira@email.com", "cliente", "0002",
+                        "Rua B, 99877 - Vicosa - MG", 0));
+
+        usuarioService = new UsuarioService(usuarios);
+        caixa = new Caixa("Darlan", "24677692084", "123456", "darlan@email.com", "caixa", "123", usuarioService);
     }
 
     @AfterEach
@@ -69,7 +80,7 @@ public class CaixaTest {
     public void testDepositoValido() {
         System.out.println("depositoValido");
         double valor = 5000;
-        String contaCliente = "1235";
+        String contaCliente = "0001";
         caixa.deposito(valor, contaCliente);
     }
 
@@ -80,7 +91,7 @@ public class CaixaTest {
     public void testDepositoInvalido() {
         System.out.println("depositoInvalido");
         double valor = -5000;
-        String contaCliente = "1235";
+        String contaCliente = "0002";
         try {
             caixa.deposito(valor, contaCliente);
             fail("Deveria ter lançado uma exceção para depósito inválido.");
@@ -96,8 +107,8 @@ public class CaixaTest {
     public void testSaqueValido() {
         System.out.println("saqueValido");
         double valor = 50000;
-        String contaCliente = "1234";
-        String senhaCliente = "111111";
+        String contaCliente = "0001";
+        String senhaCliente = "123456";
         boolean resultado = caixa.saque(valor, contaCliente, senhaCliente);
         assertTrue(resultado, "O saque dentro do limite deve ser bem-sucedido.");
     }
@@ -109,8 +120,8 @@ public class CaixaTest {
     public void testSaqueInvalido() {
         System.out.println("saqueInvalido");
         double valor = 1950000;
-        String contaCliente = "1234";
-        String senhaCliente = "111111";
+        String contaCliente = "0002";
+        String senhaCliente = "987654";
         boolean resultado = caixa.saque(valor, contaCliente, senhaCliente);
         assertFalse(resultado, "O saque dentro do limite deve falhar.");
     }
@@ -122,9 +133,9 @@ public class CaixaTest {
     public void testTransferenciaValida() {
         System.out.println("transferenciaValida");
         double valor = 50000;
-        String contaCliente = "1234";
-        String senhaCliente = "111111";
-        String contaDestino = "4321";
+        String contaCliente = "0001";
+        String senhaCliente = "123456";
+        String contaDestino = "0002";
         boolean resultado = caixa.transferencia(valor, contaCliente, senhaCliente, contaDestino);
         assertTrue(resultado, "A transferência dentro do limite deve ser bem-sucedida.");
     }
@@ -136,9 +147,9 @@ public class CaixaTest {
     public void testTransferenciaInvalida() {
         System.out.println("transferenciaInvalida");
         double valor = 1950000;
-        String contaCliente = "1234";
-        String senhaCliente = "111111";
-        String contaDestino = "4321";
+        String contaCliente = "0002";
+        String senhaCliente = "987654";
+        String contaDestino = "0001";
         boolean resultado = caixa.transferencia(valor, contaCliente, senhaCliente, contaDestino);
         assertFalse(resultado, "A transferência acima do limite deve falhar.");
     }

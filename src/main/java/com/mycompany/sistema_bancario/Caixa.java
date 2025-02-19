@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.sistema_bancario;
-
 /**
  *
  * @author Darlan Henrique da Costa Silva
@@ -12,10 +11,13 @@ package com.mycompany.sistema_bancario;
 public class Caixa extends Usuario {
 
     private String numeroFuncionario;
+    private UsuarioService usuarioService;
 
-    public Caixa(String nome, String cpf, String senha, String email, String tipo, String numeroFuncionario) {
+    public Caixa(String nome, String cpf, String senha, String email, String tipo, String numeroFuncionario,
+            UsuarioService usuarioService) {
         super(nome, cpf, senha, email, tipo);
         this.numeroFuncionario = numeroFuncionario;
+        this.usuarioService = usuarioService;
     }
 
     public String getNumeroFuncionario() {
@@ -26,14 +28,18 @@ public class Caixa extends Usuario {
         this.numeroFuncionario = numeroFuncionario;
     }
 
-    public void deposito(double valor, String contaCliente) {
+    public void deposito(double valor, String numeroContaCliente) {
         if (valor <= 0)
             throw new IllegalArgumentException("Valor inválido para depósito.");
 
-        System.out.println("Depósito de R$" + valor + " na conta" + contaCliente + " foi realizado com sucesso.");
+        Cliente cliente = usuarioService.buscarClientePorNumeroConta(numeroContaCliente);
+        System.out.println(
+                "Depósito de R$" + valor + " na conta de " + cliente.getNome() + " foi realizado com sucesso.");
     }
 
-    public boolean saque(double valor, String contaCliente, String senhaCliente) {
+    public boolean saque(double valor, String numeroContaCliente, String senhaCliente) {
+        Cliente cliente = usuarioService.buscarClientePorNumeroConta(numeroContaCliente);
+
         if (valor <= 0) {
             System.out.println("Valor inválido para saque.");
             return false;
@@ -43,12 +49,17 @@ public class Caixa extends Usuario {
                     .println("Valor máximo para saque é de R$1.000.000,00. Para saques maiores, procurar um gerente.");
             return false;
         }
-        verificaSenha(senhaCliente);
-        System.out.println("Saque de R$" + valor + " da conta " + contaCliente + " realizado com sucesso.");
+        if (!cliente.verificaSenha(senhaCliente)) {
+            System.out.println("Senha incorreta.");
+            return false;
+        }
+        System.out.println("Saque de R$" + valor + " da conta " + numeroContaCliente + " realizado com sucesso.");
         return true;
     }
 
-    public boolean transferencia(double valor, String contaCliente, String senhaCliente, String contaDestino) {
+    public boolean transferencia(double valor, String numeroContaCliente, String senhaCliente, String contaDestino) {
+        Cliente cliente = usuarioService.buscarClientePorNumeroConta(numeroContaCliente);
+
         if (valor <= 0) {
             System.out.println("Valor inválido para transferência.");
             return false;
@@ -58,9 +69,13 @@ public class Caixa extends Usuario {
                     "Valor máximo para transferência é de R$1.000.000,00. Para transferências maiores, procurar um gerente.");
             return false;
         }
-        System.out.println("Transferência de R$" + valor + " da conta " + contaCliente + " para a conta " + contaDestino
-                + " realizada com sucesso.");
+        if (!cliente.verificaSenha(senhaCliente)) {
+            System.out.println("Senha incorreta.");
+            return false;
+        }
+        System.out.println(
+                "Transferência de R$" + valor + " da conta " + numeroContaCliente + " para a conta " + contaDestino
+                        + " realizada com sucesso.");
         return true;
-
     }
 }
