@@ -4,13 +4,10 @@
  */
 package com.mycompany.sistema_bancario;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import java.io.FileReader;
-import java.io.FileWriter;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.type.TypeReference;
+import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,6 +16,7 @@ import java.util.List;
  * @matricula 202176038
  */
 public class JsonHandler<T> {
+    private final ObjectMapper objectMapper = new ObjectMapper();
     private final String filePath;
 
     public JsonHandler(String filePath) {
@@ -26,19 +24,10 @@ public class JsonHandler<T> {
     }
 
     public void saveToJson(List<T> data) throws IOException {
-        Gson gson = new Gson();
-        try (FileWriter writer = new FileWriter(filePath)) {
-            gson.toJson(data, writer);
-        }
+        objectMapper.writeValue(new File(filePath), data);
     }
 
     public List<T> loadFromJson(Class<T> clazz) throws IOException {
-        Gson gson = new Gson();
-        try (FileReader reader = new FileReader(filePath)) {
-            Type listType = TypeToken.getParameterized(ArrayList.class, clazz).getType();
-            return gson.fromJson(reader, listType);
-        } catch (IOException e) {
-            return new ArrayList<>();
-        }
+        return objectMapper.readValue(new File(filePath), objectMapper.getTypeFactory().constructCollectionType(List.class, clazz));
     }
 }

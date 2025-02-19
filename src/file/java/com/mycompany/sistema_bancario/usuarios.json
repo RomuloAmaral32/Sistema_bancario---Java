@@ -2,16 +2,35 @@
   {
     "nome": "Darlan Silva",
     "cpf": "34014199002",
-    "senha": "senha123",
+    "senha": "123456",
     "email": "darlan@email.com",
-    "tipo": "cliente"
+    "tipo": "cliente",
+    "contaBancaria": "0001",
+    "endereco": "Rua A, 123 - Belmiro BRaga - MG"
   },
   {
     "nome": "Maria Julia",
     "cpf": "47712171068",
-    "senha": "senha456",
+    "senha": "987654",
     "email": "mj@email.com",
-    "tipo": "caixa",
+    "tipo": "cliente",
+    "contaBancaria": "0002",
+    "endereco": "Rua B, 456 - Belmiro BRaga - MG"
+  },
+  {
+    "nome": "João Santos",
+    "cpf": "10295176067",
+    "senha": "000000",
+    "email": "joao@email.com",
+    "tipo": "Caixa",
     "numeroFuncionario": "001"
+  },
+  {
+    "nome": "Carlos Silva",
+    "cpf": "71832421023",
+    "senha": "776655",
+    "email": "carlos@email.com",
+    "tipo": "Gerente",
+    "nivelDeAcesso": 1500000.0
   }
 ]
