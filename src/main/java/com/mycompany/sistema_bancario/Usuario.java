@@ -79,7 +79,6 @@ public class Usuario {
         }
     }
 
-    // Método que verifica se o login é válido
     public boolean login(String cpfInserido, String senhaInserida) {
         return this.cpf.equals(cpfInserido) && this.senha.equals(senhaInserida);
     }

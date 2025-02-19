@@ -16,18 +16,33 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-        JsonHandler<Usuario> jsonHandler = new JsonHandler<>("usuarios.json");
 
-        try {
-            List<Usuario> usuarios = jsonHandler.loadFromJson(Usuario.class);
-            System.out.println("Usuários carregados:");
-            for (Usuario usuario : usuarios) {
-                System.out.println(usuario.getNome() + " - " + usuario.getCpf());
-            }
-        } catch (IOException e) {
-            System.out.println("Erro ao carregar usuários: " + e.getMessage());
+        String filePath = "usuarios.json";
+        LoginService loginService = new LoginService(filePath);
+
+        String cpfInserido = "34014199002";
+        String senhaInserida = "senha123";
+
+
+        boolean loginValido = loginService.verificarLogin(cpfInserido, senhaInserida);
+        if (loginValido) {
+            System.out.println("Login bem-sucedido!");
+        } else {
+            System.out.println("CPF ou senha inválidos.");
         }
 
+        // carregar usuarios
+        // JsonHandler<Usuario> jsonHandler = new JsonHandler<>("src/file/java/com/mycompany/sistema_bancario/usuarios.json");
+
+        // try {
+        //     List<Usuario> usuarios = jsonHandler.loadFromJson(Usuario.class);
+        //     System.out.println("Usuários carregados:");
+        //     for (Usuario usuario : usuarios) {
+        //         System.out.println(usuario.getNome() + " - " + usuario.getCpf());
+        //     }
+        // } catch (IOException e) {
+        //     System.out.println("Erro ao carregar usuários: " + e.getMessage());
+        // }
 
         // salvar usuarios
         // List<Usuario> usuarios = new ArrayList<>();
@@ -41,20 +56,6 @@ public class Main {
         // } catch (IOException e) {
         //     System.out.println("Erro ao salvar usuários: " + e.getMessage());
         // }
-
-        Caixa caixa = new Caixa("Darlan", "34014199002", "123456", "darlan@email.com", "caixa", "1234");
-        String cpfInserido = "34014199002";
-        String senhaInserida = "123456";
-        boolean loginValido = caixa.login(cpfInserido, senhaInserida);
-
-        if (loginValido)
-            System.out.println("Login bem-sucedido! Bem-vindo, " + caixa.getNome() + ".");
-        else
-            System.out.println("Login falhou. Verifique seu CPF e senha.");
-
-        caixa.deposito(1000, "123456");
-        caixa.saque(500, "123456", "1234");
-        caixa.transferencia(200, "123456", "1234", "654321");
 
     }
 }
