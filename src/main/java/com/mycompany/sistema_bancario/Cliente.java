@@ -96,4 +96,12 @@ public class Cliente extends Usuario {
     public void setEndereco(String endereco) {
         this.endereco = endereco;
     }
+
+    public double getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
+    }
 }

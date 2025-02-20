@@ -28,6 +28,7 @@ public class JsonHandler<T> {
     }
 
     public List<T> loadFromJson(Class<T> clazz) throws IOException {
-        return objectMapper.readValue(new File(filePath), objectMapper.getTypeFactory().constructCollectionType(List.class, clazz));
+        return objectMapper.readValue(new File(filePath),
+                objectMapper.getTypeFactory().constructCollectionType(List.class, clazz));
     }
 }

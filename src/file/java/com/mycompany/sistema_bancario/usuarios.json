@@ -6,7 +6,8 @@
     "email": "darlan@email.com",
     "tipo": "cliente",
     "contaBancaria": "0001",
-    "endereco": "Rua A, 123 - Belmiro BRaga - MG"
+    "endereco": "Rua A, 123 - Belmiro Baga - MG",
+    "saldo": 1000.0
   },
   {
     "nome": "Maria Julia",
@@ -15,7 +16,8 @@
     "email": "mj@email.com",
     "tipo": "cliente",
     "contaBancaria": "0002",
-    "endereco": "Rua B, 456 - Belmiro BRaga - MG"
+    "endereco": "Rua B, 456 - Belmiro BRaga - MG",
+    "saldo": 1000.0
   },
   {
     "nome": "João Santos",
@@ -31,6 +33,6 @@
     "senha": "776655",
     "email": "carlos@email.com",
     "tipo": "Gerente",
-    "nivelDeAcesso": 1500000.0
+    "nivelDeAcesso": 1000000.0
   }
 ]

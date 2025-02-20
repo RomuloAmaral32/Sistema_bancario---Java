@@ -4,6 +4,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ * @author Darlan Henrique da Costa Silva
+ * @matricula 202176038
+ */
+
 public class Main {
 
     public static UsuarioService usuarioService;
@@ -39,13 +45,14 @@ public class Main {
 
         List<Usuario> usuarios = new ArrayList<>();
         usuarios.add(new Cliente("Darlan Silva", "34014199002", "123456",
-                "darlan@email.com", "cliente", "0001", "Rua A, 123 - Belmiro BRaga - MG", 0));
+                "darlan@email.com", "cliente", "0001", "Rua A, 123 - Belmiro Baga - MG", 1000.0));
         usuarios.add(new Cliente("Maria Julia", "47712171068", "987654",
-                "mj@email.com", "cliente", "0002", "Rua B, 456 - Belmiro BRaga - MG", 0));
+                "mj@email.com", "cliente", "0002", "Rua B, 456 - Belmiro BRaga - MG", 1000.0));
         usuarios.add(new Caixa("João Santos", "10295176067", "000000", "joao@email.com",
                 "Caixa", "001", usuarioService));
         usuarios.add(new Gerente("Carlos Silva", "71832421023", "776655", "carlos@email.com", "Gerente",
-                1500000.0));
+                1000000.0));
+
 
         JsonHandler<Usuario> jsonHandler = new JsonHandler<>(
                 "src/file/java/com/mycompany/sistema_bancario/usuarios.json");
