@@ -21,7 +21,6 @@ public class Cliente extends Usuario {
         registrarExtrato("Abertura da conta com saldo inicial: R$" + saldoInicial);
     }
 
-    // Método de validação de senha
     private boolean validarSenha() {
         System.out.print("Digite sua senha para validar a operação: ");
         String senhaDigitada = scanner.nextLine();  
@@ -103,6 +102,77 @@ public class Cliente extends Usuario {
                 System.out.println(registro);
             }
         } else {
+            System.out.println("Senha incorreta. Operação cancelada.");
+        }
+    }
+
+    public void escolherInvestimento(Gerente gerente) {
+        System.out.println("Opções de Investimentos em Renda Fixa:");
+        List<String> rendaFixa = gerente.getRendaFixa();
+        if (rendaFixa.isEmpty()) {
+            System.out.println("Nenhum produto de Renda Fixa disponível.");
+        } else {
+            for (int i = 0; i < rendaFixa.size(); i++) {
+                System.out.println((i + 1) + ". " + rendaFixa.get(i));
+            }
+        }
+    
+        System.out.println("\nOpções de Investimentos em Renda Variável:");
+        List<String> rendaVariavel = gerente.getRendaVariavel();
+        if (rendaVariavel.isEmpty()) {
+            System.out.println("Nenhum produto de Renda Variável disponível.");
+        } else {
+            for (int i = 0; i < rendaVariavel.size(); i++) {
+                System.out.println((i + 1) + ". " + rendaVariavel.get(i));
+            }
+        }
+    
+        System.out.println("\nEscolha o tipo de investimento: ");
+        System.out.println("1. Renda Fixa");
+        System.out.println("2. Renda Variável");
+        int tipoInvestimento = scanner.nextInt();
+        scanner.nextLine(); 
+    
+        System.out.println("Digite o número do investimento que deseja escolher: ");
+        int escolha = scanner.nextInt();
+        scanner.nextLine();  
+    
+        System.out.print("Digite o valor que deseja investir: R$ ");
+        double valorInvestido = scanner.nextDouble();
+        scanner.nextLine();  
+    
+        if (valorInvestido <= this.saldo) {
+            if (tipoInvestimento == 1 && escolha > 0 && escolha <= rendaFixa.size()) {
+                System.out.println("Você escolheu o investimento de Renda Fixa: " + rendaFixa.get(escolha - 1));
+                this.saldo -= valorInvestido; 
+                registrarExtrato("Investimento de R$" + valorInvestido + " realizado em Renda Fixa: " + rendaFixa.get(escolha - 1));
+                System.out.println("Investimento realizado com sucesso!");
+            } else if (tipoInvestimento == 2 && escolha > 0 && escolha <= rendaVariavel.size()) {
+                System.out.println("Você escolheu o investimento de Renda Variável: " + rendaVariavel.get(escolha - 1));
+                this.saldo -= valorInvestido; 
+                registrarExtrato("Investimento de R$" + valorInvestido + " realizado em Renda Variável: " + rendaVariavel.get(escolha - 1));
+                System.out.println("Investimento realizado com sucesso!");
+            } else {
+                System.out.println("Opção inválida.");
+            }
+        } else {
+            System.out.println("Saldo insuficiente para realizar o investimento.");
+        }
+    }
+
+    public void solicitarCredito(double valor, Gerente gerente) {
+        if(validarSenha()){
+            boolean autoriza;
+            autoriza=gerente.analisarCredito(this, valor);
+            if(autoriza){
+                this.saldo += valor;
+                registrarExtrato("Crédito de R$" + valor + " concedito por:" + gerente.getNome());
+            }
+         else {
+            System.out.println("O gerente nao concedeu o crédito solicitado.");
+        }
+        }
+        else {
             System.out.println("Senha incorreta. Operação cancelada.");
         }
     }

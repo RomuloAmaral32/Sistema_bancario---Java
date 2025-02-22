@@ -105,5 +105,28 @@ public class Gerente extends Usuario {
                 return false;
             }
     }
+    public List<String> getRendaFixa() {
+        return rendaFixa;
+    }
+    
+    public List<String> getRendaVariavel() {
+        return rendaVariavel;
+    }
+
+    public boolean analisarCredito(Cliente cliente, double valor) {
+        System.out.println("Gerente, uma solicitação de crédito de R$" + valor + " foi solicitado por:" + cliente.getNome());
+        System.out.print("Deseja autorizar o crédito? (y/n): ");
+        String escolha = scanner.nextLine();
+
+        if (escolha.equalsIgnoreCase("y")) {
+            System.out.println("Gerente concedendo crédito de R$" + valor + "...");
+            return true;
+        }else {
+            return false;
+        }
+
+    }
+    
+    
 
 }
