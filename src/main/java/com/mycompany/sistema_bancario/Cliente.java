@@ -36,12 +36,28 @@ public class Cliente extends Usuario {
         }
     }
 
-    public void transferir(double valor, Cliente destinatario) {
+    public void transferir(double valor, Cliente destinatario, Gerente gerente) {
         if (validarSenha()) {
-            if (valor <= this.saldo) {
+            if (valor >= 1000000.0) {
+                if (valor <= this.saldo){
+                    boolean veracidade;
+                    veracidade = gerente.acompanharTransacao(this, destinatario, valor);
+                    if(veracidade){
+                        this.saldo -= valor;
+                        destinatario.receberTransferencia(valor, this);
+                        registrarExtrato("Transferência de R$" + valor + " para " + destinatario.getContaBancaria());
+                        System.out.println("Transferência realizada com sucesso.");
+                    }else{
+                        System.out.println("O gerente nao autorizou a sua transferência");
+                    }
+                }
+                else {
+                    System.out.println("Saldo insuficiente para essa transferência.");
+                }
+            } else if (valor <= this.saldo) {
                 this.saldo -= valor;
                 destinatario.receberTransferencia(valor, this);
-                registrarExtrato("Transferência de R$" + valor + " para " + destinatario.getContaBancaria());
+                registrarExtrato("Transferência de R$" + valor + " para " + destinatario.getNome());
                 System.out.println("Transferência realizada com sucesso.");
             } else {
                 System.out.println("Saldo insuficiente para essa transferência.");
@@ -53,12 +69,14 @@ public class Cliente extends Usuario {
 
     public void receberTransferencia(double valor, Cliente remetente) {
         this.saldo += valor;
-        registrarExtrato("Recebido R$" + valor + " de " + remetente.getContaBancaria());
+        registrarExtrato("Recebido R$" + valor + " de " + remetente.getNome());
     }
 
-    public void sacar(double valor) {
+    public void sacar(double valor, Gerente gerente) {
         if (validarSenha()) {
-            if (valor <= this.saldo) {
+            if (valor >= 1000000.0) {
+                gerente.acompanharSaque(this, valor);
+            } else if (valor <= this.saldo) {
                 this.saldo -= valor;
                 registrarExtrato("Saque de R$" + valor);
                 System.out.println("Saque de R$" + valor + " realizado com sucesso.");

@@ -82,4 +82,34 @@ public class Gerente extends Usuario {
     public void setNivelDeAcesso(double nivelDeAcesso) {
         this.nivelDeAcesso = nivelDeAcesso;
     }
+    public boolean acompanharTransacao(Cliente cliente, Cliente destinatario, double valor) {
+        if (valor >= 1000000.0) {
+            System.out.println("Gerente, uma transação de R$" + valor + " foi solicitada.");
+            System.out.print("Deseja autorizar a transação? (y/n): ");
+            String escolha = scanner.nextLine();
+
+            if (escolha.equalsIgnoreCase("y")) {
+                System.out.println("Gerente autorizando transação de R$" + valor + "...");
+                return true;
+            } 
+             System.out.println("Gerente recusou a transação.");
+             return false;
+        } 
+        return false;
+    }
+    public void acompanharSaque(Cliente cliente, double valor) {
+        if (valor >= 1000000.0) {
+            System.out.println("Gerente, um saque de R$" + valor + " foi solicitado.");
+            System.out.print("Deseja autorizar o saque? (y/n): ");
+            String escolha = scanner.nextLine();
+
+            if (escolha.equalsIgnoreCase("y")) {
+                System.out.println("Gerente autorizando saque de R$" + valor + "...");
+                cliente.sacar(valor, this);
+            } else {
+                System.out.println("Gerente recusou o saque.");
+            }
+        }
+    }
+
 }
