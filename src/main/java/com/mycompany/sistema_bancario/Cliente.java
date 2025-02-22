@@ -75,7 +75,15 @@ public class Cliente extends Usuario {
     public void sacar(double valor, Gerente gerente) {
         if (validarSenha()) {
             if (valor >= 1000000.0) {
-                gerente.acompanharSaque(this, valor);
+                boolean veracidadesaque;
+                veracidadesaque = gerente.acompanharSaque(this, valor);
+                if(veracidadesaque){
+                    this.saldo -= valor;
+                registrarExtrato("Saque de R$" + valor);
+                System.out.println("Saque de R$" + valor + " realizado com sucesso.");
+                }else{
+                    System.out.println("O gerente não autorizou o seu saque");
+                }
             } else if (valor <= this.saldo) {
                 this.saldo -= valor;
                 registrarExtrato("Saque de R$" + valor);
