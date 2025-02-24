@@ -88,3 +88,4 @@ void testAnalisarCreditoAutomatizadoRejeitado() {
     assertFalse(aprovado, "O crédito deveria ser rejeitado automaticamente.");
 }
 }
+//ian
