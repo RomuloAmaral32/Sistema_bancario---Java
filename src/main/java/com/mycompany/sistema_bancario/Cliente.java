@@ -35,6 +35,12 @@ public class Cliente extends Usuario {
         }
     }
 
+    /*ian */
+
+    public double getSaldo() {
+        return this.saldo;
+    }
+
     public void transferir(double valor, Cliente destinatario, Gerente gerente) {
         if (validarSenha()) {
             if (valor >= 1000000.0) {
