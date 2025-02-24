@@ -74,6 +74,7 @@ public class Gerente extends Usuario {
             System.out.println("Nenhum produto de Renda Variável cadastrado.");
         }
     }
+    
 
     public double getNivelDeAcesso() {
         return nivelDeAcesso;
@@ -125,6 +126,16 @@ public class Gerente extends Usuario {
             return false;
         }
 
+    }
+    //dois métodos para o teste testAnalisarCreditoAutomatizadoAprovado e testAnalisarCreditoAutomatizadoRejeitado ~ian
+    
+    public boolean acompanharTransacao(boolean decisao, Cliente cliente, Cliente destinatario, double valor) {
+        System.out.println("Gerente, uma transação de R$" + valor + " foi solicitada.");
+        return decisao;
+    }
+
+    public boolean analisarCreditoAutomatizado(Cliente cliente, double valor, boolean aprovado) {
+        return aprovado;
     }
     
     
