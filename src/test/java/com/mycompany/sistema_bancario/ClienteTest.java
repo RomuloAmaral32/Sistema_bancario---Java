@@ -11,7 +11,6 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.List;
 
-
 public class ClienteTest {
     private Cliente cliente;
     private Cliente cliente2;
@@ -75,4 +74,34 @@ public class ClienteTest {
         assertEquals(1000.0, cliente2.getSaldo()); 
     }
     
+    @Test
+    void saqueBemSucedido() {
+        cliente.sacar(500.0, gerente, "senha123");
+        assertEquals(500.0, cliente.getSaldo());
+    }
+
+    @Test
+    void saqueSenhaIncorreta() {
+        cliente.sacar(500.0, gerente, "senhaErrada");
+        assertEquals(1000.0, cliente.getSaldo());
+    }
+    @Test
+    void saqueSaldoInsuficiente() {
+        cliente.sacar(2000.0, gerente, "senha123");
+        assertEquals(1000.0, cliente.getSaldo());
+    }
+
+   /*  @Test
+    void saqueAcimaDeUmMilhaoAprovado() {
+        cliente3.sacar(1100000.0, gerente, "senha123");
+        assertEquals(400000.0, cliente3.getSaldo());
+    }
+
+    @Test
+    void saqueAcimaDeUmMilhaoNegado() {
+        gerente.setAprovarSaque(false); // Simula gerente negando o saque
+        cliente3.sacar(1100000.0, gerente, "senha123");
+        assertEquals(1500000.0, cliente3.getSaldo());
+    }
+        */
 }

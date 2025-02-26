@@ -35,7 +35,6 @@ public class Cliente extends Usuario {
         }
     }*/
 
-
     // ian
     private boolean validarSenha(String senhaTeste) {
     if (senhaTeste != null) {  // Se for um teste, usa a senha fornecida
