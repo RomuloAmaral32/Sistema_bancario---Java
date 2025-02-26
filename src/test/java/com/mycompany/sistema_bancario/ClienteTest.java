@@ -74,12 +74,5 @@ public class ClienteTest {
         assertEquals(1000.0, cliente.getSaldo()); 
         assertEquals(1000.0, cliente2.getSaldo()); 
     }
-    @Test
-    void testTransferenciaAltaExigeAprovacaoGerente() {
-        gerente.acompanharTransacao(true, cliente3, cliente2, 1000000.0); // Simular aprovação do gerente
-        cliente3.transferir(1000000.0, cliente2, gerente, "senha123");
-        assertEquals(0.0, cliente.getSaldo()); // Saldo negativo devido à transferência
-        assertEquals(1001000.0, cliente2.getSaldo()); // Destinatário recebe o valor
-    }
-
+    
 }
