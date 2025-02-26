@@ -35,7 +35,19 @@ public class Cliente extends Usuario {
         }
     }
 
-    /*ian */
+    /*private boolean validarSenha(String senhaDigitada) {
+        return senhaDigitada.equals(super.getSenha());
+    }
+
+    public void consultarSaldo(String senhaDigitada) {
+        if (validarSenha(senhaDigitada)) {
+            System.out.println("Seu saldo é: R$"+ this.saldo);
+        } else {
+            System.out.println("Senha incorreta.");} 
+        }
+     */ 
+    
+    //final
 
     public double getSaldo() {
         return this.saldo;
@@ -198,4 +210,5 @@ public class Cliente extends Usuario {
     public void setEndereco(String endereco) {
         this.endereco = endereco;
     }
+        
 }
