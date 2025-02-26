@@ -30,7 +30,7 @@ public class Main {                                                     //main m
 
             switch (opcao) {
                 case 1:
-                    cliente1.consultarSaldo(null);
+                    cliente1.consultarSaldo(null); //
                     break;
 
                 case 2:
