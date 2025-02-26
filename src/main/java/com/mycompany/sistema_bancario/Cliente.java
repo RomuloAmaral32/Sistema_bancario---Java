@@ -21,7 +21,7 @@ public class Cliente extends Usuario {
         registrarExtrato("Abertura da conta com saldo inicial: R$" + saldoInicial);
     }
 
-    private boolean validarSenha() {
+    /*private boolean validarSenha() {
         System.out.print("Digite sua senha para validar a operação: ");
         String senhaDigitada = scanner.nextLine();  
         return senhaDigitada.equals(super.getSenha());
@@ -33,19 +33,27 @@ public class Cliente extends Usuario {
         } else {
             System.out.println("Senha incorreta."); 
         }
+    }*/
+
+
+    // ian
+    private boolean validarSenha(String senhaTeste) {
+    if (senhaTeste != null) {  // Se for um teste, usa a senha fornecida
+        return senhaTeste.equals(super.getSenha());
+    }
+    System.out.print("Digite sua senha para validar a operação: ");
+    String senhaDigitada = scanner.nextLine();
+    return senhaDigitada.equals(super.getSenha());
     }
 
-    /*private boolean validarSenha(String senhaDigitada) {
-        return senhaDigitada.equals(super.getSenha());
+    public void consultarSaldo(String senhaTeste) {
+    if (validarSenha(senhaTeste)) {
+        System.out.println("Seu saldo é: R$" + this.saldo);
+    } else {
+        System.out.println("Senha incorreta.");
     }
-
-    public void consultarSaldo(String senhaDigitada) {
-        if (validarSenha(senhaDigitada)) {
-            System.out.println("Seu saldo é: R$"+ this.saldo);
-        } else {
-            System.out.println("Senha incorreta.");} 
-        }
-     */ 
+    }
+     
     
     //final
 
@@ -53,8 +61,8 @@ public class Cliente extends Usuario {
         return this.saldo;
     }
 
-    public void transferir(double valor, Cliente destinatario, Gerente gerente) {
-        if (validarSenha()) {
+    public void transferir(double valor, Cliente destinatario, Gerente gerente, String senhaTeste) {
+        if (validarSenha(senhaTeste)) {
             if (valor >= 1000000.0) {
                 if (valor <= this.saldo){
                     boolean veracidade;
@@ -89,8 +97,8 @@ public class Cliente extends Usuario {
         registrarExtrato("Recebido R$" + valor + " de " + remetente.getNome());
     }
 
-    public void sacar(double valor, Gerente gerente) {
-        if (validarSenha()) {
+    public void sacar(double valor, Gerente gerente, String senhaTeste) {
+        if (validarSenha(senhaTeste)) {
             if (valor >= 1000000.0) {
                 boolean veracidadesaque;
                 veracidadesaque = gerente.acompanharSaque(this, valor);
@@ -113,8 +121,8 @@ public class Cliente extends Usuario {
         }
     }
 
-    public void consultarExtrato() {
-        if (validarSenha()) {
+    public void consultarExtrato(String senhaTeste) {
+        if (validarSenha(senhaTeste)) {
             System.out.println("Extrato da conta " + this.contaBancaria + ":");
             for (String registro : extrato) {
                 System.out.println(registro);
@@ -178,8 +186,8 @@ public class Cliente extends Usuario {
         }
     }
 
-    public void solicitarCredito(double valor, Gerente gerente) {
-        if(validarSenha()){
+    public void solicitarCredito(double valor, Gerente gerente, String senhaTeste) {
+        if(validarSenha(senhaTeste)){
             boolean autoriza;
             autoriza=gerente.analisarCredito(this, valor);
             if(autoriza){

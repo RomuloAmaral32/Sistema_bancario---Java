@@ -30,25 +30,25 @@ public class Main {                                                     //main m
 
             switch (opcao) {
                 case 1:
-                    cliente1.consultarSaldo();
+                    cliente1.consultarSaldo(null);
                     break;
 
                 case 2:
-                    cliente1.consultarExtrato();
+                    cliente1.consultarExtrato(null);
                     break;
 
                 case 3:
                     System.out.print("Digite o valor a ser transferido: ");
                     double valorTransferencia = scanner.nextDouble();
                     scanner.nextLine();  
-                    cliente1.transferir(valorTransferencia, cliente2, gerente);
+                    cliente1.transferir(valorTransferencia, cliente2, gerente, null);
                     break;
 
                 case 4:
                     System.out.print("Digite o valor a ser sacado: ");
                     double valorSaque = scanner.nextDouble();
                     scanner.nextLine(); 
-                    cliente1.sacar(valorSaque, gerente);
+                    cliente1.sacar(valorSaque, gerente, null);
                     break;
 
                 case 5:
@@ -74,7 +74,7 @@ public class Main {                                                     //main m
                     System.out.print("Digite o valor do crédito solicitado: ");
                     double valorCredito = scanner.nextDouble();
                     scanner.nextLine(); 
-                    cliente1.solicitarCredito(valorCredito, gerente);
+                    cliente1.solicitarCredito(valorCredito, gerente, null);
                     break;
 
                 default:
