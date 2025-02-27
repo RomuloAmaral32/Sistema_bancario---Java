@@ -2,13 +2,22 @@ package com.mycompany.sistema_bancario;
 
 import java.util.Scanner;
 
-public class Main {                                                     //main meremente para testes
+/**
+ *
+ * @author Darlan Henrique da Costa Silva
+ * @matricula 202176038
+ */
+
+public class Main { // main meremente para testes
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        Cliente cliente1 = new Cliente("João", "161.586.406-70", "senha123", "joao@email.com", "cliente", "12345", "Rua A", 5000000.0);
-        Cliente cliente2 = new Cliente("Maria", "161.586.406-70", "senha456", "maria@email.com", "cliente", "67890", "Rua B", 3000000.0);
-        Gerente gerente = new Gerente("Carlos", "161.586.406-70", "gerente123", "carlos@email.com", "gerente", 2000000.0);
+        Cliente cliente1 = new Cliente("João", "161.586.406-70", "senha123", "joao@email.com", "cliente", "12345",
+                "Rua A", 5000000.0);
+        Cliente cliente2 = new Cliente("Maria", "161.586.406-70", "senha456", "maria@email.com", "cliente", "67890",
+                "Rua B", 3000000.0);
+        Gerente gerente = new Gerente("Carlos", "161.586.406-70", "gerente123", "carlos@email.com", "gerente",
+                2000000.0);
 
         boolean continuar = true;
         while (continuar) {
@@ -23,10 +32,10 @@ public class Main {                                                     //main m
             System.out.println("8. Exibir Produtos de Renda Variável");
             System.out.println("9. Escolher Investimento");
             System.out.println("10. Sair");
-            System.out.println("11. Solicitar Crédito"); 
+            System.out.println("11. Solicitar Crédito");
             System.out.print("Escolha uma opção: ");
             int opcao = scanner.nextInt();
-            scanner.nextLine(); 
+            scanner.nextLine();
 
             switch (opcao) {
                 case 1:
@@ -40,14 +49,14 @@ public class Main {                                                     //main m
                 case 3:
                     System.out.print("Digite o valor a ser transferido: ");
                     double valorTransferencia = scanner.nextDouble();
-                    scanner.nextLine();  
+                    scanner.nextLine();
                     cliente1.transferir(valorTransferencia, cliente2, gerente, null);
                     break;
 
                 case 4:
                     System.out.print("Digite o valor a ser sacado: ");
                     double valorSaque = scanner.nextDouble();
-                    scanner.nextLine(); 
+                    scanner.nextLine();
                     cliente1.sacar(valorSaque, gerente, null);
                     break;
 
@@ -70,10 +79,10 @@ public class Main {                                                     //main m
                     System.out.println("Saindo do sistema...");
                     break;
 
-                    case 11:
+                case 11:
                     System.out.print("Digite o valor do crédito solicitado: ");
                     double valorCredito = scanner.nextDouble();
-                    scanner.nextLine(); 
+                    scanner.nextLine();
                     cliente1.solicitarCredito(valorCredito, gerente, null);
                     break;
 
@@ -81,7 +90,21 @@ public class Main {                                                     //main m
                     System.out.println("Opção inválida! Tente novamente.");
             }
         }
+        Caixa caixa = new Caixa("Darlan", "34014199002", "123456", "darlan@email.com", "caixa", "1234");
+        Usuario usuario = new Usuario("Joao", "47712171068", "111111", "email@email.com", "cliente");
+        String cpfInserido = "34014199002";
+        String senhaInserida = "123456";
+        boolean loginValido = caixa.login(cpfInserido, senhaInserida);
 
+        if (loginValido)
+            System.out.println("Login bem-sucedido! Bem-vindo, " + caixa.getNome() + ".");
+        else
+            System.out.println("Login falhou. Verifique seu CPF e senha.");
+
+        caixa.deposito(1000, "123456");
+        caixa.saque(500, "123456", "1234");
+        caixa.transferencia(200, "123456", "1234", "654321");
         scanner.close();
+
     }
 }
