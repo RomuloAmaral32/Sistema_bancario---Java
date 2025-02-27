@@ -74,6 +74,7 @@ public class Gerente extends Usuario {
             System.out.println("Nenhum produto de Renda Variável cadastrado.");
         }
     }
+    
 
     public double getNivelDeAcesso() {
         return nivelDeAcesso;
@@ -82,4 +83,61 @@ public class Gerente extends Usuario {
     public void setNivelDeAcesso(double nivelDeAcesso) {
         this.nivelDeAcesso = nivelDeAcesso;
     }
+    public boolean acompanharTransacao(Cliente cliente, Cliente destinatario, double valor) {
+            System.out.println("Gerente, uma transação de R$" + valor + " foi solicitada.");
+            System.out.print("Deseja autorizar a transação? (y/n): ");
+            String escolha = scanner.nextLine();
+
+            if (escolha.equalsIgnoreCase("y")) {
+                System.out.println("Gerente autorizando transação de R$" + valor + "...");
+                return true;
+            } 
+             return false;
+    }
+    public boolean acompanharSaque(Cliente cliente, double valor) {
+            System.out.println("Gerente, um saque de R$" + valor + " foi solicitado.");
+            System.out.print("Deseja autorizar o saque? (y/n): ");
+            String escolha = scanner.nextLine();
+
+            if (escolha.equalsIgnoreCase("y")) {
+                System.out.println("Gerente autorizando saque de R$" + valor + "...");
+                return true;
+            } else {
+                return false;
+            }
+    }
+    public List<String> getRendaFixa() {
+        return rendaFixa;
+    }
+    
+    public List<String> getRendaVariavel() {
+        return rendaVariavel;
+    }
+
+    public boolean analisarCredito(Cliente cliente, double valor) {
+        System.out.println("Gerente, uma solicitação de crédito de R$" + valor + " foi solicitado por:" + cliente.getNome());
+        System.out.print("Deseja autorizar o crédito? (y/n): ");
+        String escolha = scanner.nextLine();
+
+        if (escolha.equalsIgnoreCase("y")) {
+            System.out.println("Gerente concedendo crédito de R$" + valor + "...");
+            return true;
+        }else {
+            return false;
+        }
+
+    }
+    //dois métodos para o teste testAnalisarCreditoAutomatizadoAprovado e testAnalisarCreditoAutomatizadoRejeitado ~ian
+    
+    public boolean acompanharTransacao(boolean decisao, Cliente cliente, Cliente destinatario, double valor) {
+        System.out.println("Gerente, uma transação de R$" + valor + " foi solicitada.");
+        return decisao;
+    }
+
+    public boolean analisarCreditoAutomatizado(Cliente cliente, double valor, boolean aprovado) {
+        return aprovado;
+    }
+    
+    
+
 }
