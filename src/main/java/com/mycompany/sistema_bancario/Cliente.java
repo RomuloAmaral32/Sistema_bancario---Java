@@ -3,14 +3,20 @@ package com.mycompany.sistema_bancario;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlTransient;
 
+
+@XmlRootElement
 public class Cliente extends Usuario {
     private String contaBancaria;
     private String endereco;
     private double saldo;
     private List<String> extrato;
+    @XmlTransient
     private Scanner scanner;
-
+    public Cliente(){}
     public Cliente(String nome, String cpf, String senha, String email, String tipo, String contaBancaria,
             String endereco, double saldoInicial) {
         super(nome, cpf, senha, email, tipo);
@@ -202,11 +208,11 @@ public class Cliente extends Usuario {
     private void registrarExtrato(String transacao) {
         extrato.add(transacao);
     }
-
+    @XmlElement
     public String getContaBancaria() {
         return contaBancaria;
     }
-
+    @XmlElement
     public String getEndereco() {
         return endereco;
     }
@@ -214,7 +220,7 @@ public class Cliente extends Usuario {
     public void setEndereco(String endereco) {
         this.endereco = endereco;
     }
-
+    @XmlElement
     public double getSaldo() {
         return saldo;
     }

@@ -8,11 +8,19 @@ package com.mycompany.sistema_bancario;
  * @author Darlan Henrique da Costa Silva
  * @matricula 202176038
  */
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+
+
+ @XmlRootElement
 public class Caixa extends Usuario {
 
     private String numeroFuncionario;
+    @XmlTransient
     private UsuarioService usuarioService;
 
+    public Caixa(){}
     public Caixa(String nome, String cpf, String senha, String email, String tipo, String numeroFuncionario,
             UsuarioService usuarioService) {
         super(nome, cpf, senha, email, tipo);
@@ -20,6 +28,8 @@ public class Caixa extends Usuario {
         this.usuarioService = usuarioService;
     }
 
+    
+    @XmlElement
     public String getNumeroFuncionario() {
         return numeroFuncionario;
     }

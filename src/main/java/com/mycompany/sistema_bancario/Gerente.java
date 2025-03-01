@@ -4,13 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+
+@XmlRootElement
+
 public class Gerente extends Usuario {
     private double nivelDeAcesso; 
+    @XmlTransient
     private Scanner scanner;
 
     private List<String> rendaFixa;
     private List<String> rendaVariavel;
 
+    public Gerente(){}
     public Gerente(String nome, String cpf, String senha, String email, String tipo, double nivelDeAcesso) {
         super(nome, cpf, senha, email, tipo);
         this.nivelDeAcesso = nivelDeAcesso;
@@ -19,6 +27,7 @@ public class Gerente extends Usuario {
         this.rendaVariavel = new ArrayList<>();
     }
 
+    
     public boolean verificarAcesso() {
         return nivelDeAcesso >= 1000000.0;
     }
@@ -75,11 +84,11 @@ public class Gerente extends Usuario {
         }
     }
     
-
+    @XmlElement
     public double getNivelDeAcesso() {
         return nivelDeAcesso;
     }
-
+    @XmlElement
     public void setNivelDeAcesso(double nivelDeAcesso) {
         this.nivelDeAcesso = nivelDeAcesso;
     }
@@ -106,10 +115,11 @@ public class Gerente extends Usuario {
                 return false;
             }
     }
+    @XmlElement
     public List<String> getRendaFixa() {
         return rendaFixa;
     }
-    
+    @XmlElement
     public List<String> getRendaVariavel() {
         return rendaVariavel;
     }

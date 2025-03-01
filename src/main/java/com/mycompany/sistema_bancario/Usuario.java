@@ -10,13 +10,14 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.InputMismatchException;
-
+import jakarta.xml.bind.annotation.XmlSeeAlso;
 /**
  * @author Darlan Henrique da Costa Silva
  * @matricula 202176038
  */
 
  @XmlRootElement
+ @XmlSeeAlso({Cliente.class, Caixa.class, Gerente.class})
 public class Usuario {
 
     private String nome;

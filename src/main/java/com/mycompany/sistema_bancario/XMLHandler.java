@@ -10,6 +10,8 @@ import javax.xml.bind.Unmarshaller;
 import java.util.List;
 
 import com.mycompany.sistema_bancario.ListaUsuarios;
+
+
 public class XMLHandler {
 
     // Método para salvar os dados dos usuários em um arquivo XML
@@ -52,5 +54,7 @@ public class XMLHandler {
             return null;
         }
     }
+
+    
 
 }
