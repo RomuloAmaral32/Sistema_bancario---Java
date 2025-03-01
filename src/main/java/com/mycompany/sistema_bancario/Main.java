@@ -2,6 +2,9 @@ package com.mycompany.sistema_bancario;
 
 import java.util.Scanner;
 
+import javax.xml.bind.JAXBException;
+
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +18,7 @@ import java.util.List;
 public class Main { // main meremente para testes
     public static UsuarioService usuarioService;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
 
         Cliente cliente1 = new Cliente("João", "161.586.406-70", "senha123", "joao@email.com", "cliente", "12345",
@@ -143,5 +146,16 @@ public class Main { // main meremente para testes
             System.out.println("Erro ao salvar usuários: " + e.getMessage());
         }
 
+        String caminhoArquivoXML = "src/file/java/com/mycompany/sistema_bancario/usuarios.xml";
+
+        // Salvando os usuários em XML
+        try {
+            XMLHandler.salvarEmXml(usuarios, caminhoArquivoXML);
+            System.out.println("Usuários salvos com sucesso em XML!");
+        } catch (Exception e) {
+            System.out.println("Erro ao salvar usuários em XML: " + e.getMessage());
+        }
     }
-}
+    }
+    
+
