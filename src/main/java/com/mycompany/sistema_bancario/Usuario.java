@@ -5,11 +5,18 @@
 package com.mycompany.sistema_bancario;
 
 import java.util.InputMismatchException;
+import java.util.List;
+
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.util.InputMismatchException;
 
 /**
  * @author Darlan Henrique da Costa Silva
  * @matricula 202176038
  */
+
+ @XmlRootElement
 public class Usuario {
 
     private String nome;
@@ -17,6 +24,9 @@ public class Usuario {
     private String senha;
     private String email;
     private String tipo; // "cliente", "caixa" ou "gerente"
+
+    public Usuario() {
+    }
 
     public Usuario(String nome, String cpf, String senha, String email, String tipo) {
         this.nome = nome;
@@ -30,7 +40,7 @@ public class Usuario {
         this.email = email;
         this.tipo = tipo;
     }
-
+    @XmlElement
     public String getNome() {
         return nome;
     }
@@ -38,7 +48,7 @@ public class Usuario {
     public void setNome(String nome) {
         this.nome = nome;
     }
-
+    @XmlElement
     public String getCpf() {
         return cpf;
     }
@@ -50,7 +60,7 @@ public class Usuario {
             throw new IllegalArgumentException("CPF invalido");
         }
     }
-
+    @XmlElement
     public String getSenha() {
         return senha;
     }
@@ -58,7 +68,7 @@ public class Usuario {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-
+    @XmlElement
     public String getEmail() {
         return email;
     }
@@ -66,7 +76,7 @@ public class Usuario {
     public void setEmail(String email) {
         this.email = email;
     }
-
+    @XmlElement
     public String getTipo() {
         return tipo;
     }
@@ -129,4 +139,5 @@ public class Usuario {
     public boolean verificaSenha(String senhaInserida) {
         return this.senha.equals(senhaInserida);
     }
+
 }
