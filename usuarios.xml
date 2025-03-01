@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<listaUsuarios>
+    <usuarios>
+        <cpf>34014199002</cpf>
+        <email>darlan@email.com</email>
+        <nome>Darlan Silva</nome>
+        <senha>123456</senha>
+        <tipo>cliente</tipo>
+    </usuarios>
+    <usuarios>
+        <cpf>47712171068</cpf>
+        <email>mj@email.com</email>
+        <nome>Maria Julia</nome>
+        <senha>987654</senha>
+        <tipo>cliente</tipo>
+    </usuarios>
+    <usuarios>
+        <cpf>10295176067</cpf>
+        <email>joao@email.com</email>
+        <nome>João Santos</nome>
+        <senha>000000</senha>
+        <tipo>Caixa</tipo>
+    </usuarios>
+    <usuarios>
+        <cpf>71832421023</cpf>
+        <email>carlos@email.com</email>
+        <nome>Carlos Silva</nome>
+        <senha>776655</senha>
+        <tipo>Gerente</tipo>
+    </usuarios>
+</listaUsuarios>
