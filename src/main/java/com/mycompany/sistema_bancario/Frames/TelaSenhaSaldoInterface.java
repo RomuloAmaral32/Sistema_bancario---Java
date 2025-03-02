@@ -54,7 +54,9 @@ public class TelaSenhaSaldoInterface extends JFrame {
                     mensagemStatus.setText("Senha correta! Ação realizada.");
                     mensagemStatus.setForeground(Color.GREEN);
                     // Ação quando a senha está correta (exemplo)
-                    JOptionPane.showMessageDialog(null, "Ação executada com sucesso!");
+                    dispose(); // Fecha a janela atual
+                Saldo saldo = new Saldo(); // Volta para a tela de login
+                saldo.setVisible(true);
                 } else {
                     mensagemStatus.setText("Senha incorreta!");
                     mensagemStatus.setForeground(Color.RED);

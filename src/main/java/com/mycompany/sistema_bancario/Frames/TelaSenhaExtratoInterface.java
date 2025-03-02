@@ -53,8 +53,9 @@ public class TelaSenhaExtratoInterface extends JFrame {
                 if (senha.equals("1234")) { // Senha correta para validar
                     mensagemStatus.setText("Senha correta! Ação realizada.");
                     mensagemStatus.setForeground(Color.GREEN);
-                    // Ação quando a senha está correta (exemplo)
-                    JOptionPane.showMessageDialog(null, "Ação executada com sucesso!");
+                   dispose(); // Fecha a janela atual
+                Extrato extrato = new Extrato(); // Volta para a tela de login
+                extrato.setVisible(true);;
                 } else {
                     mensagemStatus.setText("Senha incorreta!");
                     mensagemStatus.setForeground(Color.RED);
