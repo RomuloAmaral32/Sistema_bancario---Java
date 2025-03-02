@@ -87,16 +87,18 @@ public class CaixaInterface extends JFrame {
         botaoSaque.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Lógica da operação de saque
-                JOptionPane.showMessageDialog(null, "Operação de Atendimento de Saque selecionada.");
+                dispose();
+                Saque sacar = new Saque();
+                sacar.setVisible(true);
             }
         });
 
         botaoDeposito.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Lógica da operação de depósito
-                JOptionPane.showMessageDialog(null, "Operação de Processamento de Depósitos selecionada.");
+                dispose();
+                Deposito depositar = new Deposito();
+                depositar.setVisible(true);
             }
         });
 

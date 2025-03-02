@@ -55,6 +55,9 @@ public class LoginInterface extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 campoCPF.setText("");
                 campoSenha.setText("");
+                dispose(); // Fecha a janela atual
+                Cadastro cadastrar = new Cadastro(); // Volta para a tela de login
+                cadastrar.setVisible(true);
             }
         });
     }
