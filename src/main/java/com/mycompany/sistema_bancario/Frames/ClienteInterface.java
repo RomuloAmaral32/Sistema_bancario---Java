@@ -70,16 +70,18 @@ public class ClienteInterface extends JFrame {
         botaoInvestimentoRF.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Lógica de investimento em renda fixa
-                JOptionPane.showMessageDialog(null, "Operação de Investimento em Renda Fixa selecionada.");
+                dispose(); // Fecha a janela atual
+                RendaFixa rendafixa = new RendaFixa(); // Volta para a tela de login
+                rendafixa.setVisible(true);
             }
         });
 
         botaoInvestimentoRV.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Lógica de investimento em renda variável
-                JOptionPane.showMessageDialog(null, "Operação de Investimento em Renda Variável selecionada.");
+                dispose(); // Fecha a janela atual
+                RendaVariavel rendavariavel = new RendaVariavel(); // Volta para a tela de login
+                rendavariavel.setVisible(true);
             }
         });
 
