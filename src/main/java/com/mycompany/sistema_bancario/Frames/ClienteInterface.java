@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
 public class ClienteInterface extends JFrame {
 
     private JButton botaoTransferencia, botaoSaldo, botaoExtrato, botaoInvestimentoRF, botaoInvestimentoRV, botaoCredito, botaoSair;
@@ -45,24 +46,24 @@ public class ClienteInterface extends JFrame {
         botaoTransferencia.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Lógica da operação de transferência
-                JOptionPane.showMessageDialog(null, "Operação de Transferência selecionada.");
+                TransferenciaInterface telatransferencia = new TransferenciaInterface(); 
+                telatransferencia.setVisible(true);
             }
         });
 
         botaoSaldo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Lógica da consulta de saldo
-                JOptionPane.showMessageDialog(null, "Operação de Consulta de Saldo selecionada.");
+                TelaSenhaSaldoInterface saldo = new TelaSenhaSaldoInterface(); // Volta para a tela de login
+                saldo.setVisible(true);
             }
         });
 
         botaoExtrato.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Lógica da consulta de extrato
-                JOptionPane.showMessageDialog(null, "Operação de Consulta de Extrato selecionada.");
+               TelaSenhaExtratoInterface extrato = new TelaSenhaExtratoInterface(); // Volta para a tela de login
+                extrato.setVisible(true);
             }
         });
 
@@ -95,8 +96,8 @@ public class ClienteInterface extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // Retorna à tela de login
                 dispose(); // Fecha a janela atual
-                LoginInterface telaLogin = new LoginInterface(); // Volta para a tela de login
-                telaLogin.setVisible(true);
+                LoginInterface login = new LoginInterface(); // Volta para a tela de login
+                login.setVisible(true);
             }
         });
     }
