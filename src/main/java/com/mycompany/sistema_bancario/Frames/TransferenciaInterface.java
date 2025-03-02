@@ -38,7 +38,7 @@ public class TransferenciaInterface extends JFrame {
 
         // Botões
         botaoConfirmar = new JButton("Confirmar");
-        botaoCancelar = new JButton("Cancelar");
+        botaoCancelar = new JButton("Sair");
 
         // Mensagem de status (sucesso ou erro)
         mensagemStatus = new JLabel("", JLabel.CENTER);

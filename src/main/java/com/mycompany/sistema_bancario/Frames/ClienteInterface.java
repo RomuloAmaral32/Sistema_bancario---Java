@@ -88,8 +88,9 @@ public class ClienteInterface extends JFrame {
         botaoCredito.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Lógica de solicitação de crédito
-                JOptionPane.showMessageDialog(null, "Operação de Solicitação de Crédito selecionada.");
+                dispose(); // Fecha a janela atual
+                SolicitarCredito credito = new SolicitarCredito(); // Volta para a tela de login
+                credito.setVisible(true);
             }
         });
 
