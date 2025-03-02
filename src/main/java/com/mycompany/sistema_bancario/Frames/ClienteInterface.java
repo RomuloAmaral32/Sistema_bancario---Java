@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
 public class ClienteInterface extends JFrame {
 
     private JButton botaoTransferencia, botaoSaldo, botaoExtrato, botaoInvestimentoRF, botaoInvestimentoRV, botaoCredito, botaoSair;
@@ -45,48 +46,51 @@ public class ClienteInterface extends JFrame {
         botaoTransferencia.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Lógica da operação de transferência
-                JOptionPane.showMessageDialog(null, "Operação de Transferência selecionada.");
+                TransferenciaInterface telatransferencia = new TransferenciaInterface(); 
+                telatransferencia.setVisible(true);
             }
         });
 
         botaoSaldo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Lógica da consulta de saldo
-                JOptionPane.showMessageDialog(null, "Operação de Consulta de Saldo selecionada.");
+                TelaSenhaSaldoInterface saldo = new TelaSenhaSaldoInterface(); // Volta para a tela de login
+                saldo.setVisible(true);
             }
         });
 
         botaoExtrato.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Lógica da consulta de extrato
-                JOptionPane.showMessageDialog(null, "Operação de Consulta de Extrato selecionada.");
+               TelaSenhaExtratoInterface extrato = new TelaSenhaExtratoInterface(); // Volta para a tela de login
+                extrato.setVisible(true);
             }
         });
 
         botaoInvestimentoRF.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Lógica de investimento em renda fixa
-                JOptionPane.showMessageDialog(null, "Operação de Investimento em Renda Fixa selecionada.");
+                dispose(); // Fecha a janela atual
+                RendaFixa rendafixa = new RendaFixa(); // Volta para a tela de login
+                rendafixa.setVisible(true);
             }
         });
 
         botaoInvestimentoRV.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Lógica de investimento em renda variável
-                JOptionPane.showMessageDialog(null, "Operação de Investimento em Renda Variável selecionada.");
+                dispose(); // Fecha a janela atual
+                RendaVariavel rendavariavel = new RendaVariavel(); // Volta para a tela de login
+                rendavariavel.setVisible(true);
             }
         });
 
         botaoCredito.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Lógica de solicitação de crédito
-                JOptionPane.showMessageDialog(null, "Operação de Solicitação de Crédito selecionada.");
+                dispose(); // Fecha a janela atual
+                SolicitarCredito credito = new SolicitarCredito(); // Volta para a tela de login
+                credito.setVisible(true);
             }
         });
 
@@ -95,8 +99,8 @@ public class ClienteInterface extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // Retorna à tela de login
                 dispose(); // Fecha a janela atual
-                LoginInterface telaLogin = new LoginInterface(); // Volta para a tela de login
-                telaLogin.setVisible(true);
+                LoginInterface login = new LoginInterface(); // Volta para a tela de login
+                login.setVisible(true);
             }
         });
     }
