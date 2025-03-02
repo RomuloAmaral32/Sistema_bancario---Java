@@ -156,7 +156,7 @@ public class Main { // main meremente para testes
             System.out.println("Erro ao salvar usuários em XML: " + e.getMessage());
         }
 
-        try {
+       /*  try {
             List<Usuario> usuariosCarregados = XMLHandler.carregarDeXml(caminhoArquivoXML);
             System.out.println("\nUsuários carregados do XML:");
             for (Usuario usuario : usuariosCarregados) {
@@ -165,7 +165,7 @@ public class Main { // main meremente para testes
         } catch (Exception e) {
             System.out.println("Erro ao carregar usuários do XML: " + e.getMessage());
         }
-    
+    */
     }
     }
     
