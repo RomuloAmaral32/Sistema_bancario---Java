@@ -152,16 +152,18 @@ public class GerenteInterface extends JFrame {
         botaoRendaFixa.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Lógica de cadastro de opções de renda fixa
-                JOptionPane.showMessageDialog(null, "Cadastro de Opções de Renda Fixa selecionado.");
+               dispose(); // Fecha a janela atual
+                CadastroRendaFixa rendafixa = new CadastroRendaFixa(); // Volta para a tela de login
+                rendafixa.setVisible(true);
             }
         });
 
         botaoRendaVariavel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Lógica de cadastro de opções de renda variável
-                JOptionPane.showMessageDialog(null, "Cadastro de Opções de Renda Variável selecionado.");
+                dispose(); // Fecha a janela atual
+                CadastroRendaVariavel rendavariavel = new CadastroRendaVariavel(); // Volta para a tela de login
+                rendavariavel.setVisible(true);
             }
         });
 
