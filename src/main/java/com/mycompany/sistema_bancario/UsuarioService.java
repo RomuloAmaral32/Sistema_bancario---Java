@@ -4,6 +4,8 @@
  */
 package com.mycompany.sistema_bancario;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,6 +20,17 @@ import java.util.List;
 
 public class UsuarioService {
     private List<Usuario> usuarios;
+    private JsonHandler<Usuario> jsonHandler;
+
+        public UsuarioService(String filePath) {
+        jsonHandler = new JsonHandler<>(filePath);
+        try {
+            usuarios = jsonHandler.loadFromJson(Usuario.class);
+        } catch (IOException e) {
+            usuarios = new ArrayList<>();
+            System.out.println("Erro ao carregar usuários do arquivo: " + e.getMessage());
+        }
+    }
 
     public UsuarioService(List<Usuario> usuarios) {
         this.usuarios = usuarios;
@@ -31,6 +44,15 @@ public class UsuarioService {
         }
         throw new IllegalArgumentException("Usuário não encontrado para o CPF: " + cpf);
     }
+
+    public void adicionarUsuario(Usuario usuario) {
+        usuarios.add(usuario);
+        try {
+            jsonHandler.saveToJson(usuarios); // Salvando a lista atualizada no arquivo JSON
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar usuário: " + e.getMessage());
+        }
+    } 
 
     public Cliente buscarClientePorNumeroConta(String numeroConta) {
         for (Usuario usuario : usuarios) {

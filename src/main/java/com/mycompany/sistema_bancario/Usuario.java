@@ -1,28 +1,21 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.sistema_bancario;
 
 import java.util.InputMismatchException;
-import java.util.List;
-
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.InputMismatchException;
 import jakarta.xml.bind.annotation.XmlSeeAlso;
+
 /**
  * @author Darlan Henrique da Costa Silva
  * @matricula 202176038
  */
 /**
- *
  * @author Rômulo Amaral
  * @matricula 202335015
  */
 
- @XmlRootElement
- @XmlSeeAlso({Cliente.class, Caixa.class, Gerente.class})
+@XmlRootElement
+@XmlSeeAlso({Cliente.class, Caixa.class, Gerente.class})
 public class Usuario {
 
     private String nome;
@@ -35,25 +28,46 @@ public class Usuario {
     }
 
     public Usuario(String nome, String cpf, String senha, String email, String tipo) {
-        this.nome = nome;
+        if (validaNome(nome)) {
+            this.nome = nome;
+        } else {
+            throw new IllegalArgumentException("Nome inválido. O nome deve conter apenas letras e ter pelo menos duas letras.");
+        }
 
         if (validaCPF(cpf)) {
             this.cpf = cpf;
         } else {
-            throw new IllegalArgumentException("CPF invalido");
+            throw new IllegalArgumentException("CPF inválido");
         }
-        this.senha = senha;
-        this.email = email;
+
+        if (validaSenha(senha)) {
+            this.senha = senha;
+        } else {
+            throw new IllegalArgumentException("Senha inválida. A senha não pode estar vazia ou conter apenas espaços.");
+        }
+
+        if (validaEmail(email)) {
+            this.email = email;
+        } else {
+            throw new IllegalArgumentException("Email inválido");
+        }
+
         this.tipo = tipo;
     }
+
     @XmlElement
     public String getNome() {
         return nome;
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        if (validaNome(nome)) {
+            this.nome = nome;
+        } else {
+            throw new IllegalArgumentException("Nome inválido. O nome deve conter apenas letras e ter pelo menos duas letras.");
+        }
     }
+
     @XmlElement
     public String getCpf() {
         return cpf;
@@ -63,25 +77,36 @@ public class Usuario {
         if (validaCPF(cpf)) {
             this.cpf = cpf;
         } else {
-            throw new IllegalArgumentException("CPF invalido");
+            throw new IllegalArgumentException("CPF inválido");
         }
     }
+
     @XmlElement
     public String getSenha() {
         return senha;
     }
 
     public void setSenha(String senha) {
-        this.senha = senha;
+        if (validaSenha(senha)) {
+            this.senha = senha;
+        } else {
+            throw new IllegalArgumentException("Senha inválida. A senha não pode estar vazia ou conter apenas espaços.");
+        }
     }
+
     @XmlElement
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        if (validaEmail(email)) {
+            this.email = email;
+        } else {
+            throw new IllegalArgumentException("Email inválido");
+        }
     }
+
     @XmlElement
     public String getTipo() {
         return tipo;
@@ -146,4 +171,16 @@ public class Usuario {
         return this.senha.equals(senhaInserida);
     }
 
+    private boolean validaNome(String nome) {
+        return nome.matches("[a-zA-Z\\s]{2,}");
+    }
+
+    private boolean validaSenha(String senha) {
+        return senha != null && !senha.trim().isEmpty();
+    }
+
+    private boolean validaEmail(String email) {
+        String regex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        return email.matches(regex);
+    }
 }
