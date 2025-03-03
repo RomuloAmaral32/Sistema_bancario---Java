@@ -24,17 +24,18 @@ public class XMLHandler {
     // Método para salvar os dados dos usuários em um arquivo XML
     public static void salvarEmXml(List<Usuario> usuarios, String caminhoArquivo) throws FileNotFoundException {
         try {
-            // Cria um contexto JAXB para a classe ListaUsuarios
-            JAXBContext context = JAXBContext.newInstance(ListaUsuarios.class); // Use ListaUsuarios em vez de Usuario
-
-            // Cria um Marshalling (converter objetos para XML)
+            JAXBContext context = JAXBContext.newInstance(ListaUsuarios.class);
             Marshaller marshaller = context.createMarshaller();
-            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);  // Formatar o XML para leitura
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
-            // Cria o objeto ListaUsuarios
-            ListaUsuarios listaUsuarios = new ListaUsuarios(usuarios);
+            ListaUsuarios listaUsuarios = new ListaUsuarios();
+            listaUsuarios.setUsuarios(usuarios);
+            for (Usuario usuario : usuarios) {
+                if (usuario instanceof Cliente) {
+                    Cliente cliente = (Cliente) usuario;
+                    cliente.setSaldo(cliente.getSaldo()); // Garante que o saldo está atualizado
+                }}
 
-            // Converte e escreve os dados no arquivo XML
             marshaller.marshal(listaUsuarios, new FileOutputStream(caminhoArquivo));
             System.out.println("Usuários salvos com sucesso em " + caminhoArquivo);
         } catch (JAXBException e) {
@@ -42,19 +43,12 @@ public class XMLHandler {
         }
     }
 
-    // Método para carregar os dados dos usuários a partir de um arquivo XML
-    public static List<Usuario> carregarDeXml(String caminhoArquivo) {
+    public static List<Usuario> carregarDeXml(String caminhoArquivo) throws FileNotFoundException {
         try {
-            // Cria um contexto JAXB para a classe ListaUsuarios
             JAXBContext context = JAXBContext.newInstance(ListaUsuarios.class);
-
-            // Cria um Unmarshaller (converter XML de volta para objetos)
             Unmarshaller unmarshaller = context.createUnmarshaller();
 
-            // Lê o arquivo XML e retorna a lista de usuários
             ListaUsuarios listaUsuarios = (ListaUsuarios) unmarshaller.unmarshal(new File(caminhoArquivo));
-
-            // Retorna a lista de usuários
             return listaUsuarios.getUsuarios();
         } catch (JAXBException e) {
             System.err.println("Erro ao carregar usuários: " + e.getMessage());

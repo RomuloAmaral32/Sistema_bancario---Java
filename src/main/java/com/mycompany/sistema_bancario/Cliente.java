@@ -209,7 +209,7 @@ public class Cliente extends Usuario {
             System.out.println("Senha incorreta. Operação cancelada.");
         }
     }
-
+    @XmlElement
     private void registrarExtrato(String transacao) {
         extrato.add(transacao);
     }
@@ -221,7 +221,7 @@ public class Cliente extends Usuario {
     public String getEndereco() {
         return endereco;
     }
-
+    @XmlElement
     public void setEndereco(String endereco) {
         this.endereco = endereco;
     }
@@ -229,7 +229,7 @@ public class Cliente extends Usuario {
     public double getSaldo() {
         return saldo;
     }
-
+    @XmlElement
     public void setSaldo(double saldo) {
         this.saldo = saldo;
     }
