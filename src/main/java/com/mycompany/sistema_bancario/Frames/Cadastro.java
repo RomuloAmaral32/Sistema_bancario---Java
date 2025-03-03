@@ -1,4 +1,5 @@
 package com.mycompany.sistema_bancario.Frames;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -20,13 +21,13 @@ public class Cadastro extends JFrame {
     private UsuarioService usuarioService;
 
     public Cadastro() {
-        usuarioService = new UsuarioService("usuarios.json"); 
+        usuarioService = new UsuarioService("usuarios.json");
 
         // Configurações da janela
         setTitle("Tela de Cadastro");
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null); 
+        setLocationRelativeTo(null);
 
         labelTitulo = new JLabel("Cadastro de Usuário", JLabel.CENTER);
         labelTitulo.setFont(new Font("Arial", Font.BOLD, 18));
@@ -51,7 +52,7 @@ public class Cadastro extends JFrame {
 
         // Layout
         JPanel painel = new JPanel();
-        painel.setLayout(new GridLayout(7, 2, 10, 10)); 
+        painel.setLayout(new GridLayout(7, 2, 10, 10));
 
         painel.add(labelNome);
         painel.add(campoNome);
@@ -63,9 +64,9 @@ public class Cadastro extends JFrame {
         painel.add(campoSenha);
         painel.add(labelPerfil);
         painel.add(comboBoxPerfil);
-        painel.add(new JLabel()); 
+        painel.add(new JLabel());
         painel.add(botaoCadastrar);
-        painel.add(new JLabel()); 
+        painel.add(new JLabel());
         painel.add(botaoCancelar);
 
         add(labelTitulo, BorderLayout.NORTH);
@@ -78,15 +79,16 @@ public class Cadastro extends JFrame {
                 String cpf = campoCpf.getText();
                 String email = campoEmail.getText();
                 char[] senhaInformada = campoSenha.getPassword();
-                String senha = new String(senhaInformada); 
+                String senha = new String(senhaInformada);
                 String perfil = (String) comboBoxPerfil.getSelectedItem();
 
-                if (nome.isEmpty() || cpf.isEmpty() || email.isEmpty() || senha.isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos!", "Erro", JOptionPane.ERROR_MESSAGE);
+                if (nome.isEmpty() || cpf.isEmpty() || email.isEmpty() || senha.isEmpty() || perfil == null) {
+                    JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos!", "Erro",
+                            JOptionPane.ERROR_MESSAGE);
                 } else {
                     try {
                         // Criar o novo usuário e salvar no backend
-                        Usuario novoUsuario = new Usuario(nome, cpf, senha, email, perfil.toLowerCase());
+                        Usuario novoUsuario = new Usuario(nome, cpf, senha, email, perfil.toLowerCase(), "00000000", "00");
                         usuarioService.adicionarUsuario(novoUsuario);
 
                         JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!");

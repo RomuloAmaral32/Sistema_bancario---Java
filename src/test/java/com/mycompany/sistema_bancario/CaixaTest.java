@@ -28,14 +28,15 @@ public class CaixaTest {
     @BeforeEach
     public void setUpClass() {
         List<Usuario> usuarios = new ArrayList<>();
-        usuarios.add(new Cliente("Joao Carlos", "71832421023", "123456", "joaocarlos@email.com", "cliente", "0001",
-                "Rua A, 1567 - Bias Fortes - MG", 0));
+        usuarios.add(new Cliente("Joao Carlos", "71832421023", "123456", "joaocarlos@email.com", "cliente", "36000000",
+                "22", "0001", 0));
         usuarios.add(
-                new Cliente("Mariana Silveira", "10295176067", "987654", "marianasilveira@email.com", "cliente", "0002",
-                        "Rua B, 99877 - Vicosa - MG", 0));
+                new Cliente("Mariana Silveira", "10295176067", "987654", "marianasilveira@email.com", "cliente",
+                        "36000000", "22", "0002", 0));
 
         usuarioService = new UsuarioService(usuarios);
-        caixa = new Caixa("Darlan", "24677692084", "123456", "darlan@email.com", "caixa", "123", usuarioService);
+        caixa = new Caixa("Darlan", "24677692084", "123456", "darlan@email.com", "caixa", "36000000", "22", "123",
+                usuarioService);
     }
 
     @AfterEach
