@@ -26,7 +26,7 @@ public class Main { // main meremente para testes
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
 
-        Cliente cliente1 = new Cliente("João", "161.586.406-70", "senha123", "joao@email.com", "cliente", "12345",
+        Cliente cliente1 = new Cliente("Joao", "161.586.406-70", "senha123", "joao@email.com", "cliente", "12345",
                 "36000000", "22", 5000000.0);
         Cliente cliente2 = new Cliente("Maria", "161.586.406-70", "senha456", "maria@email.com", "cliente", "67890",
                 "36000000", "22", 3000000.0);
