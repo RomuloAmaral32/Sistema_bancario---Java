@@ -17,8 +17,10 @@ public class Usuario {
     private String senha;
     private String email;
     private String tipo; // "cliente", "caixa" ou "gerente"
+    private String cep;
+    private String numero;
 
-    public Usuario(String nome, String cpf, String senha, String email, String tipo) {
+    public Usuario(String nome, String cpf, String senha, String email, String tipo, String cep, String numero) {
         this.nome = nome;
 
         if (validaCPF(cpf)) {
@@ -29,6 +31,9 @@ public class Usuario {
         this.senha = senha;
         this.email = email;
         this.tipo = tipo;
+        this.cep = cep;
+        this.numero = numero;
+
     }
 
     public String getNome() {
@@ -77,6 +82,22 @@ public class Usuario {
         } else {
             throw new IllegalArgumentException("Tipo de usuário inválido.");
         }
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
     }
 
     private boolean validaCPF(String CPF) {

@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.sistema_bancario;
+
 /**
  *
  * @author Darlan Henrique da Costa Silva
@@ -13,9 +14,9 @@ public class Caixa extends Usuario {
     private String numeroFuncionario;
     private UsuarioService usuarioService;
 
-    public Caixa(String nome, String cpf, String senha, String email, String tipo, String numeroFuncionario,
-            UsuarioService usuarioService) {
-        super(nome, cpf, senha, email, tipo);
+    public Caixa(String nome, String cpf, String senha, String email, String tipo, String cep, String numero,
+            String numeroFuncionario, UsuarioService usuarioService) {
+        super(nome, cpf, senha, email, tipo, cep, numero);
         this.numeroFuncionario = numeroFuncionario;
         this.usuarioService = usuarioService;
     }

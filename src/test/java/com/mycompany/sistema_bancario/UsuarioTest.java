@@ -25,7 +25,7 @@ public class UsuarioTest {
 
     @BeforeAll
     public static void setUpClass() {
-        usuario = new Usuario("Darlan", "24677692084", "123456", "darlan@email.com", "cliente");
+        usuario = new Usuario("Darlan", "24677692084", "123456", "darlan@email.com", "cliente", "36060000", "01");
     }
 
     @AfterAll
@@ -148,5 +148,33 @@ public class UsuarioTest {
         String tipo = "caixa";
         usuario.setTipo(tipo);
         assertEquals(tipo, usuario.getTipo(), "O tipo do usuário deve ser 'Gerente'.");
+    }
+
+    public void testSetCep() {
+        System.out.println("setCep");
+        String cep = "36060000";
+        usuario.setCep(cep);
+        assertEquals(cep, usuario.getCep(), "O CEP do usuário deve ser '36060000'.");
+    }
+
+    public void testGetCep() {
+        System.out.println("getCep");
+        String expResult = "36060000";
+        String result = usuario.getCep();
+        assertEquals(expResult, result, "O CEP do usuário deve ser '36060000'.");
+    }
+
+    public void testSetNumero() {
+        System.out.println("setNumero");
+        String numero = "01";
+        usuario.setNumero(numero);
+        assertEquals(numero, usuario.getNumero(), "O número do usuário deve ser '01'.");
+    }
+
+    public void testGetNumero() {
+        System.out.println("getNumero");
+        String expResult = "01";
+        String result = usuario.getNumero();
+        assertEquals(expResult, result, "O número do usuário deve ser '01'.");
     }
 }

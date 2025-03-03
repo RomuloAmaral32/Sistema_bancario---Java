@@ -11,11 +11,9 @@ public class Cliente extends Usuario {
     private List<String> extrato;
     private Scanner scanner;
 
-    public Cliente(String nome, String cpf, String senha, String email, String tipo, String contaBancaria,
-            String endereco, double saldoInicial) {
-        super(nome, cpf, senha, email, tipo);
+    public Cliente(String nome, String cpf, String senha, String email, String tipo, String cep, String numero, String contaBancaria, String endereco, double saldoInicial) {
+        super(nome, cpf, senha, email, tipo, cep, numero);
         this.contaBancaria = contaBancaria;
-        this.endereco = endereco;
         this.saldo = saldoInicial;
         this.extrato = new ArrayList<>();
         this.scanner = new Scanner(System.in);
