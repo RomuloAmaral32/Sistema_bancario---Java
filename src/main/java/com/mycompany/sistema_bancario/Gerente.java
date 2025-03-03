@@ -24,7 +24,6 @@ public class Gerente extends Usuario {
     private List<String> rendaFixa;
     private List<String> rendaVariavel;
 
-    public Gerente(){}
     public Gerente(String nome, String cpf, String senha, String email, String tipo, String cep, String numero,
             double nivelDeAcesso) {
         super(nome, cpf, senha, email, tipo, cep, numero);

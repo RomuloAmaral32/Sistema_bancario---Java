@@ -27,10 +27,11 @@ public class Main { // main meremente para testes
         Scanner scanner = new Scanner(System.in);
 
         Cliente cliente1 = new Cliente("João", "161.586.406-70", "senha123", "joao@email.com", "cliente", "12345",
-                "Rua A", 5000000.0);
+                "36000000", "22", 5000000.0);
         Cliente cliente2 = new Cliente("Maria", "161.586.406-70", "senha456", "maria@email.com", "cliente", "67890",
-                "Rua B", 3000000.0);
+                "36000000", "22", 3000000.0);
         Gerente gerente = new Gerente("Carlos", "161.586.406-70", "gerente123", "carlos@email.com", "gerente",
+                "36000000", "22",
                 2000000.0);
 
         boolean continuar = true;
@@ -134,13 +135,14 @@ public class Main { // main meremente para testes
 
         List<Usuario> usuarios = new ArrayList<>();
         usuarios.add(new Cliente("Darlan Silva", "34014199002", "123456",
-                "darlan@email.com", "cliente", "0001", "Rua A, 123 - Belmiro Baga - MG", 1000.0));
+                "darlan@email.com", "cliente", "36000000", "22", "0001", 1000.0));
         usuarios.add(new Cliente("Maria Julia", "47712171068", "987654",
-                "mj@email.com", "cliente", "0002", "Rua B, 456 - Belmiro BRaga - MG", 1000.0));
+                "mj@email.com", "cliente", "31000000", "01", "0002", 1000.0));
         usuarios.add(new Caixa("João Santos", "10295176067", "000000", "joao@email.com",
-                "Caixa", "001", usuarioService));
-        usuarios.add(new Gerente("Carlos Silva", "71832421023", "776655", "carlos@email.com", "Gerente",
-                1000000.0));
+                "Caixa", "36000000", "22", "001", usuarioService));
+        usuarios.add(
+                new Gerente("Carlos Silva", "71832421023", "776655", "carlos@email.com", "Gerente", "36000000", "22",
+                        1000000.0));
 
         JsonHandler<Usuario> jsonHandler = new JsonHandler<>(
                 "src/file/java/com/mycompany/sistema_bancario/usuarios.json");
@@ -171,6 +173,4 @@ public class Main { // main meremente para testes
             System.out.println("Erro ao carregar usuários do XML: " + e.getMessage());
         }
     }
-    }
-    
-
+}

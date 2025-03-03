@@ -16,13 +16,12 @@ import jakarta.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 public class Cliente extends Usuario {
     private String contaBancaria;
-    private String endereco;
     private double saldo;
     private List<String> extrato;
     @XmlTransient
     private Scanner scanner;
 
-    public Cliente(String nome, String cpf, String senha, String email, String tipo, String cep, String numero, String contaBancaria, String endereco, double saldoInicial) {
+    public Cliente(String nome, String cpf, String senha, String email, String tipo, String cep, String numero, String contaBancaria, double saldoInicial) {
         super(nome, cpf, senha, email, tipo, cep, numero);
         this.contaBancaria = contaBancaria;
         this.saldo = saldoInicial;
@@ -207,26 +206,22 @@ public class Cliente extends Usuario {
             System.out.println("Senha incorreta. Operação cancelada.");
         }
     }
+
     @XmlElement
     private void registrarExtrato(String transacao) {
         extrato.add(transacao);
     }
+
     @XmlElement
     public String getContaBancaria() {
         return contaBancaria;
     }
-    @XmlElement
-    public String getEndereco() {
-        return endereco;
-    }
-    @XmlElement
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
+
     @XmlElement
     public double getSaldo() {
         return saldo;
     }
+
     @XmlElement
     public void setSaldo(double saldo) {
         this.saldo = saldo;
