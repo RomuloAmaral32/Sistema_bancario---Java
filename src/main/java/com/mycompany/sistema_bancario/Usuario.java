@@ -15,6 +15,11 @@ import jakarta.xml.bind.annotation.XmlSeeAlso;
  * @author Darlan Henrique da Costa Silva
  * @matricula 202176038
  */
+/**
+ *
+ * @author Rômulo Amaral
+ * @matricula 202335015
+ */
 
  @XmlRootElement
  @XmlSeeAlso({Cliente.class, Caixa.class, Gerente.class})

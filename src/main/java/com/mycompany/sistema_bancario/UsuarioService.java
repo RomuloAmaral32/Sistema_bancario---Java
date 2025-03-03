@@ -10,6 +10,12 @@ import java.util.List;
  *
  * @author Darlan
  */
+/**
+ *
+ * @author Rômulo Amaral
+ * @matricula 202335015
+ */
+
 public class UsuarioService {
     private List<Usuario> usuarios;
 

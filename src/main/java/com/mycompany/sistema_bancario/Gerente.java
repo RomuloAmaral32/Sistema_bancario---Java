@@ -8,6 +8,12 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+/**
+ *
+ * @author Rômulo Amaral
+ * @matricula 202335015
+ */
+
 @XmlRootElement
 
 public class Gerente extends Usuario {

@@ -4,6 +4,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ *
+ * @author Rômulo Amaral
+ * @matricula 202335015
+ */
+
 public class LoginInterface extends JFrame {
 
     private JLabel labelCPF, labelSenha, labelPerfil;

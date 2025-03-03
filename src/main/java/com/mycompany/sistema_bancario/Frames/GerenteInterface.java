@@ -5,6 +5,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ *
+ * @author Rômulo Amaral
+ * @matricula 202335015
+ */
+
 public class GerenteInterface extends JFrame {
 
     private JButton botaoSaque, botaoDeposito, botaoTransferencia, botaoRendaFixa, botaoRendaVariavel, 

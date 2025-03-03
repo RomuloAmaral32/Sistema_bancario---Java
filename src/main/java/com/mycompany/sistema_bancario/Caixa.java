@@ -8,6 +8,12 @@ package com.mycompany.sistema_bancario;
  * @author Darlan Henrique da Costa Silva
  * @matricula 202176038
  */
+
+ /**
+ *
+ * @author Rômulo Amaral
+ * @matricula 202335015
+ */
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;

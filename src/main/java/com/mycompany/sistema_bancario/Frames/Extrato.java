@@ -4,6 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ *
+ * @author Rômulo Amaral
+ * @matricula 202335015
+ */
+
 public class Extrato extends JFrame {
 
     private JLabel labelExtrato;

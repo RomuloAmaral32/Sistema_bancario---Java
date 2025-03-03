@@ -14,6 +14,11 @@ import java.util.List;
  * @author Darlan Henrique da Costa Silva
  * @matricula 202176038
  */
+/**
+ *
+ * @author Rômulo Amaral
+ * @matricula 202335015
+ */
 
 public class Main { // main meremente para testes
     public static UsuarioService usuarioService;

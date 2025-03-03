@@ -5,6 +5,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ *
+ * @author Rômulo Amaral
+ * @matricula 202335015
+ */
+
 public class CadastroRendaFixa extends JFrame {
 
     private JLabel labelTitulo, labelNomeOpcao, labelTaxaRendimento, labelPrazoMinimo, labelPrazoMaximo;

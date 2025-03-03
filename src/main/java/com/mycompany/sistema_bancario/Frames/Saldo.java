@@ -3,6 +3,12 @@ package com.mycompany.sistema_bancario.Frames;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ *
+ * @author Rômulo Amaral
+ * @matricula 202335015
+ */
+
 public class Saldo extends JFrame {
 
     private JLabel labelSaldo, saldoAtual;
