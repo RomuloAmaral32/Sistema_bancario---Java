@@ -1,10 +1,7 @@
 package com.mycompany.sistema_bancario.Frames;
 
+import com.mycompany.sistema_bancario.LoginService;
 import com.mycompany.sistema_bancario.Usuario;
-import com.mycompany.sistema_bancario.Cliente;
-import com.mycompany.sistema_bancario.Caixa;
-import com.mycompany.sistema_bancario.Gerente;
-import com.mycompany.sistema_bancario.UsuarioService;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -16,16 +13,16 @@ public class LoginInterface extends JFrame {
     private JTextField campoCPF;
     private JPasswordField campoSenha;
     private JButton botaoLogin, botaoCancelar;
-    private UsuarioService usuarioService;
+    private LoginService loginService; // Instância de LoginService para verificar login
 
     public LoginInterface() {
-        // Inicializa o UsuarioService com o caminho do arquivo JSON
-        usuarioService = new UsuarioService("usuarios.json");
+        // Inicializa o LoginService com o caminho do arquivo JSON
+        loginService = new LoginService("usuarios.json");
 
         setTitle("Tela de Login");
         setSize(550, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
+        setLocationRelativeTo(null);  
 
         labelCPF = new JLabel("CPF:");
         labelSenha = new JLabel("Senha:");
@@ -54,19 +51,13 @@ public class LoginInterface extends JFrame {
                 String senha = new String(campoSenha.getPassword());
 
                 try {
-                    // Valida o login (CPF e senha)
-                    Usuario usuario = usuarioService.validarLogin(cpf, senha);
+                    // Verifica o login através do LoginService
+                    Usuario usuario = loginService.verificarLogin(cpf, senha);
+                    JOptionPane.showMessageDialog(null, "Login bem-sucedido! Bem-vindo(a), " + usuario.getNome());
 
-                    JOptionPane.showMessageDialog(null, "Login bem-sucedido");
+                    // Aqui você pode redirecionar para a tela correspondente ao usuário logado
+                    // Por exemplo: abrirTelaCliente() se for Cliente, abrirTelaCaixa() se for Caixa, etc.
 
-                    // Redireciona com base no perfil do usuário
-                    if (usuario instanceof Cliente) {
-                        abrirTelaCliente();
-                    } else if (usuario instanceof Caixa) {
-                        abrirTelaCaixa();
-                    } else if (usuario instanceof Gerente) {
-                        abrirTelaGerente();
-                    }
                 } catch (IllegalArgumentException ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                 }
@@ -79,28 +70,11 @@ public class LoginInterface extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 campoCPF.setText("");
                 campoSenha.setText("");
-                dispose(); // Fecha a janela atual
-                // Volta para a tela de cadastro
+                dispose();
                 Cadastro cadastrar = new Cadastro();
                 cadastrar.setVisible(true);
             }
         });
-    }
-
-    // Métodos para abrir as telas baseadas no perfil
-    private void abrirTelaCliente() {
-        JOptionPane.showMessageDialog(this, "Redirecionando para a tela do Cliente...");
-        // Aqui você pode abrir a interface específica do Cliente
-    }
-
-    private void abrirTelaCaixa() {
-        JOptionPane.showMessageDialog(this, "Redirecionando para a tela do Caixa...");
-        // Aqui você pode abrir a interface específica do Caixa
-    }
-
-    private void abrirTelaGerente() {
-        JOptionPane.showMessageDialog(this, "Redirecionando para a tela do Gerente...");
-        // Aqui você pode abrir a interface específica do Gerente
     }
 
     public static void main(String[] args) {

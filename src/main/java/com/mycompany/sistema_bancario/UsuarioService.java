@@ -13,8 +13,8 @@ public class UsuarioService {
         try {
             // Tentar carregar os usuários existentes do JSON
             usuarios = jsonHandler.loadFromJson(Usuario.class);
-            if (usuarios == null) {
-                // Se o arquivo estiver vazio ou não contiver usuários, inicializar uma lista vazia
+            // Se o arquivo JSON estiver vazio ou não existir, inicializa uma lista vazia
+            if (usuarios == null || usuarios.isEmpty()) {
                 usuarios = new ArrayList<>();
             }
         } catch (IOException e) {
@@ -69,6 +69,7 @@ public class UsuarioService {
         }
         throw new IllegalArgumentException("Cliente não encontrado para a conta: " + numeroConta);
     }
+
     public Usuario validarLogin(String cpf, String senha) {
         for (Usuario usuario : usuarios) {
             // Verifica o CPF e a senha

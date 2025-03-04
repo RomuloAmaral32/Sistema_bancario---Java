@@ -24,7 +24,7 @@ public class LoginService {
         this.jsonHandler = new JsonHandler<>(filePath);
     }
 
-public Usuario verificarLogin(String cpfInserido, String senhaInserida) throws IllegalArgumentException {
+public  Usuario verificarLogin(String cpfInserido, String senhaInserida) throws IllegalArgumentException {
     try {
         List<Usuario> usuarios = jsonHandler.loadFromJson(Usuario.class);
 
