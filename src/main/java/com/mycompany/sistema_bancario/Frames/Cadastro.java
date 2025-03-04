@@ -104,19 +104,19 @@ public class Cadastro extends JFrame {
                         JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!");
                         dispose(); // Fecha a janela atual
 
-                        if(perfil=="Cliente"){
-                            ClienteInterface telacliente = new ClienteInterface(); // Volta para a tela de login
+                        if (perfil.equals("Cliente")) {
+                            ClienteInterface telacliente = new ClienteInterface();
                             telacliente.setVisible(true);
                         }
-                        if(perfil=="Caixa"){
-                            CaixaInterface telacaixa = new CaixaInterface(); // Volta para a tela de login
+                        if (perfil.equals("Caixa")) {
+                            CaixaInterface telacaixa = new CaixaInterface();
                             telacaixa.setVisible(true);
                         }
-                        if(perfil=="Gerente"){
-                            GerenteInterface telagerente = new GerenteInterface(); // Volta para a tela de login
+                        if (perfil.equals("Gerente")) {
+                            GerenteInterface telagerente = new GerenteInterface();
                             telagerente.setVisible(true);
                         }
-
+                        
                     } catch (IllegalArgumentException ex) {
                         JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                     }
