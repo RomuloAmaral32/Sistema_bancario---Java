@@ -101,8 +101,10 @@ public class Cadastro extends JFrame {
                         // Criar o novo usuário e salvar no backend
                         Usuario novoUsuario = new Usuario(nome, cpf, senha, email, perfil.toLowerCase(), cep, numero);
                         usuarioService.adicionarUsuario(novoUsuario);
-
                         JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!");
+                        dispose(); // Fecha a janela atual
+                        LoginInterface telaLogin = new LoginInterface(); // Volta para a tela de login
+                        telaLogin.setVisible(true);
                     } catch (IllegalArgumentException ex) {
                         JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                     }

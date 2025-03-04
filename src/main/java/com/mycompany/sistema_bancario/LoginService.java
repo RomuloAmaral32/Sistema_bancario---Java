@@ -24,19 +24,31 @@ public class LoginService {
         this.jsonHandler = new JsonHandler<>(filePath);
     }
 
-    public boolean verificarLogin(String cpfInserido, String senhaInserida) {
-        try {
-            List<Usuario> usuarios = jsonHandler.loadFromJson(Usuario.class);
+public Usuario verificarLogin(String cpfInserido, String senhaInserida) throws IllegalArgumentException {
+    try {
+        List<Usuario> usuarios = jsonHandler.loadFromJson(Usuario.class);
 
-            for (Usuario usuario : usuarios) {
-                if (usuario.getCpf().equals(cpfInserido)) {
-                    return usuario.getSenha().equals(senhaInserida);
+        for (Usuario usuario : usuarios) {
+            // Adicionando prints para depuração
+            System.out.println("Verificando CPF no arquivo JSON: " + usuario.getCpf());  // CPF do arquivo JSON
+            System.out.println("CPF inserido: " + cpfInserido);  // CPF inserido pelo usuário
+
+            if (usuario.getCpf().trim().equals(cpfInserido.trim())) {  // Removendo espaços extras
+                System.out.println("CPF encontrado no arquivo: " + usuario.getCpf());  // CPF encontrado
+
+                // Verificando senha com remoção de espaços extras
+                if (usuario.getSenha().trim().equals(senhaInserida.trim())) {
+                    return usuario;  // Senha correta, retorna o usuário
+                } else {
+                    throw new IllegalArgumentException("Senha incorreta.");
                 }
             }
-        } catch (IOException e) {
-            System.out.println("Erro ao carregar usuários: " + e.getMessage());
         }
-
-        return false;
+        throw new IllegalArgumentException("Usuário não encontrado.");
+    } catch (IOException e) {
+        System.out.println("Erro ao carregar usuários: " + e.getMessage());
+        throw new IllegalArgumentException("Erro ao carregar usuários.");
     }
+}
+
 }
