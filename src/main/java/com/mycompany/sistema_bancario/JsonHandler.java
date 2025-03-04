@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,5 +36,51 @@ public class JsonHandler<T> {
     public List<T> loadFromJson(Class<T> clazz) throws IOException {
         return objectMapper.readValue(new File(filePath),
                 objectMapper.getTypeFactory().constructCollectionType(List.class, clazz));
+    }
+
+    public void addSingleData(T newData) throws IOException {
+        List<T> dataList = loadFromJson((Class<T>) newData.getClass());
+        dataList.add(newData);
+        saveToJson(dataList);
+    }
+
+    public void editDataByCpf(String cpf, T updatedData, Class<T> clazz) throws IOException {
+        List<T> dataList = loadFromJson(clazz);
+        boolean found = false;
+
+        for (int i = 0; i < dataList.size(); i++) {
+            T data = dataList.get(i);
+            if (data instanceof Usuario) {
+                Usuario usuario = (Usuario) data;
+                if (usuario.getCpf().equals(cpf)) {
+                    dataList.set(i, updatedData);
+                    found = true;
+                    break;
+                }
+            }
+        }
+
+        if (!found) {
+            throw new IllegalArgumentException("Usuário com CPF " + cpf + " não encontrado.");
+        }
+
+        saveToJson(dataList);
+    }
+
+    public void removeDataByCpf(String cpf, Class<T> clazz) throws IOException {
+        List<T> dataList = loadFromJson(clazz);
+        boolean removed = dataList.removeIf(data -> {
+            if (data instanceof Usuario) {
+                Usuario usuario = (Usuario) data;
+                return usuario.getCpf().equals(cpf);
+            }
+            return false;
+        });
+
+        if (!removed) {
+            throw new IllegalArgumentException("Usuário com CPF " + cpf + " não encontrado.");
+        }
+
+        saveToJson(dataList);
     }
 }
