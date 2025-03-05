@@ -26,18 +26,8 @@ public class Main { // main meremente para testes
     public static void main(String[] args) throws IOException {
         String filePath = "src/file/java/com/mycompany/sistema_bancario/usuarios.json";
 
-<<<<<<< HEAD
         // Cria uma instância do UsuarioService
         UsuarioService usuarioService = new UsuarioService(filePath);
-=======
-        Cliente cliente1 = new Cliente("Joao", "161.586.406-70", "senha123", "joao@email.com", "cliente", "12345",
-                "36000000", "22", 5000000.0);
-        Cliente cliente2 = new Cliente("Maria", "161.586.406-70", "senha456", "maria@email.com", "cliente", "67890",
-                "36000000", "22", 3000000.0);
-        Gerente gerente = new Gerente("Carlos", "161.586.406-70", "gerente123", "carlos@email.com", "gerente",
-                "36000000", "22",
-                2000000.0);
->>>>>>> fa9054b248a3cdca18ab2ed1c368351709d79a72
 
         // Carrega os usuários existentes
         List<Usuario> usuarios = usuarioService.loadFromJson();
