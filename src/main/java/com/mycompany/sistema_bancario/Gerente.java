@@ -17,12 +17,16 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 
 public class Gerente extends Usuario {
-    private double nivelDeAcesso; 
+    private double nivelDeAcesso;
     @XmlTransient
     private Scanner scanner;
 
     private List<String> rendaFixa;
     private List<String> rendaVariavel;
+
+    public Gerente() {
+        super();
+    }
 
     public Gerente(String nome, String cpf, String senha, String email, String tipo, String cep, String numero,
             double nivelDeAcesso) {
@@ -33,7 +37,6 @@ public class Gerente extends Usuario {
         this.rendaVariavel = new ArrayList<>();
     }
 
-    
     public boolean verificarAcesso() {
         return nivelDeAcesso >= 1000000.0;
     }
@@ -91,11 +94,12 @@ public class Gerente extends Usuario {
             System.out.println("Nenhum produto de Renda Variável cadastrado.");
         }
     }
-    
+
     @XmlElement
     public double getNivelDeAcesso() {
         return nivelDeAcesso;
     }
+
     @XmlElement
     public void setNivelDeAcesso(double nivelDeAcesso) {
         this.nivelDeAcesso = nivelDeAcesso;
@@ -125,10 +129,12 @@ public class Gerente extends Usuario {
             return false;
         }
     }
+
     @XmlElement
     public List<String> getRendaFixa() {
         return rendaFixa;
     }
+
     @XmlElement
     public List<String> getRendaVariavel() {
         return rendaVariavel;

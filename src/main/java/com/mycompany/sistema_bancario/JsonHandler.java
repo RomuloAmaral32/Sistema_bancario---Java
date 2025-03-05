@@ -5,7 +5,11 @@
 package com.mycompany.sistema_bancario;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.jsontype.impl.LaissezFaireSubTypeValidator;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,11 +26,17 @@ import java.util.List;
  * @matricula 202335015
  */
 public class JsonHandler<T> {
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper;
     private final String filePath;
 
     public JsonHandler(String filePath) {
         this.filePath = filePath;
+        this.objectMapper = new ObjectMapper();
+
+        // Habilita o polimorfismo diretamente no ObjectMapper
+        objectMapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+        objectMapper.enable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+
     }
 
     public void saveToJson(List<T> data) throws IOException {
@@ -34,7 +44,11 @@ public class JsonHandler<T> {
     }
 
     public List<T> loadFromJson(Class<T> clazz) throws IOException {
-        return objectMapper.readValue(new File(filePath),
+        File file = new File(filePath);
+        if (!file.exists() || file.length() == 0) {
+            return new ArrayList<>();
+        }
+        return objectMapper.readValue(file,
                 objectMapper.getTypeFactory().constructCollectionType(List.class, clazz));
     }
 

@@ -21,12 +21,17 @@ public class Cliente extends Usuario {
     @XmlTransient
     private Scanner scanner;
 
-    public Cliente(String nome, String cpf, String senha, String email, String tipo, String cep, String numero, String contaBancaria, double saldoInicial) {
+    public Cliente() {
+        super();
+    }
+
+    public Cliente(String nome, String cpf, String senha, String email, String tipo, String cep, String numero,
+            String contaBancaria, double saldoInicial) {
         super(nome, cpf, senha, email, tipo, cep, numero);
         this.contaBancaria = contaBancaria;
         this.saldo = saldoInicial;
         this.extrato = new ArrayList<>();
-        this.scanner = new Scanner(System.in);
+this.scanner = new Scanner(System.in);
         registrarExtrato("Abertura da conta com saldo inicial: R$" + saldoInicial);
     }
 

@@ -4,6 +4,8 @@ import java.util.InputMismatchException;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.XmlSeeAlso;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 /**
  * @author Darlan Henrique da Costa Silva
@@ -15,7 +17,14 @@ import jakarta.xml.bind.annotation.XmlSeeAlso;
  */
 
 @XmlRootElement
-@XmlSeeAlso({Cliente.class, Caixa.class, Gerente.class})
+@XmlSeeAlso({ Cliente.class, Caixa.class, Gerente.class })
+
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "tipo", visible = true)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = Cliente.class, name = "cliente"),
+        @JsonSubTypes.Type(value = Caixa.class, name = "caixa"),
+        @JsonSubTypes.Type(value = Gerente.class, name = "gerente")
+})
 public class Usuario {
 
     private String nome;
@@ -26,12 +35,15 @@ public class Usuario {
     private String cep;
     private String numero;
 
+    public Usuario() {
+    }
 
     public Usuario(String nome, String cpf, String senha, String email, String tipo, String cep, String numero) {
         if (validaNome(nome)) {
             this.nome = nome;
         } else {
-            throw new IllegalArgumentException("Nome inválido. O nome deve conter apenas letras e ter pelo menos duas letras.");
+            throw new IllegalArgumentException(
+                    "Nome inválido. O nome deve conter apenas letras e ter pelo menos duas letras.");
         }
 
         if (validaCPF(cpf)) {
@@ -43,7 +55,8 @@ public class Usuario {
         if (validaSenha(senha)) {
             this.senha = senha;
         } else {
-            throw new IllegalArgumentException("Senha inválida. A senha não pode estar vazia ou conter apenas espaços.");
+            throw new IllegalArgumentException(
+                    "Senha inválida. A senha não pode estar vazia ou conter apenas espaços.");
         }
 
         if (validaEmail(email)) {
@@ -67,7 +80,8 @@ public class Usuario {
         if (validaNome(nome)) {
             this.nome = nome;
         } else {
-            throw new IllegalArgumentException("Nome inválido. O nome deve conter apenas letras e ter pelo menos duas letras.");
+            throw new IllegalArgumentException(
+                    "Nome inválido. O nome deve conter apenas letras e ter pelo menos duas letras.");
         }
     }
 
@@ -93,7 +107,8 @@ public class Usuario {
         if (validaSenha(senha)) {
             this.senha = senha;
         } else {
-            throw new IllegalArgumentException("Senha inválida. A senha não pode estar vazia ou conter apenas espaços.");
+            throw new IllegalArgumentException(
+                    "Senha inválida. A senha não pode estar vazia ou conter apenas espaços.");
         }
     }
 

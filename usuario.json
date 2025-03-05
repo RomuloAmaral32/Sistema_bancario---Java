@@ -42,16 +42,5 @@
     "nivelDeAcesso": 1000000.0,
     "rendaFixa": [],
     "rendaVariavel": []
-  },
-  {
-    "nome": "Novo Cliente",
-    "cpf": "34014199002",
-    "senha": "senha123",
-    "email": "novo@email.com",
-    "tipo": "cliente",
-    "cep": "36000000",
-    "numero": "456",
-    "contaBancaria": "0003",
-    "saldo": 500.0
   }
 ]

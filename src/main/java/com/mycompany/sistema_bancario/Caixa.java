@@ -10,22 +10,25 @@ package com.mycompany.sistema_bancario;
  * @matricula 202176038
  */
 
- /**
- *
- * @author Rômulo Amaral
- * @matricula 202335015
- */
+/**
+*
+* @author Rômulo Amaral
+* @matricula 202335015
+*/
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-
- @XmlRootElement
+@XmlRootElement
 public class Caixa extends Usuario {
 
     private String numeroFuncionario;
     @XmlTransient
     private UsuarioService usuarioService;
+
+    public Caixa() {
+        super();
+    }
 
     public Caixa(String nome, String cpf, String senha, String email, String tipo, String cep, String numero,
             String numeroFuncionario, UsuarioService usuarioService) {
@@ -34,7 +37,6 @@ public class Caixa extends Usuario {
         this.usuarioService = usuarioService;
     }
 
-    
     @XmlElement
     public String getNumeroFuncionario() {
         return numeroFuncionario;
