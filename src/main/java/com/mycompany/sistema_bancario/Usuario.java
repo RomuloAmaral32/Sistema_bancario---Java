@@ -8,14 +8,22 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 /**
+ *
  * @author Darlan Henrique da Costa Silva
  * @matricula 202176038
  */
 /**
- * @author Rômulo Amaral
+ *
+ * @author Rômulo Ferreira do Amaral
  * @matricula 202335015
  */
+/**
+ *
+ * @author  Ian Nakamura Okano Preste
+ * @matricula 202335038
+ */
 
+ 
 @XmlRootElement
 @XmlSeeAlso({ Cliente.class, Caixa.class, Gerente.class })
 

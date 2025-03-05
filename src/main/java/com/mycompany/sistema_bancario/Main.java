@@ -16,8 +16,13 @@ import java.util.List;
  */
 /**
  *
- * @author Rômulo Amaral
+ * @author Rômulo Ferreira do Amaral
  * @matricula 202335015
+ */
+/**
+ *
+ * @author  Ian Nakamura Okano Preste
+ * @matricula 202335038
  */
 
 public class Main { // main meremente para testes

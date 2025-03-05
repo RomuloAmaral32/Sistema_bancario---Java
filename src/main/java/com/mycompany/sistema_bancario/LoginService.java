@@ -6,6 +6,8 @@ package com.mycompany.sistema_bancario;
 
 import java.io.IOException;
 import java.util.List;
+
+
 /**
  *
  * @author Darlan Henrique da Costa Silva
@@ -13,8 +15,13 @@ import java.util.List;
  */
 /**
  *
- * @author Rômulo Amaral
+ * @author Rômulo Ferreira do Amaral
  * @matricula 202335015
+ */
+/**
+ *
+ * @author  Ian Nakamura Okano Preste
+ * @matricula 202335038
  */
 
 public class LoginService {
