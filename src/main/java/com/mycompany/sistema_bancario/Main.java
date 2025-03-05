@@ -21,7 +21,7 @@ import java.util.List;
  */
 /**
  *
- * @author  Ian Nakamura Okano Preste
+ * @author Ian Nakamura Okano Preste
  * @matricula 202335038
  */
 
@@ -34,28 +34,62 @@ public class Main { // main meremente para testes
         UsuarioService usuarioService = new UsuarioService(filePath);
 
         // Carrega os usuários existentes
-        List<Usuario> usuarios = usuarioService.loadFromJson();
-        for (Usuario usuario : usuarios) {
-            System.out.println("Usuário carregado: " + usuario.getNome() + " (" + usuario.getTipo() + ") - CPF: "
-                    + usuario.getCpf());
-            System.out.println("Classe do usuário: " + usuario.getClass().getName()); // Verifique a classe real
-        }
+        // List<Usuario> usuarios = usuarioService.loadFromJson();
+        // for (Usuario usuario : usuarios) {
+        //     System.out.println("Usuário carregado: " + usuario.getNome() + " (" + usuario.getTipo() + ") - CPF: "
+        //             + usuario.getCpf());
+        //     System.out.println("Classe do usuário: " + usuario.getClass().getName()); // Verifique a classe real
+        // }
 
-        // Adiciona um novo cliente
-        Cliente novoCliente = new Cliente(
-                "Novo Cliente",
-                "34014199002",
+        // Caso 1: Cliente com CPF já utilizado por outro cliente
+        Cliente clienteDuplicado = new Cliente(
+                "Cliente Duplicado",
+                "34014199002", // Mesmo CPF de outro cliente
                 "senha123",
-                "novo@email.com",
-                "cliente", // Define o tipo corretamente
+                "clienteDuplicado@email.com",
+                "cliente",
                 "36000000",
                 "456",
                 "0003",
                 500.0);
+        try {
+            usuarioService.adicionarUsuario(clienteDuplicado);
+        } catch (Exception e) {
+            System.out.println("Erro: " + e.getMessage());
+        }
 
-        usuarioService.adicionarUsuario(novoCliente);
+        // Caso 2: Gerente com CPF já utilizado por um cliente
+        Gerente novoGerente = new Gerente(
+                "Novo Gerente",
+                "34014199002", // Mesmo CPF de um cliente
+                "senha123",
+                "gerente@email.com",
+                "gerente",
+                "36000000",
+                "456",
+                1000.0);
+        try {
+            usuarioService.adicionarUsuario(novoGerente);
+        } catch (Exception e) {
+            System.out.println("Erro: " + e.getMessage());
+        }
 
-        System.out.println("Usuário adicionado com sucesso!");
+        // Caso 3: Cliente com CPF único
+        Cliente clienteUnico = new Cliente(
+                "Cliente Unico",
+                "70622788078", // CPF único
+                "senha123",
+                "unico@email.com",
+                "cliente",
+                "36000000",
+                "456",
+                "0004",
+                500.0);
+        try {
+            usuarioService.adicionarUsuario(clienteUnico);
+        } catch (Exception e) {
+            System.out.println("Erro: " + e.getMessage());
+        }
 
         // Scanner scanner = new Scanner(System.in);
 

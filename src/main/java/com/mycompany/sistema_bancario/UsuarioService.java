@@ -16,10 +16,9 @@ import java.util.List;
  */
 /**
  *
- * @author  Ian Nakamura Okano Preste
+ * @author Ian Nakamura Okano Preste
  * @matricula 202335038
  */
-
 
 public class UsuarioService {
     private List<Usuario> usuarios;
@@ -49,13 +48,20 @@ public class UsuarioService {
             // Carrega os usuários existentes
             List<Usuario> usuariosExistentes = jsonHandler.loadFromJson(Usuario.class);
 
+            // Verifica se o CPF já está em uso pelo mesmo tipo
+            isCpfDuplicado(usuario, usuariosExistentes);
+
             // Adiciona o novo usuário à lista
             usuariosExistentes.add(usuario);
 
             // Salva a lista atualizada no arquivo JSON
             jsonHandler.saveToJson(usuariosExistentes);
-        } catch (IOException e) {
+
+            System.out.println("Usuário adicionado com sucesso!");
+        } catch (CpfDuplicadoException e) {
             System.out.println("Erro ao adicionar usuário: " + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("Erro ao acessar o arquivo JSON: " + e.getMessage());
         }
     }
 
@@ -98,5 +104,18 @@ public class UsuarioService {
             }
         }
         throw new IllegalArgumentException("CPF ou senha inválidos."); // Lança exceção se não encontrar
+    }
+
+    private void isCpfDuplicado(Usuario novoUsuario, List<Usuario> usuariosExistentes) throws CpfDuplicadoException {
+        for (Usuario usuario : usuariosExistentes) {
+            if (usuario.getCpf().equals(novoUsuario.getCpf())) {
+                if (usuario.getTipo().equals(novoUsuario.getTipo())) {
+                    throw new CpfDuplicadoException("CPF já está em uso por um usuário do mesmo tipo.");
+                }
+                // Se o tipo for diferente, permitir a adição
+                return;
+            }
+        }
+        // Se o CPF não estiver em uso, permitir a adição
     }
 }
