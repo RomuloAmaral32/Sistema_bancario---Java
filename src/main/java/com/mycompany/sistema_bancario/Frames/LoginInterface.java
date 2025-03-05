@@ -74,6 +74,20 @@ public class LoginInterface extends JFrame {
                     // Aqui você pode redirecionar para a tela correspondente ao usuário logado
                     // Por exemplo: abrirTelaCliente() se for Cliente, abrirTelaCaixa() se for Caixa, etc.
 
+                    if( usuario.getTipo().equals("cliente") ){
+                        dispose(); 
+                        ClienteInterface telacliente = new ClienteInterface();
+                        telacliente.setVisible(true);
+                    } else if( usuario.getTipo().equals("caixa") ){
+                        dispose(); 
+                        CaixaInterface telacaixa = new CaixaInterface();
+                        telacaixa.setVisible(true);
+                    } else if( usuario.getTipo().equals("gerente") ){
+                        dispose(); 
+                        GerenteInterface telagerente = new GerenteInterface();
+                        telagerente.setVisible(true);
+                    } 
+
                 } catch (IllegalArgumentException ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                 }
