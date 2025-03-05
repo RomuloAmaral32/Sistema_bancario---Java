@@ -21,7 +21,6 @@ import java.util.List;
  */
 
 public class Main { // main meremente para testes
-    public static UsuarioService usuarioService;
 
     public static void main(String[] args) throws IOException {
         String filePath = "src/file/java/com/mycompany/sistema_bancario/usuarios.json";

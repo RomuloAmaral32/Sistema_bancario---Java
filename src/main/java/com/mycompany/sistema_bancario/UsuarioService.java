@@ -9,7 +9,6 @@ public class UsuarioService {
     private JsonHandler<Usuario> jsonHandler;
 
     public UsuarioService(String filePath) {
-    public UsuarioService(String filePath) {
         jsonHandler = new JsonHandler<>(filePath);
         try {
             // Tentar carregar os usuários existentes do JSON
@@ -50,7 +49,6 @@ public class UsuarioService {
             System.out.println("Erro ao carregar usuários: " + e.getMessage());
             return new ArrayList<>();
         }
-    }
     }
 
     // Método para buscar cliente por número da conta
