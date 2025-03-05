@@ -1,11 +1,14 @@
 package com.mycompany.sistema_bancario.Frames;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import com.mycompany.sistema_bancario.Caixa;
 import com.mycompany.sistema_bancario.Cliente;
+import com.mycompany.sistema_bancario.Gerente;
 import com.mycompany.sistema_bancario.JsonHandler;
 import com.mycompany.sistema_bancario.Usuario;
 import com.mycompany.sistema_bancario.UsuarioService;
@@ -128,30 +131,44 @@ public class Cadastro extends JFrame {
                             // Abrir a interface de cliente
                             ClienteInterface telacliente = new ClienteInterface();
                             telacliente.setVisible(true);
-                        } else {
-                            // Criar o novo usuário para perfis "Caixa" e "Gerente"
-                            Usuario novoUsuario = new Usuario(nome, cpf, senha, email, perfil.toLowerCase(), cep, numero);
-                            usuarioService.adicionarUsuario(novoUsuario);
-                            JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!");
-                            dispose(); // Fecha a tela de cadastro
-        
-                            // Abrir a interface correspondente
-                            if (perfil.equals("Caixa")) {
-                                CaixaInterface telacaixa = new CaixaInterface();
-                                telacaixa.setVisible(true);
-                            }
-                            if (perfil.equals("Gerente")) {
-                                GerenteInterface telagerente = new GerenteInterface();
-                                telagerente.setVisible(true);
-                            }
-                        }
-        
-                    } catch (IllegalArgumentException ex) {
-                        JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-                    }
+                        } else if (perfil.equals("Caixa")) {
+                    String numeroFuncionario = "12345"; // Valor estático
+
+                    // Criar o novo usuário do tipo Caixa com o número de funcionário
+                    Caixa novoCaixa = new Caixa(nome, cpf, senha, email, perfil.toLowerCase(), cep, numero, numeroFuncionario, usuarioService);
+                    usuarioService.adicionarUsuario(novoCaixa);
+                    JOptionPane.showMessageDialog(null, "Caixa cadastrado com sucesso!");
+                    dispose(); // Fecha a tela de cadastro
+
+                    // Abrir a interface de caixa
+                    CaixaInterface telacaixa = new CaixaInterface();
+                    telacaixa.setVisible(true);
+                } 
+                // Verificar se o perfil é "Gerente"
+                else if (perfil.equals("Gerente")) {
+                    double nivelDeAcesso = 1000000; // Inicializado com valor de 1 milhão
+
+                    // Criar o novo usuário do tipo Gerente com nível de acesso e arrays de renda
+                    Gerente novoGerente = new Gerente(nome, cpf, senha, email, perfil.toLowerCase(), cep, numero, nivelDeAcesso);
+                    usuarioService.adicionarUsuario(novoGerente);
+                    JOptionPane.showMessageDialog(null, "Gerente cadastrado com sucesso!");
+                    dispose(); // Fecha a tela de cadastro
+
+                    // Abrir a interface de gerente
+                    GerenteInterface telagerente = new GerenteInterface();
+                    telagerente.setVisible(true);
+                } 
+                // Caso o perfil não seja nenhum dos três, exibe mensagem de erro
+                else {
+                    throw new IllegalArgumentException("Perfil inválido!");
                 }
+
+            } catch (IllegalArgumentException ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             }
-        });
+        }
+    }
+});
         
 
         // Ação do botão Cancelar
