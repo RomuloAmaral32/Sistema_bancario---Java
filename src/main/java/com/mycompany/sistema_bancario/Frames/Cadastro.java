@@ -1,9 +1,12 @@
 package com.mycompany.sistema_bancario.Frames;
-
+import java.util.List;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import com.mycompany.sistema_bancario.Cliente;
+import com.mycompany.sistema_bancario.JsonHandler;
 import com.mycompany.sistema_bancario.Usuario;
 import com.mycompany.sistema_bancario.UsuarioService;
 
@@ -24,7 +27,7 @@ import com.mycompany.sistema_bancario.UsuarioService;
  */
 
 public class Cadastro extends JFrame {
-
+    private JsonHandler<Usuario> jsonHandler;
     private JLabel labelTitulo, labelNome, labelCpf, labelEmail, labelSenha, labelPerfil, labelCep, labelNumero;
     private JTextField campoNome, campoCpf, campoEmail, campoCep, campoNumero;
     private JPasswordField campoSenha;
@@ -105,36 +108,51 @@ public class Cadastro extends JFrame {
                 String perfil = (String) comboBoxPerfil.getSelectedItem();
                 String cep = campoCep.getText();
                 String numero = campoNumero.getText();
-
+        
                 if (nome.isEmpty() || cpf.isEmpty() || email.isEmpty() || senha.isEmpty() || cep.isEmpty() || numero.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos!", "Erro", JOptionPane.ERROR_MESSAGE);
                 } else {
                     try {
-                        // Criar o novo usuário e salvar no backend
-                        Usuario novoUsuario = new Usuario(nome, cpf, senha, email, perfil.toLowerCase(), cep, numero);
-                        usuarioService.adicionarUsuario(novoUsuario);
-                        JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!");
-                        dispose(); // Fecha a janela atual
-
+                        // Verificar se o perfil é "Cliente"
                         if (perfil.equals("Cliente")) {
+                            // Gerar um novo ID de conta bancária de forma estática
+                            //List<Usuario> usuariosExistentes = jsonHandler.loadFromJson(Usuario.class);; // Método que retorna os usuários existentes
+                            int novoIdConta =2; // Método que gera o novo ID (estático)
+        
+                            // Criar o novo usuário do tipo Cliente com conta bancária e saldo
+                            Cliente novoCliente = new Cliente(nome, cpf, senha, email, perfil.toLowerCase(), cep, numero, String.valueOf(novoIdConta), 0.0);
+                            usuarioService.adicionarUsuario(novoCliente);
+                            JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!");
+                            dispose(); // Fecha a tela de cadastro
+        
+                            // Abrir a interface de cliente
                             ClienteInterface telacliente = new ClienteInterface();
                             telacliente.setVisible(true);
+                        } else {
+                            // Criar o novo usuário para perfis "Caixa" e "Gerente"
+                            Usuario novoUsuario = new Usuario(nome, cpf, senha, email, perfil.toLowerCase(), cep, numero);
+                            usuarioService.adicionarUsuario(novoUsuario);
+                            JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!");
+                            dispose(); // Fecha a tela de cadastro
+        
+                            // Abrir a interface correspondente
+                            if (perfil.equals("Caixa")) {
+                                CaixaInterface telacaixa = new CaixaInterface();
+                                telacaixa.setVisible(true);
+                            }
+                            if (perfil.equals("Gerente")) {
+                                GerenteInterface telagerente = new GerenteInterface();
+                                telagerente.setVisible(true);
+                            }
                         }
-                        if (perfil.equals("Caixa")) {
-                            CaixaInterface telacaixa = new CaixaInterface();
-                            telacaixa.setVisible(true);
-                        }
-                        if (perfil.equals("Gerente")) {
-                            GerenteInterface telagerente = new GerenteInterface();
-                            telagerente.setVisible(true);
-                        }
-                        
+        
                     } catch (IllegalArgumentException ex) {
                         JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
         });
+        
 
         // Ação do botão Cancelar
         botaoCancelar.addActionListener(new ActionListener() {
