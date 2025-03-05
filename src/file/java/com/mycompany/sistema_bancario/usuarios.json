@@ -65,5 +65,16 @@
     "numero": "456",
     "contaBancaria": "0004",
     "saldo": 500.0
+  },
+  {
+    "nome": "Cliente Unico",
+    "cpf": "43236859040",
+    "senha": "senha123",
+    "email": "unico@email.com",
+    "tipo": "cliente",
+    "cep": "36000000",
+    "numero": "456",
+    "contaBancaria": "0005",
+    "saldo": 500.0
   }
 ]

@@ -41,49 +41,16 @@ public class Main { // main meremente para testes
         //     System.out.println("Classe do usuário: " + usuario.getClass().getName()); // Verifique a classe real
         // }
 
-        // Caso 1: Cliente com CPF já utilizado por outro cliente
-        Cliente clienteDuplicado = new Cliente(
-                "Cliente Duplicado",
-                "34014199002", // Mesmo CPF de outro cliente
-                "senha123",
-                "clienteDuplicado@email.com",
-                "cliente",
-                "36000000",
-                "456",
-                "0003",
-                500.0);
-        try {
-            usuarioService.adicionarUsuario(clienteDuplicado);
-        } catch (Exception e) {
-            System.out.println("Erro: " + e.getMessage());
-        }
-
-        // Caso 2: Gerente com CPF já utilizado por um cliente
-        Gerente novoGerente = new Gerente(
-                "Novo Gerente",
-                "34014199002", // Mesmo CPF de um cliente
-                "senha123",
-                "gerente@email.com",
-                "gerente",
-                "36000000",
-                "456",
-                1000.0);
-        try {
-            usuarioService.adicionarUsuario(novoGerente);
-        } catch (Exception e) {
-            System.out.println("Erro: " + e.getMessage());
-        }
-
         // Caso 3: Cliente com CPF único
         Cliente clienteUnico = new Cliente(
                 "Cliente Unico",
-                "70622788078", // CPF único
+                "43236859040", // CPF único
                 "senha123",
                 "unico@email.com",
                 "cliente",
                 "36000000",
                 "456",
-                "0004",
+                usuarioService.gerarNovaContaBancaria(),
                 500.0);
         try {
             usuarioService.adicionarUsuario(clienteUnico);

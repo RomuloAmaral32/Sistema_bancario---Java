@@ -36,7 +36,7 @@ public class Cadastro extends JFrame {
     private UsuarioService usuarioService;
 
     public Cadastro() {
-        usuarioService = new UsuarioService("usuarios.json"); 
+        usuarioService = new UsuarioService("src/file/java/com/mycompany/sistema_bancario/usuarios.json"); 
 
         // Configurações da janela
         setTitle("Tela de Cadastro");
@@ -116,11 +116,15 @@ public class Cadastro extends JFrame {
                         // Verificar se o perfil é "Cliente"
                         if (perfil.equals("Cliente")) {
                             // Gerar um novo ID de conta bancária de forma estática
-                            //List<Usuario> usuariosExistentes = jsonHandler.loadFromJson(Usuario.class);; // Método que retorna os usuários existentes
-                            int novoIdConta =2; // Método que gera o novo ID (estático)
-        
+                            String novoIdConta =  usuarioService.gerarNovaContaBancaria(); // Método que gera o novo ID
+                            JOptionPane.showMessageDialog(null, "Conta bancária gerada com sucesso! Número da conta: " + novoIdConta);
+                            // if (novoIdConta == null) {
+                            //     JOptionPane.showMessageDialog(null, "Erro ao gerar conta bancária. Tente novamente.");
+                            //     return;
+                            // }
+            
                             // Criar o novo usuário do tipo Cliente com conta bancária e saldo
-                            Cliente novoCliente = new Cliente(nome, cpf, senha, email, perfil.toLowerCase(), cep, numero, String.valueOf(novoIdConta), 0.0);
+                            Cliente novoCliente = new Cliente(nome, cpf, senha, email, perfil.toLowerCase(), cep, numero, novoIdConta, 0.0);
                             usuarioService.adicionarUsuario(novoCliente);
                             JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!");
                             dispose(); // Fecha a tela de cadastro

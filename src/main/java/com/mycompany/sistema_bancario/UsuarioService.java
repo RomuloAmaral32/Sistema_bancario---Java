@@ -112,10 +112,33 @@ public class UsuarioService {
                 if (usuario.getTipo().equals(novoUsuario.getTipo())) {
                     throw new CpfDuplicadoException("CPF já está em uso por um usuário do mesmo tipo.");
                 }
-                // Se o tipo for diferente, permitir a adição
                 return;
             }
         }
-        // Se o CPF não estiver em uso, permitir a adição
+    }
+
+    public String gerarNovaContaBancaria() {
+        try {
+            List<Usuario> usuariosExistentes = jsonHandler.loadFromJson(Usuario.class);
+            int maiorConta = 0;
+
+            for (Usuario usuario : usuariosExistentes) {
+                if (usuario.getTipo().equals("cliente")) {
+                    Cliente cliente = (Cliente) usuario;
+                    String contaBancaria = cliente.getContaBancaria();
+                    int numeroConta = Integer.parseInt(contaBancaria);
+                    if (numeroConta > maiorConta) {
+                        maiorConta = numeroConta;
+                    }
+                }
+            }
+
+            int novaConta = maiorConta + 1;
+
+            return String.format("%04d", novaConta);
+        } catch (IOException e) {
+            System.out.println("Erro ao carregar usuários para gerar conta bancária: " + e.getMessage());
+            return null;
+        }
     }
 }
