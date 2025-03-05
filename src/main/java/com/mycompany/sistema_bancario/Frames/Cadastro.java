@@ -36,7 +36,7 @@ public class Cadastro extends JFrame {
     private UsuarioService usuarioService;
 
     public Cadastro() {
-        usuarioService = new UsuarioService("usuarios.json"); 
+        usuarioService = new UsuarioService("src/file/java/com/mycompany/sistema_bancario/usuarios.json"); 
 
         // Configurações da janela
         setTitle("Tela de Cadastro");
