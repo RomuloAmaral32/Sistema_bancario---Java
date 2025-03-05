@@ -65,10 +65,19 @@ public class Usuario {
             throw new IllegalArgumentException("Email inválido");
         }
 
-        this.tipo = tipo;
-        this.cep = cep;
-        this.numero = numero;
+        if (validaCep(cep)) {
+            this.cep = cep;
+        } else {
+            throw new IllegalArgumentException("CEP inválido. O CEP deve conter apenas números e ter 8 dígitos.");
+        }
 
+        if (validaNumero(numero)) {
+            this.numero = numero;
+        } else {
+            throw new IllegalArgumentException("Número inválido. O número deve conter apenas valores numéricos.");
+        }
+
+        this.tipo = tipo;
     }
 
     @XmlElement
@@ -138,20 +147,30 @@ public class Usuario {
         }
     }
 
+    @XmlElement
     public String getCep() {
         return cep;
     }
 
     public void setCep(String cep) {
-        this.cep = cep;
+        if (validaCep(cep)) {
+            this.cep = cep;
+        } else {
+            throw new IllegalArgumentException("CEP inválido. O CEP deve conter apenas números e ter 8 dígitos.");
+        }
     }
 
+    @XmlElement
     public String getNumero() {
         return numero;
     }
 
     public void setNumero(String numero) {
-        this.numero = numero;
+        if (validaNumero(numero)) {
+            this.numero = numero;
+        } else {
+            throw new IllegalArgumentException("Número inválido. O número deve conter apenas valores numéricos.");
+        }
     }
 
     private boolean validaCPF(String CPF) {
@@ -199,6 +218,14 @@ public class Usuario {
         } catch (InputMismatchException e) {
             return false;
         }
+    }
+
+    private boolean validaCep(String cep) {
+        return cep.matches("\\d{8}");
+    }
+
+    private boolean validaNumero(String numero) {
+        return numero.matches("\\d+");
     }
 
     public boolean verificaSenha(String senhaInserida) {

@@ -1,23 +1,24 @@
 package com.mycompany.sistema_bancario.Frames;
+
+import com.mycompany.sistema_bancario.LoginService;
+import com.mycompany.sistema_bancario.Usuario;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- *
- * @author Rômulo Amaral
- * @matricula 202335015
- */
-
 public class LoginInterface extends JFrame {
 
-    private JLabel labelCPF, labelSenha, labelPerfil;
+    private JLabel labelCPF, labelSenha;
     private JTextField campoCPF;
     private JPasswordField campoSenha;
     private JButton botaoLogin, botaoCancelar;
+    private LoginService loginService; // Instância de LoginService para verificar login
 
     public LoginInterface() {
+        // Inicializa o LoginService com o caminho do arquivo JSON
+        loginService = new LoginService("usuarios.json");
+
         setTitle("Tela de Login");
         setSize(550, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -42,32 +43,39 @@ public class LoginInterface extends JFrame {
 
         add(painel);
 
+        // Ação ao clicar no botão de login
         botaoLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String cpf = campoCPF.getText();
                 String senha = new String(campoSenha.getPassword());
 
-                if (cpf.equals("123.456.789-00") && senha.equals("1234")) {
-                    JOptionPane.showMessageDialog(null, "Login bem-sucedido");
-                }else {
-                    JOptionPane.showMessageDialog(null, "CPF, senha ou perfil incorretos!", "Erro", JOptionPane.ERROR_MESSAGE);
+                try {
+                    // Verifica o login através do LoginService
+                    Usuario usuario = loginService.verificarLogin(cpf, senha);
+                    JOptionPane.showMessageDialog(null, "Login bem-sucedido! Bem-vindo(a), " + usuario.getNome());
+
+                    // Aqui você pode redirecionar para a tela correspondente ao usuário logado
+                    // Por exemplo: abrirTelaCliente() se for Cliente, abrirTelaCaixa() se for Caixa, etc.
+
+                } catch (IllegalArgumentException ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
 
+        // Ação ao clicar no botão de cancelar
         botaoCancelar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 campoCPF.setText("");
                 campoSenha.setText("");
-                dispose(); // Fecha a janela atual
-                Cadastro cadastrar = new Cadastro(); // Volta para a tela de login
+                dispose();
+                Cadastro cadastrar = new Cadastro();
                 cadastrar.setVisible(true);
             }
         });
     }
-
 
     public static void main(String[] args) {
         LoginInterface telaLogin = new LoginInterface();

@@ -13,21 +13,21 @@ import com.mycompany.sistema_bancario.UsuarioService;
  */
 public class Cadastro extends JFrame {
 
-    private JLabel labelTitulo, labelNome, labelCpf, labelEmail, labelSenha, labelPerfil;
-    private JTextField campoNome, campoCpf, campoEmail;
+    private JLabel labelTitulo, labelNome, labelCpf, labelEmail, labelSenha, labelPerfil, labelCep, labelNumero;
+    private JTextField campoNome, campoCpf, campoEmail, campoCep, campoNumero;
     private JPasswordField campoSenha;
     private JComboBox<String> comboBoxPerfil;
     private JButton botaoCadastrar, botaoCancelar;
     private UsuarioService usuarioService;
 
     public Cadastro() {
-        usuarioService = new UsuarioService("usuarios.json");
+        usuarioService = new UsuarioService("usuarios.json"); 
 
         // Configurações da janela
         setTitle("Tela de Cadastro");
-        setSize(400, 300);
+        setSize(400, 350);  // Aumentando a altura da janela para acomodar os novos campos
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
+        setLocationRelativeTo(null); 
 
         labelTitulo = new JLabel("Cadastro de Usuário", JLabel.CENTER);
         labelTitulo.setFont(new Font("Arial", Font.BOLD, 18));
@@ -47,12 +47,18 @@ public class Cadastro extends JFrame {
         labelPerfil = new JLabel("Perfil:");
         comboBoxPerfil = new JComboBox<>(new String[] { "Cliente", "Caixa", "Gerente" });
 
+        labelCep = new JLabel("CEP:");
+        campoCep = new JTextField();
+
+        labelNumero = new JLabel("Número da Casa:");
+        campoNumero = new JTextField();
+
         botaoCadastrar = new JButton("Cadastrar");
         botaoCancelar = new JButton("Cancelar");
 
         // Layout
         JPanel painel = new JPanel();
-        painel.setLayout(new GridLayout(7, 2, 10, 10));
+        painel.setLayout(new GridLayout(9, 2, 10, 10)); // Ajustando o GridLayout para 9 linhas
 
         painel.add(labelNome);
         painel.add(campoNome);
@@ -64,9 +70,13 @@ public class Cadastro extends JFrame {
         painel.add(campoSenha);
         painel.add(labelPerfil);
         painel.add(comboBoxPerfil);
-        painel.add(new JLabel());
+        painel.add(labelCep);
+        painel.add(campoCep);
+        painel.add(labelNumero);
+        painel.add(campoNumero);
+        painel.add(new JLabel()); 
         painel.add(botaoCadastrar);
-        painel.add(new JLabel());
+        painel.add(new JLabel()); 
         painel.add(botaoCancelar);
 
         add(labelTitulo, BorderLayout.NORTH);
@@ -79,19 +89,34 @@ public class Cadastro extends JFrame {
                 String cpf = campoCpf.getText();
                 String email = campoEmail.getText();
                 char[] senhaInformada = campoSenha.getPassword();
-                String senha = new String(senhaInformada);
+                String senha = new String(senhaInformada); 
                 String perfil = (String) comboBoxPerfil.getSelectedItem();
+                String cep = campoCep.getText();
+                String numero = campoNumero.getText();
 
-                if (nome.isEmpty() || cpf.isEmpty() || email.isEmpty() || senha.isEmpty() || perfil == null) {
-                    JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos!", "Erro",
-                            JOptionPane.ERROR_MESSAGE);
+                if (nome.isEmpty() || cpf.isEmpty() || email.isEmpty() || senha.isEmpty() || cep.isEmpty() || numero.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos!", "Erro", JOptionPane.ERROR_MESSAGE);
                 } else {
                     try {
                         // Criar o novo usuário e salvar no backend
-                        Usuario novoUsuario = new Usuario(nome, cpf, senha, email, perfil.toLowerCase(), "00000000", "00");
+                        Usuario novoUsuario = new Usuario(nome, cpf, senha, email, perfil.toLowerCase(), cep, numero);
                         usuarioService.adicionarUsuario(novoUsuario);
-
                         JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!");
+                        dispose(); // Fecha a janela atual
+
+                        if (perfil.equals("Cliente")) {
+                            ClienteInterface telacliente = new ClienteInterface();
+                            telacliente.setVisible(true);
+                        }
+                        if (perfil.equals("Caixa")) {
+                            CaixaInterface telacaixa = new CaixaInterface();
+                            telacaixa.setVisible(true);
+                        }
+                        if (perfil.equals("Gerente")) {
+                            GerenteInterface telagerente = new GerenteInterface();
+                            telagerente.setVisible(true);
+                        }
+                        
                     } catch (IllegalArgumentException ex) {
                         JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                     }
@@ -107,6 +132,8 @@ public class Cadastro extends JFrame {
                 campoCpf.setText("");
                 campoEmail.setText("");
                 campoSenha.setText("");
+                campoCep.setText("");
+                campoNumero.setText("");
                 comboBoxPerfil.setSelectedIndex(0);
             }
         });

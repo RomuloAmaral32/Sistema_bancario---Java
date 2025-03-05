@@ -1,31 +1,23 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.sistema_bancario;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author Darlan
- */
-/**
- *
- * @author Rômulo Amaral
- * @matricula 202335015
- */
-
 public class UsuarioService {
     private List<Usuario> usuarios;
     private JsonHandler<Usuario> jsonHandler;
 
     public UsuarioService(String filePath) {
+    public UsuarioService(String filePath) {
         jsonHandler = new JsonHandler<>(filePath);
         try {
+            // Tentar carregar os usuários existentes do JSON
             usuarios = jsonHandler.loadFromJson(Usuario.class);
+            // Se o arquivo JSON estiver vazio ou não existir, inicializa uma lista vazia
+            if (usuarios == null || usuarios.isEmpty()) {
+                usuarios = new ArrayList<>();
+            }
         } catch (IOException e) {
             usuarios = new ArrayList<>();
             System.out.println("Erro ao carregar usuários do arquivo: " + e.getMessage());
@@ -59,7 +51,9 @@ public class UsuarioService {
             return new ArrayList<>();
         }
     }
+    }
 
+    // Método para buscar cliente por número da conta
     public Cliente buscarClientePorNumeroConta(String numeroConta) {
         for (Usuario usuario : usuarios) {
             if (usuario instanceof Cliente) {
@@ -79,5 +73,15 @@ public class UsuarioService {
             }
         }
         throw new IllegalArgumentException("Usuário não encontrado para o CPF: " + cpf);
+    }
+
+    public Usuario validarLogin(String cpf, String senha) {
+        for (Usuario usuario : usuarios) {
+            // Verifica o CPF e a senha
+            if (usuario.getCpf().equals(cpf) && usuario.getSenha().equals(senha)) {
+                return usuario; // Retorna o usuário se o CPF e a senha estiverem corretos
+            }
+        }
+        throw new IllegalArgumentException("CPF ou senha inválidos."); // Lança exceção se não encontrar
     }
 }

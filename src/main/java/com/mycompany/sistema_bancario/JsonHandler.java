@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.sistema_bancario;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,16 +11,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author Darlan Henrique da Costa Silva
- * @matricula 202176038
- */
-/**
- *
- * @author Rômulo Amaral
- * @matricula 202335015
- */
 public class JsonHandler<T> {
     private final ObjectMapper objectMapper;
     private final String filePath;
@@ -43,6 +29,7 @@ public class JsonHandler<T> {
         objectMapper.writeValue(new File(filePath), data);
     }
 
+    // Método para carregar os dados do JSON
     public List<T> loadFromJson(Class<T> clazz) throws IOException {
         File file = new File(filePath);
         if (!file.exists() || file.length() == 0) {
