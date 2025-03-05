@@ -33,7 +33,7 @@ public class LoginInterface extends JFrame {
 
     public LoginInterface() {
         // Inicializa o LoginService com o caminho do arquivo JSON
-        loginService = new LoginService("usuarios.json");
+        loginService = new LoginService("src/file/java/com/mycompany/sistema_bancario/usuarios.json");
 
         setTitle("Tela de Login");
         setSize(550, 300);
