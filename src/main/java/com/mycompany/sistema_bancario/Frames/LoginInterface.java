@@ -46,7 +46,7 @@ public class LoginInterface extends JFrame {
         campoSenha = new JPasswordField(15);
 
         botaoLogin = new JButton("Login");
-        botaoCancelar = new JButton("Cancelar");
+        botaoCancelar = new JButton("Cadastrar");
 
         JPanel painel = new JPanel();
         painel.setLayout(new GridLayout(4, 2));
