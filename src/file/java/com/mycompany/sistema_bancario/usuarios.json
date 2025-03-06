@@ -8,7 +8,7 @@
     "cep": "36000000",
     "numero": "123",
     "contaBancaria": "0001",
-    "saldo": 900.0
+    "saldo": 3900.0
   },
   {
     "nome": "Maria Julia",
@@ -19,7 +19,7 @@
     "cep": "36000000",
     "numero": "123",
     "contaBancaria": "0002",
-    "saldo": 1000.0
+    "saldo": 800.0
   },
   {
     "nome": "Joao Santos",

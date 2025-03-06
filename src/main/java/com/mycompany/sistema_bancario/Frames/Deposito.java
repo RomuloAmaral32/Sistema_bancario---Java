@@ -1,15 +1,17 @@
 package com.mycompany.sistema_bancario.Frames;
 
+import java.util.List;
 import com.mycompany.sistema_bancario.UsuarioService;
+import com.mycompany.sistema_bancario.Caixa;
 import com.mycompany.sistema_bancario.Cliente;
 import com.mycompany.sistema_bancario.JsonHandler;
+import com.mycompany.sistema_bancario.Usuario;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.List;
 
 public class Deposito extends JFrame {
 
@@ -70,57 +72,42 @@ public class Deposito extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String numeroConta = campoNumeroConta.getText();
-                String valorDeposito = campoValorDeposito.getText();
+                String valorDepositoStr = campoValorDeposito.getText();
+                double valorDeposito = Double.parseDouble(valorDepositoStr);
                 char[] senhaInformada = campoSenha.getPassword();
                 String senha = new String(senhaInformada);
 
                 try {
-                    // Busca o cliente pelo número da conta
-                    Cliente cliente = usuarioService.buscarClientePorNumeroConta(numeroConta);
+                    // Cria uma instância do Caixa
+                    Caixa caixa = new Caixa(
+                            "Caixa",
+                            "11357820674",
+                            "senhaCaixa",
+                            "caixa@email.com",
+                            "caixa",
+                            "36000000",
+                            "123",
+                            "001",
+                            usuarioService);
 
-                    // Verificação de null para evitar erros
-                    if (cliente != null && cliente.getContaBancaria().equals(numeroConta)) {
-                        // Verificação da senha
-                        System.out.println(cliente.getSaldo());
-                        if (cliente.getSenha().equals(senha)) {
-                            // Validação do valor de depósito
-                            double valor = Double.parseDouble(valorDeposito);
-                            if (valor > 0) {
-                                // Realizar o depósito
-                                cliente.setSaldo(cliente.getSaldo() + valor);
-                                System.out.println(cliente.getSaldo());
+                    // Processa o depósito usando o Caixa
+                    boolean depositoRealizado = caixa.deposito(valorDeposito, numeroConta, senha);
 
+                    if (depositoRealizado) {
+                        // Busca o cliente atualizado
+                        Cliente clienteAtualizado = usuarioService.buscarClientePorNumeroConta(numeroConta);
 
-                                // Carregar a lista de clientes do JSON usando JsonHandler
-                                JsonHandler<Cliente> jsonHandler = new JsonHandler<>("src/file/java/com/mycompany/sistema_bancario/usuarios.json");
-                                List<Cliente> clientes = jsonHandler.loadFromJson(Cliente.class);
+                        // Atualiza o cliente no JSON
+                        JsonHandler<Usuario> jsonHandler = new JsonHandler<>("src/file/java/com/mycompany/sistema_bancario/usuarios.json");
+                        jsonHandler.editDataByContaBancaria(numeroConta, clienteAtualizado, Usuario.class);
 
-                                // Atualizar o cliente na lista
-                                for (int i = 0; i < clientes.size(); i++) {
-                                    if (clientes.get(i).getContaBancaria().equals(cliente.getContaBancaria())) {
-                                        clientes.set(i, cliente);  // Atualiza o cliente
-                                        break;
-                                    }
-                                }
-                                System.out.println(cliente.getSaldo());
+                        // Exibe mensagem de sucesso
+                        JOptionPane.showMessageDialog(null, "Depósito realizado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 
-                                // Salvar a lista de clientes atualizada no JSON
-                                jsonHandler.saveToJson(clientes);
-
-                                JOptionPane.showMessageDialog(null, "Depósito realizado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-
-                                // Voltar para a interface anterior
-                                dispose();
-                                CaixaInterface caixaInterface = new CaixaInterface();
-                                caixaInterface.setVisible(true);
-                            } else {
-                                JOptionPane.showMessageDialog(null, "Valor de depósito inválido.", "Erro", JOptionPane.ERROR_MESSAGE);
-                            }
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Senha incorreta! O depósito não foi realizado.", "Erro", JOptionPane.ERROR_MESSAGE);
-                        }
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Conta bancária não encontrada ou inválida.", "Erro", JOptionPane.ERROR_MESSAGE);
+                        // Volta para a interface anterior
+                        dispose();
+                        CaixaInterface caixaInterface = new CaixaInterface();
+                        caixaInterface.setVisible(true);
                     }
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(null, "Valor de depósito inválido. Por favor, insira um número válido.", "Erro", JOptionPane.ERROR_MESSAGE);
