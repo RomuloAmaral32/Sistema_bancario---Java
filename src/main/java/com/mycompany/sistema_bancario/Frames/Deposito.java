@@ -1,36 +1,31 @@
 package com.mycompany.sistema_bancario.Frames;
 
+import com.mycompany.sistema_bancario.UsuarioService;
+import com.mycompany.sistema_bancario.Cliente;
+import com.mycompany.sistema_bancario.JsonHandler;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-/**
- *
- * @author Darlan Henrique da Costa Silva
- * @matricula 202176038
- */
-/**
- *
- * @author Rômulo Ferreira do Amaral
- * @matricula 202335015
- */
-/**
- *
- * @author  Ian Nakamura Okano Preste
- * @matricula 202335038
- */
+import java.io.IOException;
+import java.util.List;
 
 public class Deposito extends JFrame {
 
-    private JLabel labelTitulo, labelNomeContaOrigem, labelValorDeposito;
-    private JTextField campoNomeContaOrigem, campoValorDeposito;
-    private JButton botaoDepositar, botaoSair;
+    private JLabel labelTitulo, labelNumeroConta, labelValorDeposito, labelSenha;
+    private JTextField campoNumeroConta, campoValorDeposito;
+    private JPasswordField campoSenha;
+    private JButton botaoConfirmar, botaoCancelar;
+    private UsuarioService usuarioService;
 
     public Deposito() {
+        // Inicializar o serviço de usuários
+        usuarioService = new UsuarioService("src/file/java/com/mycompany/sistema_bancario/usuarios.json"); // Arquivo JSON com usuários
+
         // Configurações da janela
         setTitle("Tela de Depósito");
-        setSize(400, 250);
+        setSize(400, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null); // Centraliza a janela na tela
 
@@ -38,64 +33,110 @@ public class Deposito extends JFrame {
         labelTitulo = new JLabel("Depósito", JLabel.CENTER);
         labelTitulo.setFont(new Font("Arial", Font.BOLD, 18));
 
-        labelNomeContaOrigem = new JLabel("Nome da Conta de Origem:");
-        campoNomeContaOrigem = new JTextField();
+        labelNumeroConta = new JLabel("Número da Conta:");
+        campoNumeroConta = new JTextField();
 
         labelValorDeposito = new JLabel("Valor do Depósito:");
         campoValorDeposito = new JTextField();
 
-        botaoDepositar = new JButton("Depositar Dinheiro");
-        botaoSair = new JButton("Sair");
+        labelSenha = new JLabel("Senha:");
+        campoSenha = new JPasswordField();
+
+        botaoConfirmar = new JButton("Confirmar");
+        botaoCancelar = new JButton("Cancelar");
 
         // Layout
         JPanel painel = new JPanel();
-        painel.setLayout(new GridLayout(4, 2, 10, 10)); // 4 linhas, 2 colunas, espaço de 10px
+        painel.setLayout(new GridLayout(5, 2, 10, 10)); // 5 linhas, 2 colunas, espaço de 10px
 
         // Adicionando componentes ao painel
-        painel.add(labelNomeContaOrigem);
-        painel.add(campoNomeContaOrigem);
+        painel.add(labelNumeroConta);
+        painel.add(campoNumeroConta);
         painel.add(labelValorDeposito);
         painel.add(campoValorDeposito);
-        painel.add(new JLabel()); // Campo vazio
-        painel.add(botaoDepositar);
-        painel.add(new JLabel()); // Campo vazio
-        painel.add(botaoSair);
+        painel.add(labelSenha);
+        painel.add(campoSenha);
+        painel.add(new JLabel()); // Campo vazio para espaçamento
+        painel.add(botaoConfirmar);
+        painel.add(new JLabel()); // Campo vazio para espaçamento
+        painel.add(botaoCancelar);
 
         // Adicionando o título e o painel à janela
         add(labelTitulo, BorderLayout.NORTH);
         add(painel, BorderLayout.CENTER);
 
-        // Ação do botão Depositar Dinheiro
-        botaoDepositar.addActionListener(new ActionListener() {
+        // Ação do botão Confirmar
+        botaoConfirmar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String nomeContaOrigem = campoNomeContaOrigem.getText();
+                String numeroConta = campoNumeroConta.getText();
                 String valorDeposito = campoValorDeposito.getText();
+                char[] senhaInformada = campoSenha.getPassword();
+                String senha = new String(senhaInformada);
 
-                // Verificação se o valor é numérico e positivo
                 try {
-                    double valor = Double.parseDouble(valorDeposito);
-                    if (valor > 0 && !nomeContaOrigem.isEmpty()) {
-                        // Depósito realizado com sucesso
-                        JOptionPane.showMessageDialog(null, "Depósito de R$ " + valorDeposito + " realizado com sucesso na conta " + nomeContaOrigem + "!");
-                    } else if (nomeContaOrigem.isEmpty()) {
-                        JOptionPane.showMessageDialog(null, "O nome da conta de origem não pode estar vazio.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    // Busca o cliente pelo número da conta
+                    Cliente cliente = usuarioService.buscarClientePorNumeroConta(numeroConta);
+
+                    // Verificação de null para evitar erros
+                    if (cliente != null && cliente.getContaBancaria().equals(numeroConta)) {
+                        // Verificação da senha
+                        System.out.println(cliente.getSaldo());
+                        if (cliente.getSenha().equals(senha)) {
+                            // Validação do valor de depósito
+                            double valor = Double.parseDouble(valorDeposito);
+                            if (valor > 0) {
+                                // Realizar o depósito
+                                cliente.setSaldo(cliente.getSaldo() + valor);
+                                System.out.println(cliente.getSaldo());
+
+
+                                // Carregar a lista de clientes do JSON usando JsonHandler
+                                JsonHandler<Cliente> jsonHandler = new JsonHandler<>("src/file/java/com/mycompany/sistema_bancario/usuarios.json");
+                                List<Cliente> clientes = jsonHandler.loadFromJson(Cliente.class);
+
+                                // Atualizar o cliente na lista
+                                for (int i = 0; i < clientes.size(); i++) {
+                                    if (clientes.get(i).getContaBancaria().equals(cliente.getContaBancaria())) {
+                                        clientes.set(i, cliente);  // Atualiza o cliente
+                                        break;
+                                    }
+                                }
+                                System.out.println(cliente.getSaldo());
+
+                                // Salvar a lista de clientes atualizada no JSON
+                                jsonHandler.saveToJson(clientes);
+
+                                JOptionPane.showMessageDialog(null, "Depósito realizado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+
+                                // Voltar para a interface anterior
+                                dispose();
+                                CaixaInterface caixaInterface = new CaixaInterface();
+                                caixaInterface.setVisible(true);
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Valor de depósito inválido.", "Erro", JOptionPane.ERROR_MESSAGE);
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Senha incorreta! O depósito não foi realizado.", "Erro", JOptionPane.ERROR_MESSAGE);
+                        }
                     } else {
-                        // Valor inválido
-                        JOptionPane.showMessageDialog(null, "Valor inválido! O depósito deve ser maior que zero.", "Erro", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Conta bancária não encontrada ou inválida.", "Erro", JOptionPane.ERROR_MESSAGE);
                     }
                 } catch (NumberFormatException ex) {
-                    // Caso o valor inserido não seja numérico
-                    JOptionPane.showMessageDialog(null, "Por favor, insira um valor numérico válido.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Valor de depósito inválido. Por favor, insira um número válido.", "Erro", JOptionPane.ERROR_MESSAGE);
+                } catch (IllegalArgumentException ex) {
+                    JOptionPane.showMessageDialog(null, "Erro ao processar depósito: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(null, "Erro ao salvar os dados do cliente.", "Erro", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
 
-        // Ação do botão Sair
-        botaoSair.addActionListener(new ActionListener() {
+        // Ação do botão Cancelar
+        botaoCancelar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Fecha a janela de Depósito e volta para a interface anterior (por exemplo, a tela de Caixa)
+                // Fecha a janela de Depósito e volta para a tela de CaixaInterface
                 dispose();
                 CaixaInterface caixaInterface = new CaixaInterface();
                 caixaInterface.setVisible(true);
