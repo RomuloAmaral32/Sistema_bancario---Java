@@ -37,8 +37,8 @@ public class TransferenciaCaixa extends JFrame {
     private JLabel mensagemStatus;
      private UsuarioService usuarioService;
 
-    public TransferenciaCaixa() {
-        usuarioService = new UsuarioService("src/file/java/com/mycompany/sistema_bancario/usuarios.json");
+    public TransferenciaCaixa(Caixa caixa) {
+        this.usuarioService = caixa.getUsuarioService();
         // Configurações da janela
         setTitle("Transferência Bancária do caixa");
         setSize(400, 400);
@@ -108,16 +108,6 @@ public class TransferenciaCaixa extends JFrame {
 
         try {
             // Cria uma instância do Caixa
-            Caixa caixa = new Caixa(
-                    "Caixa",
-                    "11357820674",
-                    "senhaCaixa",
-                    "caixa@email.com",
-                    "caixa",
-                    "36000000",
-                    "123",
-                    "001",
-                    usuarioService);
 
             // Processa a transferência usando o Caixa
             boolean transferenciaRealizada = caixa.transferencia(valorTransferencia, contaOrigem, senha, contaDestino);
@@ -137,7 +127,7 @@ public class TransferenciaCaixa extends JFrame {
 
                 // Volta para a interface anterior
                 dispose();
-                CaixaInterface caixaInterface = new CaixaInterface();
+                CaixaInterface caixaInterface = new CaixaInterface(caixa);
                 caixaInterface.setVisible(true);
             }
         } catch (NumberFormatException ex) {
@@ -165,14 +155,25 @@ public class TransferenciaCaixa extends JFrame {
                 campoSenha.setText("");
                 mensagemStatus.setText("");
                 dispose(); // Fecha a janela atual
-                CaixaInterface telacaixa = new CaixaInterface(); 
+                CaixaInterface telacaixa = new CaixaInterface(caixa); 
                 telacaixa.setVisible(true);
             }
         });
     }
 
-    public static void main(String[] args) {
-        TransferenciaCaixa transferenciaCaixa = new TransferenciaCaixa();
+    /*public static void main(String[] args) {
+       UsuarioService usuarioService = new UsuarioService("src/file/java/com/mycompany/sistema_bancario/usuarios.json");
+        Caixa caixa = new Caixa(
+            "Caixa",
+            "11357820674",
+            "senhaCaixa",
+            "caixa@email.com",
+            "caixa",
+            "36000000",
+            "123",
+            "001",
+            usuarioService);
+        TransferenciaCaixa transferenciaCaixa = new TransferenciaCaixa(caixa);
         transferenciaCaixa.setVisible(true);
-    }
+    }*/
 }

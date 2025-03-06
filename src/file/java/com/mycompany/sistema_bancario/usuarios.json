@@ -8,7 +8,7 @@
     "cep": "36000000",
     "numero": "123",
     "contaBancaria": "0001",
-    "saldo": 8300.0
+    "saldo": 3000.0
   },
   {
     "nome": "Maria Julia",
@@ -19,7 +19,7 @@
     "cep": "36000000",
     "numero": "123",
     "contaBancaria": "0002",
-    "saldo": 2500.0
+    "saldo": 7500.0
   },
   {
     "nome": "Joao Santos",
@@ -29,7 +29,8 @@
     "tipo": "caixa",
     "cep": "36000000",
     "numero": "123",
-    "numeroFuncionario": "001"
+    "numeroFuncionario": "001",
+    "usuarioService": null
   },
   {
     "nome": "Carlos Silva",
@@ -107,7 +108,8 @@
     "tipo": "caixa",
     "cep": "55555555",
     "numero": "55",
-    "numeroFuncionario": "12345"
+    "numeroFuncionario": "12345",
+    "usuarioService": null
   },
   {
     "nome": "ererere",
@@ -129,6 +131,7 @@
     "tipo": "caixa",
     "cep": "44444444",
     "numero": "44",
-    "numeroFuncionario": "12345"
+    "numeroFuncionario": "12345",
+    "usuarioService": null
   }
 ]

@@ -146,6 +146,9 @@ public class Caixa extends Usuario {
 
         return true;
     }
+    public UsuarioService getUsuarioService() {
+        return usuarioService;
+    }
     
     
 }

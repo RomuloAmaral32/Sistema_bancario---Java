@@ -145,7 +145,7 @@ public class Cadastro extends JFrame {
                     dispose(); // Fecha a tela de cadastro
 
                     // Abrir a interface de caixa
-                    CaixaInterface telacaixa = new CaixaInterface();
+                    CaixaInterface telacaixa = new CaixaInterface(novoCaixa);
                     telacaixa.setVisible(true);
                 } 
                 // Verificar se o perfil é "Gerente"

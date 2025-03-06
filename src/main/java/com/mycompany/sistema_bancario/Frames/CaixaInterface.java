@@ -1,6 +1,10 @@
 package com.mycompany.sistema_bancario.Frames;
 
 import javax.swing.*;
+
+import com.mycompany.sistema_bancario.Caixa;
+import com.mycompany.sistema_bancario.UsuarioService;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,7 +30,7 @@ public class CaixaInterface extends JFrame {
     private JButton botaoSaque, botaoDeposito, botaoTransferencia, botaoSair;
     private JLabel titulo;
 
-    public CaixaInterface() {
+    public CaixaInterface(Caixa caixa) {
         // Configurações da janela
         setTitle("Área do Caixa");
         setSize(400, 300);
@@ -104,7 +108,7 @@ public class CaixaInterface extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                Saque sacar = new Saque();
+                Saque sacar = new Saque(caixa);
                 sacar.setVisible(true);
             }
         });
@@ -113,7 +117,7 @@ public class CaixaInterface extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                Deposito depositar = new Deposito();
+                Deposito depositar = new Deposito(caixa);
                 depositar.setVisible(true);
             }
         });
@@ -122,7 +126,7 @@ public class CaixaInterface extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose(); // Fecha a janela atual
-                TransferenciaCaixa telatransferencia = new TransferenciaCaixa(); 
+                TransferenciaCaixa telatransferencia = new TransferenciaCaixa(caixa); 
                 telatransferencia.setVisible(true);
             }
         });
@@ -139,7 +143,18 @@ public class CaixaInterface extends JFrame {
     }
 
     public static void main(String[] args) {
-        CaixaInterface caixaInterface = new CaixaInterface();
+        UsuarioService usuarioService = new UsuarioService("src/file/java/com/mycompany/sistema_bancario/usuarios.json");
+        Caixa caixa = new Caixa(
+            "Caixa",
+            "11357820674",
+            "senhaCaixa",
+            "caixa@email.com",
+            "caixa",
+            "36000000",
+            "123",
+            "001",
+            usuarioService);
+        CaixaInterface caixaInterface = new CaixaInterface(caixa);
         caixaInterface.setVisible(true);
     }
 }

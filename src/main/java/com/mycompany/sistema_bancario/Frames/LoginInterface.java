@@ -1,7 +1,10 @@
 package com.mycompany.sistema_bancario.Frames;
 
+import com.mycompany.sistema_bancario.Caixa;
 import com.mycompany.sistema_bancario.LoginService;
 import com.mycompany.sistema_bancario.Usuario;
+import com.mycompany.sistema_bancario.UsuarioService;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -73,6 +76,17 @@ public class LoginInterface extends JFrame {
 
                     // Aqui você pode redirecionar para a tela correspondente ao usuário logado
                     // Por exemplo: abrirTelaCliente() se for Cliente, abrirTelaCaixa() se for Caixa, etc.
+                    UsuarioService usuarioService = new UsuarioService("src/file/java/com/mycompany/sistema_bancario/usuarios.json");
+        Caixa caixa = new Caixa(
+            "Caixa",
+            "11357820674",
+            "senhaCaixa",
+            "caixa@email.com",
+            "caixa",
+            "36000000",
+            "123",
+            "001",
+            usuarioService);
 
                     if( usuario.getTipo().equals("cliente") ){
                         dispose(); 
@@ -80,7 +94,7 @@ public class LoginInterface extends JFrame {
                         telacliente.setVisible(true);
                     } else if( usuario.getTipo().equals("caixa") ){
                         dispose(); 
-                        CaixaInterface telacaixa = new CaixaInterface();
+                        CaixaInterface telacaixa = new CaixaInterface(caixa);
                         telacaixa.setVisible(true);
                     } else if( usuario.getTipo().equals("gerente") ){
                         dispose(); 
