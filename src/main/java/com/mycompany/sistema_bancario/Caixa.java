@@ -116,38 +116,36 @@ public class Caixa extends Usuario {
         return true;
     }
 
-    public boolean transferencia(double valor, String numeroContaOrigem, String numeroContaDestino, String senhaCliente) {
-        // Busca o cliente de origem e destino
-        Cliente clienteOrigem = usuarioService.buscarClientePorNumeroConta(numeroContaOrigem);
-        Cliente clienteDestino = usuarioService.buscarClientePorNumeroConta(numeroContaDestino);
-    
-        if (clienteOrigem == null || clienteDestino == null) {
-            System.out.println("Conta de origem ou destino não encontrada.");
+    public boolean transferencia(double valor, String numeroContaCliente, String senhaCliente, String contaDestino) {
+        Cliente cliente = usuarioService.buscarClientePorNumeroConta(numeroContaCliente);
+        Cliente destinatario = usuarioService.buscarClientePorNumeroConta(contaDestino);
+
+        if (cliente == null || destinatario == null) {
+            System.out.println("Cliente não encontrado.");
             return false;
         }
-    
-        // Validações
         if (valor <= 0) {
             System.out.println("Valor inválido para transferência.");
             return false;
         }
-    
-        if (!clienteOrigem.verificaSenha(senhaCliente)) {
+        if (valor > 1000000) {
+            System.out.println(
+                    "Valor máximo para transferência é de R$1.000.000,00. Para transferências maiores, procurar um gerente.");
+            return false;
+        }
+        if (!cliente.verificaSenha(senhaCliente)) {
             System.out.println("Senha incorreta.");
             return false;
         }
-    
-        if (clienteOrigem.getSaldo() < valor) {
-            System.out.println("Saldo insuficiente na conta de origem.");
-            return false;
-        }
-    
-        // Realiza a transferência
-        clienteOrigem.setSaldo(clienteOrigem.getSaldo() - valor);
-        clienteDestino.setSaldo(clienteDestino.getSaldo() + valor);
-        System.out.println("Transferência de R$" + valor + " realizada com sucesso da conta " + numeroContaOrigem + " para " + numeroContaDestino + ".");
-    
+
+        cliente.setSaldo(cliente.getSaldo() - valor);
+        destinatario.setSaldo(destinatario.getSaldo() + valor);
+        System.out.println(
+                "Transferência de R$" + valor + " da conta " + numeroContaCliente + " para a conta " + contaDestino
+                        + " realizada com sucesso.");
+
         return true;
     }
+    
     
 }
