@@ -1,0 +1,47 @@
+[
+  {
+    "0001": {
+      "saldoAnterior": 1000.0,
+      "tipoDeMovimentacao": "deposito",
+      "valor": 100.0,
+      "saldoAtual": 1100.0,
+      "data": "2021-01-01"
+    }
+  },
+  {
+    "0001": {
+      "saldoAnterior": 1100.0,
+      "tipoDeMovimentacao": "saque",
+      "valor": 50.0,
+      "saldoAtual": 1050.0,
+      "data": "2021-01-02"
+    }
+  },
+  {
+    "0001": {
+      "saldoAnterior": 1050.0,
+      "tipoDeMovimentacao": "deposito",
+      "valor": 200.0,
+      "saldoAtual": 1250.0,
+      "data": "2021-01-03"
+    }
+  },
+  {
+    "0001": {
+      "saldoAnterior": 1250.0,
+      "tipoDeMovimentacao": "saque",
+      "valor": 100.0,
+      "saldoAtual": 1150.0,
+      "data": "2021-01-04"
+    }
+  },
+  {
+    "0001": {
+      "data": "2025-03-06",
+      "saldoAnterior": 13899.0,
+      "valor": 9999.0,
+      "saldoAtual": 13899.0,
+      "tipoDeMovimentacao": "Depósito"
+    }
+  }
+]

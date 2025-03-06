@@ -1,7 +1,12 @@
 package com.mycompany.sistema_bancario;
 
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
@@ -19,7 +24,7 @@ import jakarta.xml.bind.annotation.XmlTransient;
  */
 /**
  *
- * @author  Ian Nakamura Okano Preste
+ * @author Ian Nakamura Okano Preste
  * @matricula 202335038
  */
 
@@ -27,7 +32,7 @@ import jakarta.xml.bind.annotation.XmlTransient;
 public class Cliente extends Usuario {
     private String contaBancaria;
     private double saldo;
-    private List<String> extrato;
+    private List<String> extrato = new ArrayList<>();
     @XmlTransient
     private Scanner scanner;
 
@@ -41,7 +46,7 @@ public class Cliente extends Usuario {
         this.contaBancaria = contaBancaria;
         this.saldo = saldoInicial;
         this.extrato = new ArrayList<>();
-this.scanner = new Scanner(System.in);
+        this.scanner = new Scanner(System.in);
         registrarExtrato("Abertura da conta com saldo inicial: R$" + saldoInicial);
     }
 
@@ -224,7 +229,7 @@ this.scanner = new Scanner(System.in);
 
     @XmlElement
     private void registrarExtrato(String transacao) {
-        extrato.add(transacao);
+        extrato.add(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")) + " - " + transacao);
     }
 
     @XmlElement
@@ -240,6 +245,34 @@ this.scanner = new Scanner(System.in);
     @XmlElement
     public void setSaldo(double saldo) {
         this.saldo = saldo;
+    }
+
+    public void registrarMovimentacao(String tipoMovimentacao, double valor) {
+        double saldoAnterior = saldo;
+
+        if (tipoMovimentacao.equalsIgnoreCase("Saque")) {
+            saldo -= valor;
+        } else if (tipoMovimentacao.equalsIgnoreCase("Deposito")) {
+            saldo += valor;
+        }
+
+        double saldoAtual = saldo;
+
+        Map<String, Object> registro = new HashMap<>();
+        Map<String, Object> detalhes = new HashMap<>();
+        detalhes.put("saldoAnterior", saldoAnterior);
+        detalhes.put("tipoDeMovimentacao", tipoMovimentacao);
+        detalhes.put("valor", valor);
+        detalhes.put("saldoAtual", saldoAtual);
+        detalhes.put("data", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+
+        registro.put(contaBancaria, detalhes);
+
+        try {
+            ExtratoHandler.adicionarRegistro(registro);
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar o extrato: " + e.getMessage());
+        }
     }
 
 }

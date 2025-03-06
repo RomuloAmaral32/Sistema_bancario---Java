@@ -50,38 +50,40 @@ public class Caixa extends Usuario {
     public void setNumeroFuncionario(String numeroFuncionario) {
         this.numeroFuncionario = numeroFuncionario;
     }
+
     public boolean deposito(double valor, String numeroContaCliente, String senhaCliente) {
         // Busca o cliente pelo número da conta
         Cliente cliente = usuarioService.buscarClientePorNumeroConta(numeroContaCliente);
-    
+
         if (cliente == null) {
             System.out.println("Cliente não encontrado.");
             return false;
         }
-    
+
         // Validações
         if (valor <= 0) {
             System.out.println("Valor inválido para depósito.");
             return false;
         }
-    
+
         if (valor > 1000000) {
-            System.out.println("Valor máximo para depósito é de R$1.000.000,00. Para depósitos maiores, procure um gerente.");
+            System.out.println(
+                    "Valor máximo para depósito é de R$1.000.000,00. Para depósitos maiores, procure um gerente.");
             return false;
         }
-    
+
         if (!cliente.verificaSenha(senhaCliente)) {
             System.out.println("Senha incorreta.");
             return false;
         }
-    
+
         // Realiza o depósito
         cliente.setSaldo(cliente.getSaldo() + valor);
+        cliente.registrarMovimentacao("Depósito", valor);
         System.out.println("Depósito de R$" + valor + " na conta " + numeroContaCliente + " realizado com sucesso.");
-    
+
         return true;
     }
-    
 
     public boolean saque(double valor, String numeroContaCliente, String senhaCliente) {
         // Busca o cliente pelo número da conta
@@ -115,6 +117,7 @@ public class Caixa extends Usuario {
 
         // Realiza o saque
         cliente.setSaldo(cliente.getSaldo() - valor);
+        cliente.registrarMovimentacao("Saque", valor);
         System.out.println("Saque de R$" + valor + " da conta " + numeroContaCliente + " realizado com sucesso.");
 
         return true;
