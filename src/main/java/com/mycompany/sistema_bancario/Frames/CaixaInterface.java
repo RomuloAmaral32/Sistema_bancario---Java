@@ -121,8 +121,9 @@ public class CaixaInterface extends JFrame {
         botaoTransferencia.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Lógica da operação de transferência
-                JOptionPane.showMessageDialog(null, "Operação de Transferência selecionada.");
+                dispose(); // Fecha a janela atual
+                TransferenciaCaixa telatransferencia = new TransferenciaCaixa(); 
+                telatransferencia.setVisible(true);
             }
         });
 

@@ -42,6 +42,8 @@ public class JsonHandler<T> {
     }
 
     public void saveToJson(List<T> data) throws IOException {
+        System.out.println("Caminho do arquivo: " + filePath);
+
         objectMapper.writeValue(new File(filePath), data);
     }
 
