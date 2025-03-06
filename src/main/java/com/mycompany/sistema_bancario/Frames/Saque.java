@@ -36,7 +36,7 @@ public class Saque extends JFrame {
 
     public Saque() {
         // Inicializar o serviço de usuários
-        usuarioService = new UsuarioService("usuarios.json"); // Arquivo JSON com usuários
+        usuarioService = new UsuarioService("src/file/java/com/mycompany/sistema_bancario/usuarios.json"); // Arquivo JSON com usuários
 
         // Configurações da janela
         setTitle("Tela de Saque");
@@ -92,7 +92,7 @@ public class Saque extends JFrame {
                 try {
                     // Busca o cliente pelo número da conta
                     Cliente cliente = usuarioService.buscarClientePorNumeroConta(numeroDono);
-        
+                    System.out.println(cliente.getSaldo());
                     // Verificação de null para evitar erros
                     if (cliente.getContaBancaria() != null && cliente.getContaBancaria().equals(numeroDono)) {
                         System.out.println(cliente.getContaBancaria());
@@ -104,6 +104,7 @@ public class Saque extends JFrame {
                             if (valor > 0 && cliente.getSaldo() >= valor) {
                                 // Realizar o saque
                                 cliente.setSaldo(cliente.getSaldo() - valor);
+                                System.out.println(cliente.getSaldo());
         
                                 // Carregar a lista de clientes do JSON usando JsonHandler
                                 JsonHandler<Cliente> jsonHandler = new JsonHandler<>("usuarios.json");

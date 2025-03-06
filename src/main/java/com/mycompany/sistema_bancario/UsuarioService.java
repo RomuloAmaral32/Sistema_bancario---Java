@@ -77,15 +77,16 @@ public class UsuarioService {
     // Método para buscar cliente por número da conta
     public Cliente buscarClientePorNumeroConta(String numeroConta) {
         for (Usuario usuario : usuarios) {
-            if (usuario.getTipo().equals("cliente")) {
-                Cliente cliente = (Cliente) usuario;
+            if (usuario instanceof Cliente) {  // Verifica se o usuário é um Cliente
+                Cliente cliente = (Cliente) usuario;  // Cast para Cliente
                 if (cliente.getContaBancaria().equals(numeroConta)) {
-                    return cliente;
+                    return cliente;  // Retorna o cliente se a conta bancária for encontrada
                 }
             }
         }
         throw new IllegalArgumentException("Cliente não encontrado para a conta: " + numeroConta);
     }
+    
 
     public Usuario buscarUsuarioPorCPF(String cpf) {
         for (Usuario usuario : usuarios) {
