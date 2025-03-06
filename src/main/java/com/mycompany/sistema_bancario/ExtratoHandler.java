@@ -16,8 +16,17 @@ import java.util.Map;
 
 /**
  *
- * @author Darlan
+ * @author Darlan Henrique da Costa Silva
+ * @matricula 202176038
+ *
+ * @author Rômulo Ferreira do Amaral
+ * @matricula 202335015
+ *
+ * @author Ian Nakamura Okano Preste
+ * @matricula 202335038
+ *
  */
+
 public class ExtratoHandler {
     private static final ObjectMapper objectMapper = new ObjectMapper();
     private static final String EXTRATO_FILE_PATH = "src/file/java/com/mycompany/sistema_bancario/extrato.json";
