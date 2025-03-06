@@ -3,11 +3,14 @@ package com.mycompany.sistema_bancario.Frames;
 import javax.swing.*;
 
 import com.mycompany.sistema_bancario.Cliente;
+import com.mycompany.sistema_bancario.JsonHandler;
+import com.mycompany.sistema_bancario.Usuario;
 import com.mycompany.sistema_bancario.UsuarioService;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 /**
  *
@@ -21,7 +24,7 @@ import java.awt.event.ActionListener;
  */
 /**
  *
- * @author  Ian Nakamura Okano Preste
+ * @author Ian Nakamura Okano Preste
  * @matricula 202335038
  */
 
@@ -31,15 +34,15 @@ public class TransferenciaInterface extends JFrame {
     private JPasswordField campoSenha;
     private JButton botaoConfirmar, botaoCancelar;
     private JLabel mensagemStatus;
-    private UsuarioService usuarioService;
 
     public TransferenciaInterface() {
+        UsuarioService usuarioService = new UsuarioService("src/file/java/com/mycompany/sistema_bancario/usuarios.json");
+
         // Configurações da janela
         setTitle("Transferência Bancária");
         setSize(400, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null); // Centraliza a janela na tela
-        //usuarioService = new UsuarioService("src/file/java/com/mycompany/sistema_bancario/usuarios.json");
         // Criando o título
         JLabel titulo = new JLabel("Transferência Bancária", JLabel.CENTER);
         titulo.setFont(new Font("Arial", Font.BOLD, 18));
@@ -88,17 +91,16 @@ public class TransferenciaInterface extends JFrame {
         botaoConfirmar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                usuarioService = new UsuarioService("src/file/java/com/mycompany/sistema_bancario/usuarios.json");
                 Cliente cliente = new Cliente(
-                    "Darlan Silva",
-                    "43236859040",
-                    "123456",
-                    "unico@email.com",
-                    "cliente",
-                    "36000000",
-                    "456",
-                    "0001",
-                    500.0);
+                        "Darlan Silva",
+                        "43236859040",
+                        "123456",
+                        "unico@email.com",
+                        "cliente",
+                        "36000000",
+                        "456",
+                        "0001",
+                        500.0);
 
                 String contaDestino = campoContaDestino.getText();
                 String senha = new String(campoSenha.getPassword());
@@ -115,7 +117,12 @@ public class TransferenciaInterface extends JFrame {
                         // Simulando validação de senha e operação de transferência
                         if (senha.equals(cliente.getSenha())) {
                             boolean transferenciaRealizada = cliente.transferencia(valor, senha, contaDestino);
+
                             if (transferenciaRealizada) {
+
+                                // Exibe mensagem de sucesso
+                                JOptionPane.showMessageDialog(null, "Transferência realizada com sucesso!", "Sucesso",
+                                        JOptionPane.INFORMATION_MESSAGE);
                                 mensagemStatus.setText("Transferência realizada com sucesso!");
                                 mensagemStatus.setForeground(Color.BLUE);
                             } else {

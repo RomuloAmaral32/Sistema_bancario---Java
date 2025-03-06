@@ -36,6 +36,7 @@ public class Cliente extends Usuario {
     @XmlTransient
     private Scanner scanner;
     private UsuarioService usuarioService;
+
     public Cliente() {
         super();
     }
@@ -274,9 +275,17 @@ public class Cliente extends Usuario {
             System.out.println("Erro ao salvar o extrato: " + e.getMessage());
         }
     }
+
     public boolean transferencia(double valor, String senhaCliente, String contaDestino) {
+        String filePath = "src/file/java/com/mycompany/sistema_bancario/usuarios.json";
+
+        usuarioService = new UsuarioService(filePath);
+        JsonHandler<Usuario> jsonHandler = new JsonHandler<>(filePath);
+
+        String contaOrigem = this.getContaBancaria();
         Cliente destinatario = usuarioService.buscarClientePorNumeroConta(contaDestino);
-    
+        Cliente cliente = usuarioService.buscarClientePorNumeroConta(contaOrigem);
+
         if (destinatario == null) {
             System.out.println("Cliente não encontrado.");
             return false;
@@ -295,17 +304,29 @@ public class Cliente extends Usuario {
             return false;
         }
 
-        this.setSaldo(this.getSaldo() - valor);
+        cliente.setSaldo(cliente.getSaldo() - valor);
         destinatario.setSaldo(destinatario.getSaldo() + valor);
-        this.registrarMovimentacao("Transferência", -valor);
+        cliente.registrarMovimentacao("Transferência", -valor);
         destinatario.registrarMovimentacao("Transferência", valor);
 
+        // Atualiza ambos os clientes no JSON de usaurio
+        try {
+            jsonHandler.editDataByContaBancaria(contaOrigem, cliente,
+                    Usuario.class);
+            jsonHandler.editDataByContaBancaria(contaDestino, destinatario,
+                    Usuario.class);
+        } catch (IOException ioException) {
+            System.out.println("Erro ao salvar os dados dos clientes.");
+            return false;
+        }
+
         System.out.println(
-                "Transferência de R$" + valor + " da conta " + this.getContaBancaria() + " para a conta " + contaDestino
+                "Transferência de R$" + valor + " da conta " + contaOrigem + " para a conta " + contaDestino
                         + " realizada com sucesso.");
 
         return true;
     }
+
     public UsuarioService getUsuarioService() {
         return usuarioService;
     }
