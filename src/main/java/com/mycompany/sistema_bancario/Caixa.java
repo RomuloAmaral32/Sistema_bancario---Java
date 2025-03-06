@@ -50,6 +50,7 @@ public class Caixa extends Usuario {
     public void setNumeroFuncionario(String numeroFuncionario) {
         this.numeroFuncionario = numeroFuncionario;
     }
+
     public boolean deposito(double valor, String numeroContaCliente) {
         // Busca o cliente pelo número da conta
         Cliente cliente = usuarioService.buscarClientePorNumeroConta(numeroContaCliente);
@@ -110,9 +111,13 @@ public class Caixa extends Usuario {
         }
 
         // Realiza o saque
+        System.out.println("Saldo antes do saque: " + cliente.getSaldo());
+        System.out.println("Valor do saque: " + valor);
         cliente.setSaldo(cliente.getSaldo() - valor);
+        System.out.println("Saldo após o saque: " + cliente.getSaldo());
         cliente.registrarMovimentacao("Saque", valor);
-        System.out.println("Saque de R$" + valor + " da conta " + numeroContaCliente + " realizado com sucesso.");
+        System.out.println("Saque de R$" + valor + " da conta " + numeroContaCliente + " realizado com sucesso."
+                + " Saldo atual: " + cliente.getSaldo());
 
         return true;
     }
@@ -150,9 +155,9 @@ public class Caixa extends Usuario {
 
         return true;
     }
+
     public UsuarioService getUsuarioService() {
         return usuarioService;
     }
-    
-    
+
 }

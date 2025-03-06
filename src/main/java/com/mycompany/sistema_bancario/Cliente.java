@@ -251,9 +251,7 @@ public class Cliente extends Usuario {
     public void registrarMovimentacao(String tipoMovimentacao, double valor) {
         double saldoAnterior = saldo;
 
-        if (tipoMovimentacao.equalsIgnoreCase("Saque")) {
-            saldo -= valor;
-        } else if (tipoMovimentacao.equalsIgnoreCase("Deposito")) {
+        if (tipoMovimentacao.equalsIgnoreCase("Deposito")) {
             saldo += valor;
         }
 
