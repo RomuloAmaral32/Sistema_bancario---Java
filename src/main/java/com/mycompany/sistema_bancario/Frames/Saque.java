@@ -1,9 +1,14 @@
 package com.mycompany.sistema_bancario.Frames;
+import java.util.List;
+import com.mycompany.sistema_bancario.UsuarioService;
+import com.mycompany.sistema_bancario.Cliente;
+import com.mycompany.sistema_bancario.JsonHandler;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 /**
  *
@@ -17,19 +22,22 @@ import java.awt.event.ActionListener;
  */
 /**
  *
- * @author  Ian Nakamura Okano Preste
+ * @author Ian Nakamura Okano Preste
  * @matricula 202335038
  */
 
 public class Saque extends JFrame {
 
-    private JLabel labelTitulo, labelNomeDono, labelValorSaque, labelSenha;
-    private JTextField campoNomeDono, campoValorSaque;
+    private JLabel labelTitulo, labelNumeroDono, labelValorSaque, labelSenha;
+    private JTextField campoNumeroDono, campoValorSaque;
     private JPasswordField campoSenha;
     private JButton botaoConfirmar, botaoCancelar;
-    private final String senhaCorreta = "1234"; // Senha fictícia para validação
+    private UsuarioService usuarioService;
 
     public Saque() {
+        // Inicializar o serviço de usuários
+        usuarioService = new UsuarioService("usuarios.json"); // Arquivo JSON com usuários
+
         // Configurações da janela
         setTitle("Tela de Saque");
         setSize(400, 300);
@@ -40,8 +48,8 @@ public class Saque extends JFrame {
         labelTitulo = new JLabel("Saque", JLabel.CENTER);
         labelTitulo.setFont(new Font("Arial", Font.BOLD, 18));
 
-        labelNomeDono = new JLabel("Nome do Dono da Conta:");
-        campoNomeDono = new JTextField();
+        labelNumeroDono = new JLabel("Número da Conta:");
+        campoNumeroDono = new JTextField();
 
         labelValorSaque = new JLabel("Valor a ser sacado:");
         campoValorSaque = new JTextField();
@@ -57,8 +65,8 @@ public class Saque extends JFrame {
         painel.setLayout(new GridLayout(5, 2, 10, 10)); // 5 linhas, 2 colunas, espaço de 10px
 
         // Adicionando componentes ao painel
-        painel.add(labelNomeDono);
-        painel.add(campoNomeDono);
+        painel.add(labelNumeroDono);
+        painel.add(campoNumeroDono);
         painel.add(labelValorSaque);
         painel.add(campoValorSaque);
         painel.add(labelSenha);
@@ -76,22 +84,69 @@ public class Saque extends JFrame {
         botaoConfirmar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String nomeDono = campoNomeDono.getText();
+                String numeroDono = campoNumeroDono.getText();
                 String valorSaque = campoValorSaque.getText();
                 char[] senhaInformada = campoSenha.getPassword();
                 String senha = new String(senhaInformada);
-
-                // Verificação da senha
-                if (senha.equals(senhaCorreta)) {
-                    // Aqui você pode adicionar a lógica para realizar o saque
-                    dispose();
-                CaixaInterface caixaInterface = new CaixaInterface();
-                caixaInterface.setVisible(true);
-                } else {
-                    JOptionPane.showMessageDialog(null, "Senha incorreta! O saque não foi realizado.", "Erro", JOptionPane.ERROR_MESSAGE);
+        
+                try {
+                    // Busca o cliente pelo número da conta
+                    Cliente cliente = usuarioService.buscarClientePorNumeroConta(numeroDono);
+        
+                    // Verificação de null para evitar erros
+                    if (cliente.getContaBancaria() != null && cliente.getContaBancaria().equals(numeroDono)) {
+                        System.out.println(cliente.getContaBancaria());
+                        // Verificação da senha
+                        if (cliente.getSenha().equals(senha)) {
+                            // Validação do valor de saque
+                            double valor = Double.parseDouble(valorSaque);
+                            System.out.println(cliente.getNome());
+                            if (valor > 0 && cliente.getSaldo() >= valor) {
+                                // Realizar o saque
+                                cliente.setSaldo(cliente.getSaldo() - valor);
+        
+                                // Carregar a lista de clientes do JSON usando JsonHandler
+                                JsonHandler<Cliente> jsonHandler = new JsonHandler<>("usuarios.json");
+                                List<Cliente> clientes = jsonHandler.loadFromJson(Cliente.class);
+        
+                                // Atualizar o cliente na lista
+                                for (int i = 0; i < clientes.size(); i++) {
+                                    if (clientes.get(i).getContaBancaria().equals(cliente.getContaBancaria())) {
+                                        clientes.set(i, cliente);  // Atualiza o cliente
+                                        break;
+                                    }
+                                }
+        
+                                // Salvar a lista de clientes atualizada no JSON
+                                jsonHandler.saveToJson(clientes);
+                                System.out.println(cliente.getContaBancaria());
+                                JOptionPane.showMessageDialog(null, "Saque realizado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+        
+                                // Voltar para a interface anterior
+                                dispose();
+                                CaixaInterface caixaInterface = new CaixaInterface();
+                                caixaInterface.setVisible(true);
+                            } else if (valor <= 0) {
+                                JOptionPane.showMessageDialog(null, "Valor de saque inválido.", "Erro", JOptionPane.ERROR_MESSAGE);
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Saldo insuficiente.", "Erro", JOptionPane.ERROR_MESSAGE);
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Senha incorreta! O saque não foi realizado.", "Erro", JOptionPane.ERROR_MESSAGE);
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Conta bancária não encontrada ou inválida.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    }
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, "Valor de saque inválido. Por favor, insira um número válido.", "Erro", JOptionPane.ERROR_MESSAGE);
+                } catch (IllegalArgumentException ex) {
+                    JOptionPane.showMessageDialog(null, "Erro ao processar saque: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(null, "Erro ao salvar os dados do cliente.", "Erro", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
+        
 
         // Ação do botão Cancelar
         botaoCancelar.addActionListener(new ActionListener() {

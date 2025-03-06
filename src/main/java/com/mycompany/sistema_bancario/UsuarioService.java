@@ -77,7 +77,7 @@ public class UsuarioService {
     // Método para buscar cliente por número da conta
     public Cliente buscarClientePorNumeroConta(String numeroConta) {
         for (Usuario usuario : usuarios) {
-            if (usuario instanceof Cliente) {
+            if (usuario.getTipo().equals("cliente")) {
                 Cliente cliente = (Cliente) usuario;
                 if (cliente.getContaBancaria().equals(numeroConta)) {
                     return cliente;
@@ -139,6 +139,27 @@ public class UsuarioService {
         } catch (IOException e) {
             System.out.println("Erro ao carregar usuários para gerar conta bancária: " + e.getMessage());
             return null;
+        }
+    }
+    public void atualizarCliente(Cliente clienteAtualizado) {
+        try {
+            // Carregar a lista de usuários do arquivo JSON
+            List<Usuario> usuariosExistentes = jsonHandler.loadFromJson(Usuario.class);
+    
+            // Atualizar o cliente na lista
+            for (int i = 0; i < usuariosExistentes.size(); i++) {
+                if (usuariosExistentes.get(i).getCpf().equals(clienteAtualizado.getCpf())) {
+                    usuariosExistentes.set(i, clienteAtualizado);
+                    break;
+                }
+            }
+    
+            // Salvar a lista atualizada no arquivo JSON
+            jsonHandler.saveToJson(usuariosExistentes);
+    
+            System.out.println("Cliente atualizado com sucesso!");
+        } catch (IOException e) {
+            System.out.println("Erro ao atualizar cliente no arquivo JSON: " + e.getMessage());
         }
     }
 }
