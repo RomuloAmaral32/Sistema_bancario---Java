@@ -50,8 +50,7 @@ public class Caixa extends Usuario {
     public void setNumeroFuncionario(String numeroFuncionario) {
         this.numeroFuncionario = numeroFuncionario;
     }
-
-    public boolean deposito(double valor, String numeroContaCliente, String senhaCliente) {
+    public boolean deposito(double valor, String numeroContaCliente) {
         // Busca o cliente pelo número da conta
         Cliente cliente = usuarioService.buscarClientePorNumeroConta(numeroContaCliente);
 
@@ -125,7 +124,12 @@ public class Caixa extends Usuario {
 
     public boolean transferencia(double valor, String numeroContaCliente, String senhaCliente, String contaDestino) {
         Cliente cliente = usuarioService.buscarClientePorNumeroConta(numeroContaCliente);
+        Cliente destinatario = usuarioService.buscarClientePorNumeroConta(contaDestino);
 
+        if (cliente == null || destinatario == null) {
+            System.out.println("Cliente não encontrado.");
+            return false;
+        }
         if (valor <= 0) {
             System.out.println("Valor inválido para transferência.");
             return false;
@@ -139,9 +143,18 @@ public class Caixa extends Usuario {
             System.out.println("Senha incorreta.");
             return false;
         }
+
+        cliente.setSaldo(cliente.getSaldo() - valor);
+        destinatario.setSaldo(destinatario.getSaldo() + valor);
         System.out.println(
                 "Transferência de R$" + valor + " da conta " + numeroContaCliente + " para a conta " + contaDestino
                         + " realizada com sucesso.");
+
         return true;
     }
+    public UsuarioService getUsuarioService() {
+        return usuarioService;
+    }
+    
+    
 }

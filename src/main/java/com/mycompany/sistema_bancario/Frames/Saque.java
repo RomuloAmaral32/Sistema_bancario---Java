@@ -37,11 +37,9 @@ public class Saque extends JFrame {
     private JButton botaoConfirmar, botaoCancelar;
     private UsuarioService usuarioService;
 
-    public Saque() {
+    public Saque(Caixa caixa) {
         // Inicializar o serviço de usuários
-        usuarioService = new UsuarioService("src/file/java/com/mycompany/sistema_bancario/usuarios.json"); // Arquivo
-                                                                                                           // JSON com
-                                                                                                           // usuários
+        this.usuarioService = caixa.getUsuarioService();
 
         // Configurações da janela
         setTitle("Tela de Saque");
@@ -97,19 +95,11 @@ public class Saque extends JFrame {
 
                 try {
                     // Cria uma instância do Caixa
-                    Caixa caixa = new Caixa(
-                            "Caixa",
-                            "11357820674",
-                            "senhaCaixa",
-                            "caixa@email.com",
-                            "caixa",
-                            "36000000",
-                            "123",
-                            "001",
-                            usuarioService);
+                    
 
                     // Processa o saque usando o Caixa
                     boolean saqueRealizado = caixa.saque(valorSaque, numeroDono, senha);
+                    System.out.println(caixa.getNome());
 
                     if (saqueRealizado) {
                         // Busca o cliente atualizado
@@ -125,9 +115,9 @@ public class Saque extends JFrame {
                                 JOptionPane.INFORMATION_MESSAGE);
 
                         // Volta para a interface anterior
-                        dispose();
-                        CaixaInterface caixaInterface = new CaixaInterface();
+                        CaixaInterface caixaInterface = new CaixaInterface(caixa);
                         caixaInterface.setVisible(true);
+                        dispose();
                     }
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(null, "Valor de saque inválido. Por favor, insira um número válido.",
@@ -148,15 +138,26 @@ public class Saque extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // Fecha a janela de Saque e volta para a tela de CaixaInterface
                 dispose();
-                CaixaInterface caixaInterface = new CaixaInterface();
+                CaixaInterface caixaInterface = new CaixaInterface(caixa);
                 caixaInterface.setVisible(true);
             }
         });
     }
 
-    public static void main(String[] args) {
+   /*public static void main(String[] args) {
         // Criando e exibindo a tela de Saque
-        Saque saque = new Saque();
+        UsuarioService usuarioService = new UsuarioService("src/file/java/com/mycompany/sistema_bancario/usuarios.json");
+        Caixa caixa = new Caixa(
+                            "Caixa",
+                            "11357820674",
+                            "senhaCaixa",
+                            "caixa@email.com",
+                            "caixa",
+                            "36000000",
+                            "123",
+                            "001",
+                            usuarioService);
+        Saque saque = new Saque(caixa);
         saque.setVisible(true);
-    }
+    }*/
 }

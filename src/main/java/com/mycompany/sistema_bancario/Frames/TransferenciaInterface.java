@@ -100,7 +100,7 @@ public class TransferenciaInterface extends JFrame {
                     mensagemStatus.setForeground(Color.RED);
                 } else {
                     // Simulando validação de senha e operação de transferência
-                    if (senha.equals("1234")) { // Aqui você pode substituir por validação real de senha
+                    if (senha.equals("12349")) { // Aqui você pode substituir por validação real de senha
                         mensagemStatus.setText("Transferência realizada com sucesso!");
                         mensagemStatus.setForeground(Color.BLUE);
                     } else {

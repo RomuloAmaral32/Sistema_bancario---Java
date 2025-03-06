@@ -21,9 +21,9 @@ public class Deposito extends JFrame {
     private JButton botaoConfirmar, botaoCancelar;
     private UsuarioService usuarioService;
 
-    public Deposito() {
+    public Deposito(Caixa caixa) {
         // Inicializar o serviço de usuários
-        usuarioService = new UsuarioService("src/file/java/com/mycompany/sistema_bancario/usuarios.json"); // Arquivo JSON com usuários
+        this.usuarioService = caixa.getUsuarioService();
 
         // Configurações da janela
         setTitle("Tela de Depósito");
@@ -56,8 +56,6 @@ public class Deposito extends JFrame {
         painel.add(campoNumeroConta);
         painel.add(labelValorDeposito);
         painel.add(campoValorDeposito);
-        painel.add(labelSenha);
-        painel.add(campoSenha);
         painel.add(new JLabel()); // Campo vazio para espaçamento
         painel.add(botaoConfirmar);
         painel.add(new JLabel()); // Campo vazio para espaçamento
@@ -74,8 +72,6 @@ public class Deposito extends JFrame {
                 String numeroConta = campoNumeroConta.getText();
                 String valorDepositoStr = campoValorDeposito.getText();
                 double valorDeposito = Double.parseDouble(valorDepositoStr);
-                char[] senhaInformada = campoSenha.getPassword();
-                String senha = new String(senhaInformada);
 
                 try {
                     // Cria uma instância do Caixa
@@ -91,7 +87,7 @@ public class Deposito extends JFrame {
                             usuarioService);
 
                     // Processa o depósito usando o Caixa
-                    boolean depositoRealizado = caixa.deposito(valorDeposito, numeroConta, senha);
+                    boolean depositoRealizado = caixa.deposito(valorDeposito, numeroConta);
 
                     if (depositoRealizado) {
                         // Busca o cliente atualizado
@@ -106,7 +102,7 @@ public class Deposito extends JFrame {
 
                         // Volta para a interface anterior
                         dispose();
-                        CaixaInterface caixaInterface = new CaixaInterface();
+                        CaixaInterface caixaInterface = new CaixaInterface(caixa);
                         caixaInterface.setVisible(true);
                     }
                 } catch (NumberFormatException ex) {
@@ -125,15 +121,26 @@ public class Deposito extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // Fecha a janela de Depósito e volta para a tela de CaixaInterface
                 dispose();
-                CaixaInterface caixaInterface = new CaixaInterface();
+                CaixaInterface caixaInterface = new CaixaInterface(caixa);
                 caixaInterface.setVisible(true);
             }
         });
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         // Criando e exibindo a tela de Depósito
-        Deposito deposito = new Deposito();
+        UsuarioService usuarioService = new UsuarioService("src/file/java/com/mycompany/sistema_bancario/usuarios.json");
+        Caixa caixa = new Caixa(
+            "Caixa",
+            "11357820674",
+            "senhaCaixa",
+            "caixa@email.com",
+            "caixa",
+            "36000000",
+            "123",
+            "001",
+            usuarioService);
+        Deposito deposito = new Deposito(caixa);
         deposito.setVisible(true);
-    }
+    }*/
 }

@@ -1,9 +1,17 @@
 package com.mycompany.sistema_bancario.Frames;
 
 import javax.swing.*;
+
+import com.mycompany.sistema_bancario.Caixa;
+import com.mycompany.sistema_bancario.Cliente;
+import com.mycompany.sistema_bancario.JsonHandler;
+import com.mycompany.sistema_bancario.Usuario;
+import com.mycompany.sistema_bancario.UsuarioService;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 /**
  *
@@ -27,10 +35,12 @@ public class TransferenciaCaixa extends JFrame {
     private JPasswordField campoSenha;
     private JButton botaoConfirmar, botaoCancelar;
     private JLabel mensagemStatus;
+     private UsuarioService usuarioService;
 
-    public TransferenciaCaixa() {
+    public TransferenciaCaixa(Caixa caixa) {
+        this.usuarioService = caixa.getUsuarioService();
         // Configurações da janela
-        setTitle("Transferência Bancária");
+        setTitle("Transferência Bancária do caixa");
         setSize(400, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null); // Centraliza a janela na tela
@@ -87,29 +97,52 @@ public class TransferenciaCaixa extends JFrame {
 
         // Ação do botão Confirmar
         botaoConfirmar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String contaOrigem = campoContaOrigem.getText();
-                String contaDestino = campoContaDestino.getText();
-                String valor = campoValor.getText();
-                String senha = new String(campoSenha.getPassword());
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String contaOrigem = campoContaOrigem.getText();
+        String contaDestino = campoContaDestino.getText();
+        String valorTransferenciaStr = campoValor.getText();
+        double valorTransferencia = Double.parseDouble(valorTransferenciaStr);
+        char[] senhaInformada = campoSenha.getPassword();
+        String senha = new String(senhaInformada);
 
-                // Verificando se os campos estão vazios
-                if (contaOrigem.isEmpty() || contaDestino.isEmpty() || valor.isEmpty() || senha.isEmpty()) {
-                    mensagemStatus.setText("Por favor, preencha todos os campos.");
-                    mensagemStatus.setForeground(Color.RED);
-                } else {
-                    // Simulando validação de senha e operação de transferência
-                    if (senha.equals("1234")) { // Aqui você pode substituir por validação real de senha
-                        mensagemStatus.setText("Transferência realizada com sucesso!");
-                        mensagemStatus.setForeground(Color.BLUE);
-                    } else {
-                        mensagemStatus.setText("Senha incorreta. Operação não autorizada.");
-                        mensagemStatus.setForeground(Color.RED);
-                    }
-                }
+        try {
+            // Cria uma instância do Caixa
+
+            // Processa a transferência usando o Caixa
+            boolean transferenciaRealizada = caixa.transferencia(valorTransferencia, contaOrigem, senha, contaDestino);
+            if (transferenciaRealizada) {
+                // Busca os clientes atualizados
+                Cliente clienteOrigemAtualizado = usuarioService.buscarClientePorNumeroConta(contaOrigem);
+                Cliente clienteDestinoAtualizado = usuarioService.buscarClientePorNumeroConta(contaDestino);
+                // Atualiza ambos os clientes no JSON
+                JsonHandler<Usuario> jsonHandler = new JsonHandler<>(
+                        "src/file/java/com/mycompany/sistema_bancario/usuarios.json");
+                jsonHandler.editDataByContaBancaria(contaOrigem, clienteOrigemAtualizado, Usuario.class);
+                jsonHandler.editDataByContaBancaria(contaDestino, clienteDestinoAtualizado, Usuario.class);
+
+                // Exibe mensagem de sucesso
+                JOptionPane.showMessageDialog(null, "Transferência realizada com sucesso!", "Sucesso",
+                        JOptionPane.INFORMATION_MESSAGE);
+
+                // Volta para a interface anterior
+                dispose();
+                CaixaInterface caixaInterface = new CaixaInterface(caixa);
+                caixaInterface.setVisible(true);
             }
-        });
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Valor de transferência inválido. Por favor, insira um número válido.",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao processar transferência: " + ex.getMessage(), "Erro",
+                    JOptionPane.ERROR_MESSAGE);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao salvar os dados dos clientes.", "Erro",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
+});
+
 
         // Ação do botão Cancelar
         botaoCancelar.addActionListener(new ActionListener() {
@@ -122,14 +155,25 @@ public class TransferenciaCaixa extends JFrame {
                 campoSenha.setText("");
                 mensagemStatus.setText("");
                 dispose(); // Fecha a janela atual
-                CaixaInterface telacaixa = new CaixaInterface(); 
+                CaixaInterface telacaixa = new CaixaInterface(caixa); 
                 telacaixa.setVisible(true);
             }
         });
     }
 
-    public static void main(String[] args) {
-        TransferenciaInterface transferenciaInterface = new TransferenciaInterface();
-        transferenciaInterface.setVisible(true);
-    }
+    /*public static void main(String[] args) {
+       UsuarioService usuarioService = new UsuarioService("src/file/java/com/mycompany/sistema_bancario/usuarios.json");
+        Caixa caixa = new Caixa(
+            "Caixa",
+            "11357820674",
+            "senhaCaixa",
+            "caixa@email.com",
+            "caixa",
+            "36000000",
+            "123",
+            "001",
+            usuarioService);
+        TransferenciaCaixa transferenciaCaixa = new TransferenciaCaixa(caixa);
+        transferenciaCaixa.setVisible(true);
+    }*/
 }

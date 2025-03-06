@@ -94,7 +94,7 @@ public class CaixaTest {
         System.out.println("depositoValido");
         double valor = 5000;
         String contaCliente = "0001";
-        caixa.deposito(valor, contaCliente, "123456");
+        caixa.deposito(valor, contaCliente);
     }
 
     /**
@@ -106,7 +106,7 @@ public class CaixaTest {
         double valor = -5000;
         String contaCliente = "0002";
         try {
-            caixa.deposito(valor, contaCliente, "987654");
+            caixa.deposito(valor, contaCliente);
             fail("Deveria ter lançado uma exceção para depósito inválido.");
         } catch (IllegalArgumentException e) {
             assertEquals("Valor inválido para depósito.", e.getMessage());
