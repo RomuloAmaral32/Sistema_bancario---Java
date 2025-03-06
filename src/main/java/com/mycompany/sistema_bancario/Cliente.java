@@ -35,7 +35,7 @@ public class Cliente extends Usuario {
     private List<String> extrato = new ArrayList<>();
     @XmlTransient
     private Scanner scanner;
-
+    private UsuarioService usuarioService;
     public Cliente() {
         super();
     }
@@ -273,6 +273,41 @@ public class Cliente extends Usuario {
         } catch (IOException e) {
             System.out.println("Erro ao salvar o extrato: " + e.getMessage());
         }
+    }
+    public boolean transferencia(double valor, String senhaCliente, String contaDestino) {
+        Cliente destinatario = usuarioService.buscarClientePorNumeroConta(contaDestino);
+    
+        if (destinatario == null) {
+            System.out.println("Cliente não encontrado.");
+            return false;
+        }
+        if (valor <= 0) {
+            System.out.println("Valor inválido para transferência.");
+            return false;
+        }
+        if (valor > 1000000) {
+            System.out.println(
+                    "Valor máximo para transferência é de R$1.000.000,00. Para transferências maiores, procurar um gerente.");
+            return false;
+        }
+        if (!this.verificaSenha(senhaCliente)) {
+            System.out.println("Senha incorreta.");
+            return false;
+        }
+
+        this.setSaldo(this.getSaldo() - valor);
+        destinatario.setSaldo(destinatario.getSaldo() + valor);
+        this.registrarMovimentacao("Transferência", -valor);
+        destinatario.registrarMovimentacao("Transferência", valor);
+
+        System.out.println(
+                "Transferência de R$" + valor + " da conta " + this.getContaBancaria() + " para a conta " + contaDestino
+                        + " realizada com sucesso.");
+
+        return true;
+    }
+    public UsuarioService getUsuarioService() {
+        return usuarioService;
     }
 
 }

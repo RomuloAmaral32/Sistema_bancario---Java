@@ -1,6 +1,10 @@
 package com.mycompany.sistema_bancario.Frames;
 
 import javax.swing.*;
+
+import com.mycompany.sistema_bancario.Cliente;
+import com.mycompany.sistema_bancario.UsuarioService;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,10 +27,11 @@ import java.awt.event.ActionListener;
 
 public class TransferenciaInterface extends JFrame {
 
-    private JTextField campoContaOrigem, campoContaDestino, campoValor;
+    private JTextField campoContaDestino, campoValor;
     private JPasswordField campoSenha;
     private JButton botaoConfirmar, botaoCancelar;
     private JLabel mensagemStatus;
+    private UsuarioService usuarioService;
 
     public TransferenciaInterface() {
         // Configurações da janela
@@ -34,15 +39,12 @@ public class TransferenciaInterface extends JFrame {
         setSize(400, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null); // Centraliza a janela na tela
-
+        //usuarioService = new UsuarioService("src/file/java/com/mycompany/sistema_bancario/usuarios.json");
         // Criando o título
         JLabel titulo = new JLabel("Transferência Bancária", JLabel.CENTER);
         titulo.setFont(new Font("Arial", Font.BOLD, 18));
 
         // Criando os campos
-        JLabel labelContaOrigem = new JLabel("Conta de Origem:");
-        campoContaOrigem = new JTextField(15);
-
         JLabel labelContaDestino = new JLabel("Conta de Destino:");
         campoContaDestino = new JTextField(15);
 
@@ -65,9 +67,6 @@ public class TransferenciaInterface extends JFrame {
         painel.setLayout(new GridLayout(6, 2, 10, 10));
 
         // Adicionando componentes ao painel
-        painel.add(labelContaOrigem);
-        painel.add(campoContaOrigem);
-
         painel.add(labelContaDestino);
         painel.add(campoContaDestino);
 
@@ -89,22 +88,46 @@ public class TransferenciaInterface extends JFrame {
         botaoConfirmar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String contaOrigem = campoContaOrigem.getText();
+                usuarioService = new UsuarioService("src/file/java/com/mycompany/sistema_bancario/usuarios.json");
+                Cliente cliente = new Cliente(
+                    "Darlan Silva",
+                    "43236859040",
+                    "123456",
+                    "unico@email.com",
+                    "cliente",
+                    "36000000",
+                    "456",
+                    "0001",
+                    500.0);
+
                 String contaDestino = campoContaDestino.getText();
-                String valor = campoValor.getText();
                 String senha = new String(campoSenha.getPassword());
 
                 // Verificando se os campos estão vazios
-                if (contaOrigem.isEmpty() || contaDestino.isEmpty() || valor.isEmpty() || senha.isEmpty()) {
+                if (contaDestino.isEmpty() || campoValor.getText().isEmpty() || senha.isEmpty()) {
                     mensagemStatus.setText("Por favor, preencha todos os campos.");
                     mensagemStatus.setForeground(Color.RED);
                 } else {
-                    // Simulando validação de senha e operação de transferência
-                    if (senha.equals("12349")) { // Aqui você pode substituir por validação real de senha
-                        mensagemStatus.setText("Transferência realizada com sucesso!");
-                        mensagemStatus.setForeground(Color.BLUE);
-                    } else {
-                        mensagemStatus.setText("Senha incorreta. Operação não autorizada.");
+                    try {
+                        // Convertendo valor para double
+                        double valor = Double.parseDouble(campoValor.getText());
+
+                        // Simulando validação de senha e operação de transferência
+                        if (senha.equals(cliente.getSenha())) {
+                            boolean transferenciaRealizada = cliente.transferencia(valor, senha, contaDestino);
+                            if (transferenciaRealizada) {
+                                mensagemStatus.setText("Transferência realizada com sucesso!");
+                                mensagemStatus.setForeground(Color.BLUE);
+                            } else {
+                                mensagemStatus.setText("Falha na transferência. Verifique as informações.");
+                                mensagemStatus.setForeground(Color.RED);
+                            }
+                        } else {
+                            mensagemStatus.setText("Senha incorreta. Operação não autorizada.");
+                            mensagemStatus.setForeground(Color.RED);
+                        }
+                    } catch (NumberFormatException ex) {
+                        mensagemStatus.setText("Valor inválido. Insira um valor numérico.");
                         mensagemStatus.setForeground(Color.RED);
                     }
                 }
@@ -116,13 +139,12 @@ public class TransferenciaInterface extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Limpar os campos
-                campoContaOrigem.setText("");
                 campoContaDestino.setText("");
                 campoValor.setText("");
                 campoSenha.setText("");
                 mensagemStatus.setText("");
-                 dispose(); // Fecha a janela atual
-                ClienteInterface telacliente = new ClienteInterface(); 
+                dispose(); // Fecha a janela atual
+                ClienteInterface telacliente = new ClienteInterface();
                 telacliente.setVisible(true);
             }
         });
