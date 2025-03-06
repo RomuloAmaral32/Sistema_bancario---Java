@@ -107,7 +107,7 @@ public class Saque extends JFrame {
                                 System.out.println(cliente.getSaldo());
         
                                 // Carregar a lista de clientes do JSON usando JsonHandler
-                                JsonHandler<Cliente> jsonHandler = new JsonHandler<>("usuarios.json");
+                                JsonHandler<Cliente> jsonHandler = new JsonHandler<>("src/file/java/com/mycompany/sistema_bancario/usuarios.json");
                                 List<Cliente> clientes = jsonHandler.loadFromJson(Cliente.class);
         
                                 // Atualizar o cliente na lista
