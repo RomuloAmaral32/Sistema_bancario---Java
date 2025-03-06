@@ -1,8 +1,13 @@
 package com.mycompany.sistema_bancario.Frames;
 
 import javax.swing.*;
+
+import com.mycompany.sistema_bancario.Cliente;
+import com.mycompany.sistema_bancario.ExtratoService;
+
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -16,7 +21,7 @@ import java.util.ArrayList;
  */
 /**
  *
- * @author  Ian Nakamura Okano Preste
+ * @author Ian Nakamura Okano Preste
  * @matricula 202335038
  */
 
@@ -44,7 +49,7 @@ public class Extrato extends JFrame {
         areaExtrato.setFont(new Font("Arial", Font.PLAIN, 14));
 
         // Adicionando o histórico de transações
-        ArrayList<String> transacoes = obterHistoricoTransacoes();
+        List<String> transacoes = obterHistoricoTransacoes();
         for (String transacao : transacoes) {
             areaExtrato.append(transacao + "\n");
         }
@@ -72,39 +77,27 @@ public class Extrato extends JFrame {
         botaoSair.addActionListener(e -> {
             // Fecha a janela de extrato
             dispose(); // Fecha a janela atual
-                ClienteInterface cliente = new ClienteInterface(); // Volta para a tela de login
-                cliente.setVisible(true);
+            ClienteInterface cliente = new ClienteInterface(); // Volta para a tela de login
+            cliente.setVisible(true);
         });
     }
 
-    private ArrayList<String> obterHistoricoTransacoes() {
-        ArrayList<String> transacoes = new ArrayList<>();
-        transacoes.add("01/03/2025 - Depósito: R$ 500,00");
-        transacoes.add("02/03/2025 - Saque: R$ 200,00");
-        transacoes.add("03/03/2025 - Transferência: R$ 150,00");
-        transacoes.add("04/03/2025 - Depósito: R$ 1.000,00");
-        transacoes.add("05/03/2025 - Saque: R$ 300,00");
-        transacoes.add("05/03/2025 - Saque: R$ 300,00");
-        transacoes.add("05/03/2025 - Saque: R$ 300,00");
-        transacoes.add("05/03/2025 - Saque: R$ 300,00");
-        transacoes.add("05/03/2025 - Saque: R$ 300,00");
-        transacoes.add("05/03/2025 - Saque: R$ 300,00");
-        transacoes.add("05/03/2025 - Saque: R$ 300,00");
-        transacoes.add("05/03/2025 - Saque: R$ 300,00");
-        transacoes.add("05/03/2025 - Saque: R$ 300,00");
-        transacoes.add("05/03/2025 - Saque: R$ 300,00");
-        transacoes.add("05/03/2025 - Saque: R$ 300,00");
-        transacoes.add("05/03/2025 - Saque: R$ 300,00");
-        transacoes.add("05/03/2025 - Saque: R$ 300,00");
-        transacoes.add("05/03/2025 - Saque: R$ 300,00");
-        transacoes.add("05/03/2025 - Saque: R$ 300,00");
-        transacoes.add("05/03/2025 - Saque: R$ 300,00");
-        transacoes.add("05/03/2025 - Saque: R$ 300,00");
-        transacoes.add("05/03/2025 - Saque: R$ 300,00");
-        transacoes.add("05/03/2025 - Saque: R$ 300,00");
-        transacoes.add("05/03/2025 - Saque: R$ 300,00");
+    private List<String> obterHistoricoTransacoes() {
 
-        return transacoes;
+        Cliente cliente = new Cliente(
+                "Darlan Silva",
+                "43236859040",
+                "123456",
+                "unico@email.com",
+                "cliente",
+                "36000000",
+                "456",
+                "0001",
+                500.0);
+
+        List<String> historicoTransacoes = ExtratoService.exibirExtrato(cliente.getContaBancaria());
+
+        return historicoTransacoes;
     }
 
     public static void main(String[] args) {
