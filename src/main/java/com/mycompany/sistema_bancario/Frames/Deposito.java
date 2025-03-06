@@ -56,8 +56,6 @@ public class Deposito extends JFrame {
         painel.add(campoNumeroConta);
         painel.add(labelValorDeposito);
         painel.add(campoValorDeposito);
-        painel.add(labelSenha);
-        painel.add(campoSenha);
         painel.add(new JLabel()); // Campo vazio para espaçamento
         painel.add(botaoConfirmar);
         painel.add(new JLabel()); // Campo vazio para espaçamento
@@ -74,8 +72,6 @@ public class Deposito extends JFrame {
                 String numeroConta = campoNumeroConta.getText();
                 String valorDepositoStr = campoValorDeposito.getText();
                 double valorDeposito = Double.parseDouble(valorDepositoStr);
-                char[] senhaInformada = campoSenha.getPassword();
-                String senha = new String(senhaInformada);
 
                 try {
                     // Cria uma instância do Caixa
@@ -91,7 +87,7 @@ public class Deposito extends JFrame {
                             usuarioService);
 
                     // Processa o depósito usando o Caixa
-                    boolean depositoRealizado = caixa.deposito(valorDeposito, numeroConta, senha);
+                    boolean depositoRealizado = caixa.deposito(valorDeposito, numeroConta);
 
                     if (depositoRealizado) {
                         // Busca o cliente atualizado

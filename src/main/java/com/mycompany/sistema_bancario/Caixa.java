@@ -50,7 +50,7 @@ public class Caixa extends Usuario {
     public void setNumeroFuncionario(String numeroFuncionario) {
         this.numeroFuncionario = numeroFuncionario;
     }
-    public boolean deposito(double valor, String numeroContaCliente, String senhaCliente) {
+    public boolean deposito(double valor, String numeroContaCliente) {
         // Busca o cliente pelo número da conta
         Cliente cliente = usuarioService.buscarClientePorNumeroConta(numeroContaCliente);
     
@@ -70,10 +70,6 @@ public class Caixa extends Usuario {
             return false;
         }
     
-        if (!cliente.verificaSenha(senhaCliente)) {
-            System.out.println("Senha incorreta.");
-            return false;
-        }
     
         // Realiza o depósito
         cliente.setSaldo(cliente.getSaldo() + valor);
@@ -120,25 +116,38 @@ public class Caixa extends Usuario {
         return true;
     }
 
-    public boolean transferencia(double valor, String numeroContaCliente, String senhaCliente, String contaDestino) {
-        Cliente cliente = usuarioService.buscarClientePorNumeroConta(numeroContaCliente);
-
+    public boolean transferencia(double valor, String numeroContaOrigem, String numeroContaDestino, String senhaCliente) {
+        // Busca o cliente de origem e destino
+        Cliente clienteOrigem = usuarioService.buscarClientePorNumeroConta(numeroContaOrigem);
+        Cliente clienteDestino = usuarioService.buscarClientePorNumeroConta(numeroContaDestino);
+    
+        if (clienteOrigem == null || clienteDestino == null) {
+            System.out.println("Conta de origem ou destino não encontrada.");
+            return false;
+        }
+    
+        // Validações
         if (valor <= 0) {
             System.out.println("Valor inválido para transferência.");
             return false;
         }
-        if (valor > 1000000) {
-            System.out.println(
-                    "Valor máximo para transferência é de R$1.000.000,00. Para transferências maiores, procurar um gerente.");
-            return false;
-        }
-        if (!cliente.verificaSenha(senhaCliente)) {
+    
+        if (!clienteOrigem.verificaSenha(senhaCliente)) {
             System.out.println("Senha incorreta.");
             return false;
         }
-        System.out.println(
-                "Transferência de R$" + valor + " da conta " + numeroContaCliente + " para a conta " + contaDestino
-                        + " realizada com sucesso.");
+    
+        if (clienteOrigem.getSaldo() < valor) {
+            System.out.println("Saldo insuficiente na conta de origem.");
+            return false;
+        }
+    
+        // Realiza a transferência
+        clienteOrigem.setSaldo(clienteOrigem.getSaldo() - valor);
+        clienteDestino.setSaldo(clienteDestino.getSaldo() + valor);
+        System.out.println("Transferência de R$" + valor + " realizada com sucesso da conta " + numeroContaOrigem + " para " + numeroContaDestino + ".");
+    
         return true;
     }
+    
 }
