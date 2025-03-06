@@ -23,7 +23,7 @@ import java.util.List;
  */
 /**
  *
- * @author  Ian Nakamura Okano Preste
+ * @author Ian Nakamura Okano Preste
  * @matricula 202335038
  */
 
@@ -84,6 +84,33 @@ public class JsonHandler<T> {
         saveToJson(dataList);
     }
 
+    public void editDataByContaBancaria(String contaBancaria, T updatedData, Class<T> clazz) throws IOException {
+        try {
+            List<T> dataList = loadFromJson(clazz);
+            boolean found = false;
+
+            for (int i = 0; i < dataList.size(); i++) {
+                T data = dataList.get(i);
+                if (data instanceof Cliente cliente) {
+                    if (cliente.getContaBancaria().equals(contaBancaria)) {
+                        dataList.set(i, updatedData); // Atualiza o cliente na lista
+                        found = true;
+                        break;
+                    }
+                }
+            }
+
+            if (!found) {
+                throw new IllegalArgumentException("Usuário com conta bancária " + contaBancaria + " não encontrado.");
+            }
+
+            this.saveToJson(dataList); // Salva a lista atualizada no JSON
+        } catch (IOException e) {
+            System.out.println("Erro no método editDataByContaBancaria: " + e.getMessage());
+            throw e; // Relança a exceção após registrar o erro
+        }
+    }
+
     public void removeDataByCpf(String cpf, Class<T> clazz) throws IOException {
         List<T> dataList = loadFromJson(clazz);
         boolean removed = dataList.removeIf(data -> {
@@ -100,5 +127,5 @@ public class JsonHandler<T> {
 
         saveToJson(dataList);
     }
-    
+
 }

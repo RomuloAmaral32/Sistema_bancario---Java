@@ -20,7 +20,6 @@ package com.mycompany.sistema_bancario;
  * @matricula 202335038
  */
 
- 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -62,22 +61,39 @@ public class Caixa extends Usuario {
     }
 
     public boolean saque(double valor, String numeroContaCliente, String senhaCliente) {
+        // Busca o cliente pelo número da conta
         Cliente cliente = usuarioService.buscarClientePorNumeroConta(numeroContaCliente);
 
+        if (cliente == null) {
+            System.out.println("Cliente não encontrado.");
+            return false;
+        }
+
+        // Validações
         if (valor <= 0) {
             System.out.println("Valor inválido para saque.");
             return false;
         }
+
         if (valor > 1000000) {
-            System.out
-                    .println("Valor máximo para saque é de R$1.000.000,00. Para saques maiores, procurar um gerente.");
+            System.out.println("Valor máximo para saque é de R$1.000.000,00. Para saques maiores, procure um gerente.");
             return false;
         }
+
         if (!cliente.verificaSenha(senhaCliente)) {
             System.out.println("Senha incorreta.");
             return false;
         }
+
+        if (cliente.getSaldo() < valor) {
+            System.out.println("Saldo insuficiente.");
+            return false;
+        }
+
+        // Realiza o saque
+        cliente.setSaldo(cliente.getSaldo() - valor);
         System.out.println("Saque de R$" + valor + " da conta " + numeroContaCliente + " realizado com sucesso.");
+
         return true;
     }
 
