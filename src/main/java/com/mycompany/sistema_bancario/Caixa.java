@@ -71,11 +71,6 @@ public class Caixa extends Usuario {
             return false;
         }
 
-        if (!cliente.verificaSenha(senhaCliente)) {
-            System.out.println("Senha incorreta.");
-            return false;
-        }
-
         // Realiza o depósito
         cliente.setSaldo(cliente.getSaldo() + valor);
         cliente.registrarMovimentacao("Depósito", valor);
@@ -146,6 +141,9 @@ public class Caixa extends Usuario {
 
         cliente.setSaldo(cliente.getSaldo() - valor);
         destinatario.setSaldo(destinatario.getSaldo() + valor);
+        cliente.registrarMovimentacao("Transferência", -valor);
+        destinatario.registrarMovimentacao("Transferência", valor);
+
         System.out.println(
                 "Transferência de R$" + valor + " da conta " + numeroContaCliente + " para a conta " + contaDestino
                         + " realizada com sucesso.");
