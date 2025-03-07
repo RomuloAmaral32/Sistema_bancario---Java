@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -42,8 +43,6 @@ public class JsonHandler<T> {
     }
 
     public void saveToJson(List<T> data) throws IOException {
-        System.out.println("Caminho do arquivo: " + filePath);
-
         objectMapper.writeValue(new File(filePath), data);
     }
 
@@ -130,4 +129,12 @@ public class JsonHandler<T> {
         saveToJson(dataList);
     }
 
+    public List<Map<String, Object>> loadMapsFromJson() throws IOException {
+        File file = new File(filePath);
+        if (!file.exists() || file.length() == 0) {
+            return new ArrayList<>();
+        }
+        return objectMapper.readValue(file,
+                objectMapper.getTypeFactory().constructCollectionType(List.class, Map.class));
+    }
 }

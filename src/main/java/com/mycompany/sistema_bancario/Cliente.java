@@ -32,6 +32,8 @@ import jakarta.xml.bind.annotation.XmlTransient;
 public class Cliente extends Usuario {
     private String contaBancaria;
     private double saldo;
+    private List<InvestimetoRendaFixa> rendaFixa;
+    private List<InvestimentoRendaVariavel> rendaVariavel;
     private List<String> extrato = new ArrayList<>();
     @XmlTransient
     private Scanner scanner;
@@ -49,25 +51,10 @@ public class Cliente extends Usuario {
         this.extrato = new ArrayList<>();
         this.scanner = new Scanner(System.in);
         registrarExtrato("Abertura da conta com saldo inicial: R$" + saldoInicial);
+        this.rendaFixa = new ArrayList<>();
+        this.rendaVariavel = new ArrayList<>();
     }
 
-    /*
-     * private boolean validarSenha() {
-     * System.out.print("Digite sua senha para validar a operação: ");
-     * String senhaDigitada = scanner.nextLine();
-     * return senhaDigitada.equals(super.getSenha());
-     * }
-     * 
-     * public void consultarSaldo() {
-     * if (validarSenha()) {
-     * System.out.println("Seu saldo é: R$"+ this.saldo);
-     * } else {
-     * System.out.println("Senha incorreta.");
-     * }
-     * }
-     */
-
-    // ian
     private boolean validarSenha(String senhaTeste) {
         if (senhaTeste != null) { // Se for um teste, usa a senha fornecida
             return senhaTeste.equals(super.getSenha());
@@ -327,6 +314,32 @@ public class Cliente extends Usuario {
 
     public UsuarioService getUsuarioService() {
         return usuarioService;
+    }
+
+    public List<InvestimetoRendaFixa> getRendaFixa() {
+        return rendaFixa;
+    }
+
+    public void setRendaFixa(List<InvestimetoRendaFixa> rendaFixa) {
+        this.rendaFixa = rendaFixa;
+    }
+
+    public List<InvestimentoRendaVariavel> getRendaVariavel() {
+        return rendaVariavel;
+    }
+
+    public void setRendaVariavel(List<InvestimentoRendaVariavel> rendaVariavel) {
+        this.rendaVariavel = rendaVariavel;
+    }
+
+    // Método para adicionar um investimento de renda fixa
+    public void adicionarInvestimetoRendaFixa(InvestimetoRendaFixa investimento) {
+        this.rendaFixa.add(investimento);
+    }
+
+    // Método para adicionar um investimento de renda variável
+    public void adicionarInvestimentoRendaVariavel(InvestimentoRendaVariavel investimento) {
+        this.rendaVariavel.add(investimento);
     }
 
 }

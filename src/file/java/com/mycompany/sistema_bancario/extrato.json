@@ -1,305 +1,344 @@
-[ {
-  "0001" : {
-    "saldoAnterior" : 1000.0,
-    "tipoDeMovimentacao" : "deposito",
-    "valor" : 100.0,
-    "saldoAtual" : 1100.0,
-    "data" : "2021-01-01"
+[
+  {
+    "0001": {
+      "saldoAnterior": 1000.0,
+      "tipoDeMovimentacao": "deposito",
+      "valor": 100.0,
+      "saldoAtual": 1100.0,
+      "data": "2021-01-01"
+    }
+  },
+  {
+    "0001": {
+      "saldoAnterior": 1100.0,
+      "tipoDeMovimentacao": "saque",
+      "valor": 50.0,
+      "saldoAtual": 1050.0,
+      "data": "2021-01-02"
+    }
+  },
+  {
+    "0001": {
+      "saldoAnterior": 1050.0,
+      "tipoDeMovimentacao": "deposito",
+      "valor": 200.0,
+      "saldoAtual": 1250.0,
+      "data": "2021-01-03"
+    }
+  },
+  {
+    "0001": {
+      "saldoAnterior": 1250.0,
+      "tipoDeMovimentacao": "saque",
+      "valor": 100.0,
+      "saldoAtual": 1150.0,
+      "data": "2021-01-04"
+    }
+  },
+  {
+    "0001": {
+      "data": "2025-03-06",
+      "saldoAnterior": 13899.0,
+      "valor": 9999.0,
+      "saldoAtual": 13899.0,
+      "tipoDeMovimentacao": "Depósito"
+    }
+  },
+  {
+    "0001": {
+      "data": "2025-03-06",
+      "saldoAnterior": 400.0,
+      "valor": -100.0,
+      "saldoAtual": 400.0,
+      "tipoDeMovimentacao": "Transferência"
+    }
+  },
+  {
+    "0002": {
+      "data": "2025-03-06",
+      "saldoAnterior": 900.0,
+      "valor": 100.0,
+      "saldoAtual": 900.0,
+      "tipoDeMovimentacao": "Transferência"
+    }
+  },
+  {
+    "0001": {
+      "data": "2025-03-06",
+      "saldoAnterior": 400.0,
+      "valor": -100.0,
+      "saldoAtual": 400.0,
+      "tipoDeMovimentacao": "Transferência"
+    }
+  },
+  {
+    "0002": {
+      "data": "2025-03-06",
+      "saldoAnterior": 900.0,
+      "valor": 100.0,
+      "saldoAtual": 900.0,
+      "tipoDeMovimentacao": "Transferência"
+    }
+  },
+  {
+    "0001": {
+      "data": "2025-03-06",
+      "saldoAnterior": 400.0,
+      "valor": -100.0,
+      "saldoAtual": 400.0,
+      "tipoDeMovimentacao": "Transferência"
+    }
+  },
+  {
+    "0002": {
+      "data": "2025-03-06",
+      "saldoAnterior": 900.0,
+      "valor": 100.0,
+      "saldoAtual": 900.0,
+      "tipoDeMovimentacao": "Transferência"
+    }
+  },
+  {
+    "0001": {
+      "data": "2025-03-06",
+      "saldoAnterior": 400.0,
+      "valor": -100.0,
+      "saldoAtual": 400.0,
+      "tipoDeMovimentacao": "Transferência"
+    }
+  },
+  {
+    "0002": {
+      "data": "2025-03-06",
+      "saldoAnterior": 900.0,
+      "valor": 100.0,
+      "saldoAtual": 900.0,
+      "tipoDeMovimentacao": "Transferência"
+    }
+  },
+  {
+    "0001": {
+      "data": "2025-03-06",
+      "saldoAnterior": 400.0,
+      "valor": -100.0,
+      "saldoAtual": 400.0,
+      "tipoDeMovimentacao": "Transferência"
+    }
+  },
+  {
+    "0002": {
+      "data": "2025-03-06",
+      "saldoAnterior": 900.0,
+      "valor": 100.0,
+      "saldoAtual": 900.0,
+      "tipoDeMovimentacao": "Transferência"
+    }
+  },
+  {
+    "0001": {
+      "data": "2025-03-06",
+      "saldoAnterior": 400.0,
+      "valor": -100.0,
+      "saldoAtual": 400.0,
+      "tipoDeMovimentacao": "Transferência"
+    }
+  },
+  {
+    "0002": {
+      "data": "2025-03-06",
+      "saldoAnterior": 900.0,
+      "valor": 100.0,
+      "saldoAtual": 900.0,
+      "tipoDeMovimentacao": "Transferência"
+    }
+  },
+  {
+    "0001": {
+      "data": "2025-03-06",
+      "saldoAnterior": -9500.0,
+      "valor": -10000.0,
+      "saldoAtual": -9500.0,
+      "tipoDeMovimentacao": "Transferência"
+    }
+  },
+  {
+    "0002": {
+      "data": "2025-03-06",
+      "saldoAnterior": 10800.0,
+      "valor": 10000.0,
+      "saldoAtual": 10800.0,
+      "tipoDeMovimentacao": "Transferência"
+    }
+  },
+  {
+    "0001": {
+      "data": "2025-03-06",
+      "saldoAnterior": -9500.0,
+      "valor": -10000.0,
+      "saldoAtual": -9500.0,
+      "tipoDeMovimentacao": "Transferência"
+    }
+  },
+  {
+    "0002": {
+      "data": "2025-03-06",
+      "saldoAnterior": 10800.0,
+      "valor": 10000.0,
+      "saldoAtual": 10800.0,
+      "tipoDeMovimentacao": "Transferência"
+    }
+  },
+  {
+    "0001": {
+      "data": "2025-03-06",
+      "saldoAnterior": 400.0,
+      "valor": -100.0,
+      "saldoAtual": 400.0,
+      "tipoDeMovimentacao": "Transferência"
+    }
+  },
+  {
+    "0002": {
+      "data": "2025-03-06",
+      "saldoAnterior": 900.0,
+      "valor": 100.0,
+      "saldoAtual": 900.0,
+      "tipoDeMovimentacao": "Transferência"
+    }
+  },
+  {
+    "0001": {
+      "data": "2025-03-06",
+      "saldoAnterior": -9500.0,
+      "valor": -10000.0,
+      "saldoAtual": -9500.0,
+      "tipoDeMovimentacao": "Transferência"
+    }
+  },
+  {
+    "0002": {
+      "data": "2025-03-06",
+      "saldoAnterior": 10800.0,
+      "valor": 10000.0,
+      "saldoAtual": 10800.0,
+      "tipoDeMovimentacao": "Transferência"
+    }
+  },
+  {
+    "0001": {
+      "data": "2025-03-06",
+      "saldoAnterior": -9500.0,
+      "valor": -10000.0,
+      "saldoAtual": -9500.0,
+      "tipoDeMovimentacao": "Transferência"
+    }
+  },
+  {
+    "0002": {
+      "data": "2025-03-06",
+      "saldoAnterior": 10800.0,
+      "valor": 10000.0,
+      "saldoAtual": 10800.0,
+      "tipoDeMovimentacao": "Transferência"
+    }
+  },
+  {
+    "0001": {
+      "data": "2025-03-06",
+      "saldoAnterior": -9500.0,
+      "valor": -10000.0,
+      "saldoAtual": -9500.0,
+      "tipoDeMovimentacao": "Transferência"
+    }
+  },
+  {
+    "0002": {
+      "data": "2025-03-06",
+      "saldoAnterior": 10800.0,
+      "valor": 10000.0,
+      "saldoAtual": 10800.0,
+      "tipoDeMovimentacao": "Transferência"
+    }
+  },
+  {
+    "0001": {
+      "data": "2025-03-06",
+      "saldoAnterior": -2500.0,
+      "valor": -3000.0,
+      "saldoAtual": -2500.0,
+      "tipoDeMovimentacao": "Transferência"
+    }
+  },
+  {
+    "0002": {
+      "data": "2025-03-06",
+      "saldoAnterior": 13800.0,
+      "valor": 3000.0,
+      "saldoAtual": 13800.0,
+      "tipoDeMovimentacao": "Transferência"
+    }
+  },
+  {
+    "0001": {
+      "data": "2025-03-06",
+      "saldoAnterior": -2500.0,
+      "valor": -3000.0,
+      "saldoAtual": -2500.0,
+      "tipoDeMovimentacao": "Transferência"
+    }
+  },
+  {
+    "0002": {
+      "data": "2025-03-06",
+      "saldoAnterior": 4000.0,
+      "valor": 3000.0,
+      "saldoAtual": 4000.0,
+      "tipoDeMovimentacao": "Transferência"
+    }
+  },
+  {
+    "0001": {
+      "data": "2025-03-06",
+      "saldoAnterior": 10899.0,
+      "valor": -3000.0,
+      "saldoAtual": 10899.0,
+      "tipoDeMovimentacao": "Transferência"
+    }
+  },
+  {
+    "0002": {
+      "data": "2025-03-06",
+      "saldoAnterior": 7000.0,
+      "valor": 3000.0,
+      "saldoAtual": 7000.0,
+      "tipoDeMovimentacao": "Transferência"
+    }
+  },
+  {
+    "0001": {
+      "data": "2025-03-06",
+      "saldoAnterior": 5899.0,
+      "valor": 5000.0,
+      "saldoAtual": 899.0,
+      "tipoDeMovimentacao": "Saque"
+    }
+  },
+  {
+    "0001": {
+      "data": "2025-03-06",
+      "saldoAnterior": 499.0,
+      "valor": 400.0,
+      "saldoAtual": 99.0,
+      "tipoDeMovimentacao": "Saque"
+    }
+  },
+  {
+    "0001": {
+      "data": "2025-03-06",
+      "saldoAnterior": 500.0,
+      "valor": 500.0,
+      "saldoAtual": 500.0,
+      "tipoDeMovimentacao": "Saque"
+    }
   }
-}, {
-  "0001" : {
-    "saldoAnterior" : 1100.0,
-    "tipoDeMovimentacao" : "saque",
-    "valor" : 50.0,
-    "saldoAtual" : 1050.0,
-    "data" : "2021-01-02"
-  }
-}, {
-  "0001" : {
-    "saldoAnterior" : 1050.0,
-    "tipoDeMovimentacao" : "deposito",
-    "valor" : 200.0,
-    "saldoAtual" : 1250.0,
-    "data" : "2021-01-03"
-  }
-}, {
-  "0001" : {
-    "saldoAnterior" : 1250.0,
-    "tipoDeMovimentacao" : "saque",
-    "valor" : 100.0,
-    "saldoAtual" : 1150.0,
-    "data" : "2021-01-04"
-  }
-}, {
-  "0001" : {
-    "data" : "2025-03-06",
-    "saldoAnterior" : 13899.0,
-    "valor" : 9999.0,
-    "saldoAtual" : 13899.0,
-    "tipoDeMovimentacao" : "Depósito"
-  }
-}, {
-  "0001" : {
-    "data" : "2025-03-06",
-    "saldoAnterior" : 400.0,
-    "valor" : -100.0,
-    "saldoAtual" : 400.0,
-    "tipoDeMovimentacao" : "Transferência"
-  }
-}, {
-  "0002" : {
-    "data" : "2025-03-06",
-    "saldoAnterior" : 900.0,
-    "valor" : 100.0,
-    "saldoAtual" : 900.0,
-    "tipoDeMovimentacao" : "Transferência"
-  }
-}, {
-  "0001" : {
-    "data" : "2025-03-06",
-    "saldoAnterior" : 400.0,
-    "valor" : -100.0,
-    "saldoAtual" : 400.0,
-    "tipoDeMovimentacao" : "Transferência"
-  }
-}, {
-  "0002" : {
-    "data" : "2025-03-06",
-    "saldoAnterior" : 900.0,
-    "valor" : 100.0,
-    "saldoAtual" : 900.0,
-    "tipoDeMovimentacao" : "Transferência"
-  }
-}, {
-  "0001" : {
-    "data" : "2025-03-06",
-    "saldoAnterior" : 400.0,
-    "valor" : -100.0,
-    "saldoAtual" : 400.0,
-    "tipoDeMovimentacao" : "Transferência"
-  }
-}, {
-  "0002" : {
-    "data" : "2025-03-06",
-    "saldoAnterior" : 900.0,
-    "valor" : 100.0,
-    "saldoAtual" : 900.0,
-    "tipoDeMovimentacao" : "Transferência"
-  }
-}, {
-  "0001" : {
-    "data" : "2025-03-06",
-    "saldoAnterior" : 400.0,
-    "valor" : -100.0,
-    "saldoAtual" : 400.0,
-    "tipoDeMovimentacao" : "Transferência"
-  }
-}, {
-  "0002" : {
-    "data" : "2025-03-06",
-    "saldoAnterior" : 900.0,
-    "valor" : 100.0,
-    "saldoAtual" : 900.0,
-    "tipoDeMovimentacao" : "Transferência"
-  }
-}, {
-  "0001" : {
-    "data" : "2025-03-06",
-    "saldoAnterior" : 400.0,
-    "valor" : -100.0,
-    "saldoAtual" : 400.0,
-    "tipoDeMovimentacao" : "Transferência"
-  }
-}, {
-  "0002" : {
-    "data" : "2025-03-06",
-    "saldoAnterior" : 900.0,
-    "valor" : 100.0,
-    "saldoAtual" : 900.0,
-    "tipoDeMovimentacao" : "Transferência"
-  }
-}, {
-  "0001" : {
-    "data" : "2025-03-06",
-    "saldoAnterior" : 400.0,
-    "valor" : -100.0,
-    "saldoAtual" : 400.0,
-    "tipoDeMovimentacao" : "Transferência"
-  }
-}, {
-  "0002" : {
-    "data" : "2025-03-06",
-    "saldoAnterior" : 900.0,
-    "valor" : 100.0,
-    "saldoAtual" : 900.0,
-    "tipoDeMovimentacao" : "Transferência"
-  }
-}, {
-  "0001" : {
-    "data" : "2025-03-06",
-    "saldoAnterior" : -9500.0,
-    "valor" : -10000.0,
-    "saldoAtual" : -9500.0,
-    "tipoDeMovimentacao" : "Transferência"
-  }
-}, {
-  "0002" : {
-    "data" : "2025-03-06",
-    "saldoAnterior" : 10800.0,
-    "valor" : 10000.0,
-    "saldoAtual" : 10800.0,
-    "tipoDeMovimentacao" : "Transferência"
-  }
-}, {
-  "0001" : {
-    "data" : "2025-03-06",
-    "saldoAnterior" : -9500.0,
-    "valor" : -10000.0,
-    "saldoAtual" : -9500.0,
-    "tipoDeMovimentacao" : "Transferência"
-  }
-}, {
-  "0002" : {
-    "data" : "2025-03-06",
-    "saldoAnterior" : 10800.0,
-    "valor" : 10000.0,
-    "saldoAtual" : 10800.0,
-    "tipoDeMovimentacao" : "Transferência"
-  }
-}, {
-  "0001" : {
-    "data" : "2025-03-06",
-    "saldoAnterior" : 400.0,
-    "valor" : -100.0,
-    "saldoAtual" : 400.0,
-    "tipoDeMovimentacao" : "Transferência"
-  }
-}, {
-  "0002" : {
-    "data" : "2025-03-06",
-    "saldoAnterior" : 900.0,
-    "valor" : 100.0,
-    "saldoAtual" : 900.0,
-    "tipoDeMovimentacao" : "Transferência"
-  }
-}, {
-  "0001" : {
-    "data" : "2025-03-06",
-    "saldoAnterior" : -9500.0,
-    "valor" : -10000.0,
-    "saldoAtual" : -9500.0,
-    "tipoDeMovimentacao" : "Transferência"
-  }
-}, {
-  "0002" : {
-    "data" : "2025-03-06",
-    "saldoAnterior" : 10800.0,
-    "valor" : 10000.0,
-    "saldoAtual" : 10800.0,
-    "tipoDeMovimentacao" : "Transferência"
-  }
-}, {
-  "0001" : {
-    "data" : "2025-03-06",
-    "saldoAnterior" : -9500.0,
-    "valor" : -10000.0,
-    "saldoAtual" : -9500.0,
-    "tipoDeMovimentacao" : "Transferência"
-  }
-}, {
-  "0002" : {
-    "data" : "2025-03-06",
-    "saldoAnterior" : 10800.0,
-    "valor" : 10000.0,
-    "saldoAtual" : 10800.0,
-    "tipoDeMovimentacao" : "Transferência"
-  }
-}, {
-  "0001" : {
-    "data" : "2025-03-06",
-    "saldoAnterior" : -9500.0,
-    "valor" : -10000.0,
-    "saldoAtual" : -9500.0,
-    "tipoDeMovimentacao" : "Transferência"
-  }
-}, {
-  "0002" : {
-    "data" : "2025-03-06",
-    "saldoAnterior" : 10800.0,
-    "valor" : 10000.0,
-    "saldoAtual" : 10800.0,
-    "tipoDeMovimentacao" : "Transferência"
-  }
-}, {
-  "0001" : {
-    "data" : "2025-03-06",
-    "saldoAnterior" : -2500.0,
-    "valor" : -3000.0,
-    "saldoAtual" : -2500.0,
-    "tipoDeMovimentacao" : "Transferência"
-  }
-}, {
-  "0002" : {
-    "data" : "2025-03-06",
-    "saldoAnterior" : 13800.0,
-    "valor" : 3000.0,
-    "saldoAtual" : 13800.0,
-    "tipoDeMovimentacao" : "Transferência"
-  }
-}, {
-  "0001" : {
-    "data" : "2025-03-06",
-    "saldoAnterior" : -2500.0,
-    "valor" : -3000.0,
-    "saldoAtual" : -2500.0,
-    "tipoDeMovimentacao" : "Transferência"
-  }
-}, {
-  "0002" : {
-    "data" : "2025-03-06",
-    "saldoAnterior" : 4000.0,
-    "valor" : 3000.0,
-    "saldoAtual" : 4000.0,
-    "tipoDeMovimentacao" : "Transferência"
-  }
-}, {
-  "0001" : {
-    "data" : "2025-03-06",
-    "saldoAnterior" : 10899.0,
-    "valor" : -3000.0,
-    "saldoAtual" : 10899.0,
-    "tipoDeMovimentacao" : "Transferência"
-  }
-}, {
-  "0002" : {
-    "data" : "2025-03-06",
-    "saldoAnterior" : 7000.0,
-    "valor" : 3000.0,
-    "saldoAtual" : 7000.0,
-    "tipoDeMovimentacao" : "Transferência"
-  }
-}, {
-  "0001" : {
-    "data" : "2025-03-06",
-    "saldoAnterior" : 5899.0,
-    "valor" : 5000.0,
-    "saldoAtual" : 899.0,
-    "tipoDeMovimentacao" : "Saque"
-  }
-}, {
-  "0001" : {
-    "data" : "2025-03-06",
-    "saldoAnterior" : 499.0,
-    "valor" : 400.0,
-    "saldoAtual" : 99.0,
-    "tipoDeMovimentacao" : "Saque"
-  }
-}, {
-  "0001" : {
-    "data" : "2025-03-06",
-    "saldoAnterior" : 500.0,
-    "valor" : 500.0,
-    "saldoAtual" : 500.0,
-    "tipoDeMovimentacao" : "Saque"
-  }
-} ]
+]

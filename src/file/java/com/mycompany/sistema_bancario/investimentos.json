@@ -1,0 +1,20 @@
+[
+  {
+    "contaBancaria": "0002",
+    "rendaFixa": [
+      {
+        "produto": "Tesouro Selic 2025",
+        "valorInvestido": 1000.0,
+        "prazoMinimo": "2025-03-01",
+        "vencimento": "2020-03-01"
+      }
+    ],
+    "rendaVariavel": [
+      {
+        "produto": "Ação 1",
+        "risco": 25.0,
+        "rentabilidade": 40.0
+      }
+    ]
+  }
+]

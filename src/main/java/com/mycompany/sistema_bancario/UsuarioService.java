@@ -1,8 +1,7 @@
 package com.mycompany.sistema_bancario;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  *
@@ -23,9 +22,11 @@ import java.util.List;
 public class UsuarioService {
     private List<Usuario> usuarios;
     private JsonHandler<Usuario> jsonHandler;
+    private JsonHandler<Map<String, Object>> jsonHandlerInvestimentos;
 
-    public UsuarioService(String filePath) {
-        jsonHandler = new JsonHandler<>(filePath);
+    public UsuarioService(String filePath, String filePathInvestimentos) {
+        this.jsonHandler = new JsonHandler<>(filePath);
+        this.jsonHandlerInvestimentos = new JsonHandler<>(filePathInvestimentos);
         try {
             // Tentar carregar os usuários existentes do JSON
             usuarios = jsonHandler.loadFromJson(Usuario.class);
@@ -77,16 +78,15 @@ public class UsuarioService {
     // Método para buscar cliente por número da conta
     public Cliente buscarClientePorNumeroConta(String numeroConta) {
         for (Usuario usuario : usuarios) {
-            if (usuario instanceof Cliente) {  // Verifica se o usuário é um Cliente
-                Cliente cliente = (Cliente) usuario;  // Cast para Cliente
+            if (usuario instanceof Cliente) { // Verifica se o usuário é um Cliente
+                Cliente cliente = (Cliente) usuario; // Cast para Cliente
                 if (cliente.getContaBancaria().equals(numeroConta)) {
-                    return cliente;  // Retorna o cliente se a conta bancária for encontrada
+                    return cliente; // Retorna o cliente se a conta bancária for encontrada
                 }
             }
         }
         throw new IllegalArgumentException("Cliente não encontrado para a conta: " + numeroConta);
     }
-    
 
     public Usuario buscarUsuarioPorCPF(String cpf) {
         for (Usuario usuario : usuarios) {
@@ -142,11 +142,12 @@ public class UsuarioService {
             return null;
         }
     }
+
     public void atualizarCliente(Cliente clienteAtualizado) {
         try {
             // Carregar a lista de usuários do arquivo JSON
             List<Usuario> usuariosExistentes = jsonHandler.loadFromJson(Usuario.class);
-    
+
             // Atualizar o cliente na lista
             for (int i = 0; i < usuariosExistentes.size(); i++) {
                 if (usuariosExistentes.get(i).getCpf().equals(clienteAtualizado.getCpf())) {
@@ -154,13 +155,76 @@ public class UsuarioService {
                     break;
                 }
             }
-    
+
             // Salvar a lista atualizada no arquivo JSON
             jsonHandler.saveToJson(usuariosExistentes);
-    
+
             System.out.println("Cliente atualizado com sucesso!");
         } catch (IOException e) {
             System.out.println("Erro ao atualizar cliente no arquivo JSON: " + e.getMessage());
         }
+    }
+
+    public void registrarInvestimentoRendaFixa(String contaBancaria, Map<String, Object> investimento) {
+        try {
+            List<Map<String, Object>> investimentos = carregarInvestimentos();
+            Map<String, Object> clienteInvestimento = encontrarOuCriarInvestimentoCliente(investimentos, contaBancaria);
+
+            @SuppressWarnings("unchecked")
+            List<Map<String, Object>> rendaFixa = (List<Map<String, Object>>) clienteInvestimento
+                    .getOrDefault("rendaFixa", new ArrayList<>());
+            rendaFixa.add(investimento);
+            clienteInvestimento.put("rendaFixa", rendaFixa);
+
+            salvarInvestimentos(investimentos);
+            System.out.println("Investimento de Renda Fixa registrado com sucesso!");
+        } catch (IOException e) {
+            System.out.println("Erro ao registrar investimento: " + e.getMessage());
+        }
+    }
+
+    // Método para registrar investimento de Renda Variável
+    public void registrarInvestimentoRendaVariavel(String contaBancaria, Map<String, Object> investimento) {
+        try {
+            List<Map<String, Object>> investimentos = carregarInvestimentos();
+            Map<String, Object> clienteInvestimento = encontrarOuCriarInvestimentoCliente(investimentos, contaBancaria);
+
+            @SuppressWarnings("unchecked")
+            List<Map<String, Object>> rendaVariavel = (List<Map<String, Object>>) clienteInvestimento
+                    .getOrDefault("rendaVariavel", new ArrayList<>());
+            rendaVariavel.add(investimento);
+            clienteInvestimento.put("rendaVariavel", rendaVariavel);
+
+            salvarInvestimentos(investimentos);
+            System.out.println("Investimento de Renda Variável registrado com sucesso!");
+        } catch (IOException e) {
+            System.out.println("Erro ao registrar investimento: " + e.getMessage());
+        }
+    }
+
+    // Método auxiliar para carregar investimentos
+    private List<Map<String, Object>> carregarInvestimentos() throws IOException {
+        return jsonHandlerInvestimentos.loadMapsFromJson();
+    }
+
+    // Método auxiliar para salvar investimentos
+    private void salvarInvestimentos(List<Map<String, Object>> investimentos) throws IOException {
+        jsonHandlerInvestimentos.saveToJson(investimentos);
+    }
+
+    // Método auxiliar para encontrar ou criar um InvestimentoCliente
+    private Map<String, Object> encontrarOuCriarInvestimentoCliente(List<Map<String, Object>> investimentos,
+            String contaBancaria) {
+        for (Map<String, Object> investimentoCliente : investimentos) {
+            if (investimentoCliente.get("contaBancaria").equals(contaBancaria)) {
+                return investimentoCliente;
+            }
+        }
+        Map<String, Object> novoInvestimentoCliente = new HashMap<>();
+        novoInvestimentoCliente.put("contaBancaria", contaBancaria);
+        novoInvestimentoCliente.put("rendaFixa", new ArrayList<>());
+        novoInvestimentoCliente.put("rendaVariavel", new ArrayList<>());
+        investimentos.add(novoInvestimentoCliente);
+        return novoInvestimentoCliente;
     }
 }
