@@ -70,7 +70,7 @@ public class TelaSenhaExtratoInterface extends JFrame {
 
                 Cliente cliente = new Cliente(
                         "Darlan Silva",
-                        "43236859040", 
+                        "43236859040",
                         "123456",
                         "unico@email.com",
                         "cliente",

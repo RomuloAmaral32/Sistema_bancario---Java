@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import com.mycompany.sistema_bancario.Gerente;
 
 /**
  *
@@ -17,17 +18,28 @@ import java.awt.event.ActionListener;
  */
 /**
  *
- * @author  Ian Nakamura Okano Preste
+ * @author Ian Nakamura Okano Preste
  * @matricula 202335038
  */
 
 public class CadastroRendaFixa extends JFrame {
 
-    private JLabel labelTitulo, labelNomeOpcao, labelTaxaRendimento, labelPrazoMinimo, labelPrazoMaximo;
-    private JTextField campoNomeOpcao, campoTaxaRendimento, campoPrazoMinimo, campoPrazoMaximo;
-    private JButton botaoRegistrar, botaoSair;
+    private Gerente gerente; // Instância do Gerente
+    private JLabel labelTitulo; // Declaração do labelTitulo
+    private JLabel labelNomeOpcao;
+    private JTextField campoNomeOpcao;
+    private JLabel labelTaxaRendimento;
+    private JTextField campoTaxaRendimento;
+    private JLabel labelPrazoMinimo;
+    private JTextField campoPrazoMinimo;
+    private JLabel labelPrazoMaximo;
+    private JTextField campoPrazoMaximo;
+    private JButton botaoRegistrar;
+    private JButton botaoSair;
 
-    public CadastroRendaFixa() {
+    public CadastroRendaFixa(Gerente gerente) {
+        this.gerente = gerente; // Recebe o gerente como parâmetro
+
         // Configurações da janela
         setTitle("Cadastro de Opções de Renda Fixa");
         setSize(400, 300);
@@ -91,14 +103,20 @@ public class CadastroRendaFixa extends JFrame {
                     int maximo = Integer.parseInt(prazoMaximo);
 
                     if (minimo > 0 && maximo > 0 && taxa > 0 && !nomeOpcao.isEmpty()) {
-                        // Registro da opção no sistema (lógica a ser implementada)
-                        JOptionPane.showMessageDialog(null, "Opção de Renda Fixa " + nomeOpcao + " registrada com sucesso!");
+                        // Chama o método do Gerente para cadastrar a opção de Renda Fixa
+                        gerente.cadastrarRendaFixa(nomeOpcao, taxa, minimo, maximo);
+
+                        JOptionPane.showMessageDialog(null,
+                                "Opção de Renda Fixa " + nomeOpcao + " registrada com sucesso!");
                     } else {
-                        JOptionPane.showMessageDialog(null, "Preencha todos os campos corretamente!", "Erro", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Preencha todos os campos corretamente!", "Erro",
+                                JOptionPane.ERROR_MESSAGE);
                     }
                 } catch (NumberFormatException ex) {
                     // Caso os valores inseridos não sejam numéricos
-                    JOptionPane.showMessageDialog(null, "Taxa de rendimento, prazo mínimo e máximo devem ser valores numéricos válidos.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null,
+                            "Taxa de rendimento, prazo mínimo e máximo devem ser valores numéricos válidos.", "Erro",
+                            JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
@@ -117,8 +135,19 @@ public class CadastroRendaFixa extends JFrame {
     }
 
     public static void main(String[] args) {
+        // Cria um gerente fictício para testar
+        Gerente gerente = new Gerente(
+                "Joao Silva",
+                "43236859040",
+                "senha123",
+                "joao@email.com",
+                "gerente",
+                "12345678",
+                "123",
+                1000000.0);
+
         // Criando e exibindo a tela de CadastroRendaFixa
-        CadastroRendaFixa cadastroRendaFixa = new CadastroRendaFixa();
+        CadastroRendaFixa cadastroRendaFixa = new CadastroRendaFixa(gerente);
         cadastroRendaFixa.setVisible(true);
     }
 }

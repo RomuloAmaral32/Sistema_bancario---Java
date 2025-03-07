@@ -1,5 +1,6 @@
 package com.mycompany.sistema_bancario;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -20,7 +21,7 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 /**
  *
- * @author  Ian Nakamura Okano Preste
+ * @author Ian Nakamura Okano Preste
  * @matricula 202335038
  */
 
@@ -34,6 +35,9 @@ public class Gerente extends Usuario {
     private List<String> rendaFixa;
     private List<String> rendaVariavel;
 
+    private JsonHandler<String> jsonHandlerRendaFixa;
+    private JsonHandler<String> jsonHandlerRendaVariavel;
+
     public Gerente() {
         super();
     }
@@ -45,27 +49,27 @@ public class Gerente extends Usuario {
         this.scanner = new Scanner(System.in);
         this.rendaFixa = new ArrayList<>();
         this.rendaVariavel = new ArrayList<>();
+
+        this.jsonHandlerRendaFixa = new JsonHandler<>("src/file/java/com/mycompany/sistema_bancario/rendaFixa.json");
+        this.jsonHandlerRendaVariavel = new JsonHandler<>(
+                "src/file/java/com/mycompany/sistema_bancario/rendaVariavel.json");
     }
 
     public boolean verificarAcesso() {
         return nivelDeAcesso >= 1000000.0;
     }
 
-    public void cadastrarRendaFixa() {
-        System.out.print("Digite o nome do produto de Renda Fixa: ");
-        String nomeProduto = scanner.nextLine();
-        System.out.print("Digite a taxa de rendimento (%): ");
-        double taxaRendimento = scanner.nextDouble();
-        System.out.print("Digite o prazo mínimo para resgatar (meses): ");
-        int prazoMinimo = scanner.nextInt();
-        System.out.print("Digite o prazo máximo para o investimento (meses): ");
-        int prazoMaximo = scanner.nextInt();
-        scanner.nextLine();
-
+    public void cadastrarRendaFixa(String nomeProduto, double taxaRendimento, int prazoMinimo, int prazoMaximo) {
         String produtoRendaFixa = "Produto: " + nomeProduto + ", Taxa de Rendimento: " + taxaRendimento
                 + "%, Prazo Mínimo: " + prazoMinimo + " meses, Prazo Máximo: " + prazoMaximo + " meses";
-        rendaFixa.add(produtoRendaFixa);
-        System.out.println("Cadastro de Renda Fixa realizado com sucesso!");
+
+        try {
+            // Adiciona o produto ao arquivo JSON
+            jsonHandlerRendaFixa.addSingleData(produtoRendaFixa);
+            System.out.println("Cadastro de Renda Fixa realizado com sucesso!");
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar o produto de Renda Fixa: " + e.getMessage());
+        }
     }
 
     public void cadastrarRendaVariavel() {
@@ -79,29 +83,31 @@ public class Gerente extends Usuario {
 
         String produtoRendaVariavel = "Produto: " + nomeProduto + ", Risco: " + risco + "%, Rentabilidade Esperada: "
                 + rentabilidade + "%";
-        rendaVariavel.add(produtoRendaVariavel);
-        System.out.println("Cadastro de Renda Variável realizado com sucesso!");
-    }
 
-    public void exibirRendaFixa() {
-        if (!rendaFixa.isEmpty()) {
-            System.out.println("Produtos de Renda Fixa cadastrados:");
-            for (String produto : rendaFixa) {
-                System.out.println(produto);
-            }
-        } else {
-            System.out.println("Nenhum produto de Renda Fixa cadastrado.");
+        try {
+            // Adiciona o produto ao arquivo JSON
+            jsonHandlerRendaVariavel.addSingleData(produtoRendaVariavel);
+            System.out.println("Cadastro de Renda Variável realizado com sucesso!");
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar o produto de Renda Variável: " + e.getMessage());
         }
     }
 
-    public void exibirRendaVariavel() {
-        if (!rendaVariavel.isEmpty()) {
-            System.out.println("Produtos de Renda Variável cadastrados:");
-            for (String produto : rendaVariavel) {
-                System.out.println(produto);
-            }
-        } else {
-            System.out.println("Nenhum produto de Renda Variável cadastrado.");
+    public List<String> getRendaFixa() {
+        try {
+            return jsonHandlerRendaFixa.loadFromJson(String.class);
+        } catch (IOException e) {
+            System.out.println("Erro ao carregar produtos de Renda Fixa: " + e.getMessage());
+            return new ArrayList<>();
+        }
+    }
+
+    public List<String> getRendaVariavel() {
+        try {
+            return jsonHandlerRendaVariavel.loadFromJson(String.class);
+        } catch (IOException e) {
+            System.out.println("Erro ao carregar produtos de Renda Variável: " + e.getMessage());
+            return new ArrayList<>();
         }
     }
 
@@ -138,16 +144,6 @@ public class Gerente extends Usuario {
         } else {
             return false;
         }
-    }
-
-    @XmlElement
-    public List<String> getRendaFixa() {
-        return rendaFixa;
-    }
-
-    @XmlElement
-    public List<String> getRendaVariavel() {
-        return rendaVariavel;
     }
 
     public boolean analisarCredito(Cliente cliente, double valor) {
