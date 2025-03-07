@@ -72,15 +72,7 @@ public class Gerente extends Usuario {
         }
     }
 
-    public void cadastrarRendaVariavel() {
-        System.out.print("Digite o nome do produto de Renda Variável: ");
-        String nomeProduto = scanner.nextLine();
-        System.out.print("Digite o percentual de risco (%): ");
-        double risco = scanner.nextDouble();
-        System.out.print("Digite a rentabilidade esperada (%): ");
-        double rentabilidade = scanner.nextDouble();
-        scanner.nextLine();
-
+    public void cadastrarRendaVariavel(String nomeProduto, double risco, double rentabilidade) {
         String produtoRendaVariavel = "Produto: " + nomeProduto + ", Risco: " + risco + "%, Rentabilidade Esperada: "
                 + rentabilidade + "%";
 

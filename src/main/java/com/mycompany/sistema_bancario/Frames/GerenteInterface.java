@@ -167,20 +167,19 @@ public class GerenteInterface extends JFrame {
                 JOptionPane.showMessageDialog(null, "Operação de Transferência selecionada.");
             }
         });
-
+        Gerente gerente = new Gerente(
+                "Joao Silva",
+                "43236859040",
+                "senha123",
+                "joao@email.com",
+                "gerente",
+                "12345678",
+                "123",
+                1000000.0);
         botaoRendaFixa.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose(); // Fecha a janela atual
-                Gerente gerente = new Gerente(
-                        "Joao Silva",
-                        "43236859040",
-                        "senha123",
-                        "joao@email.com",
-                        "gerente",
-                        "12345678",
-                        "123",
-                        1000000.0);
                 CadastroRendaFixa rendafixa = new CadastroRendaFixa(gerente); // Volta para a tela de login
                 rendafixa.setVisible(true);
             }
@@ -190,7 +189,7 @@ public class GerenteInterface extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose(); // Fecha a janela atual
-                CadastroRendaVariavel rendavariavel = new CadastroRendaVariavel(); // Volta para a tela de login
+                CadastroRendaVariavel rendavariavel = new CadastroRendaVariavel(gerente); // Volta para a tela de login
                 rendavariavel.setVisible(true);
             }
         });
