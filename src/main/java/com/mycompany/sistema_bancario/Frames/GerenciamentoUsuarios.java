@@ -1,8 +1,15 @@
 package com.mycompany.sistema_bancario.Frames;
 import javax.swing.*;
+
+import com.mycompany.sistema_bancario.Caixa;
+import com.mycompany.sistema_bancario.Cliente;
+import com.mycompany.sistema_bancario.Gerente;
+import com.mycompany.sistema_bancario.JsonHandler;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class GerenciamentoUsuarios extends JFrame {
 
@@ -11,7 +18,8 @@ public class GerenciamentoUsuarios extends JFrame {
     private JButton deletarButton;
     private JButton sairButton;
     private JComboBox<String> tipoUsuarioComboBox;
-
+    @SuppressWarnings("rawtypes")
+    private JsonHandler jsonHandler = new JsonHandler("src/file/java/com/mycompany/sistema_bancario/usuarios.json");
     public GerenciamentoUsuarios() {
         // Configuração da janela
         setTitle("Gerenciamento de Usuários");
@@ -114,6 +122,7 @@ public class GerenciamentoUsuarios extends JFrame {
         }
     }
 
+    @SuppressWarnings("unchecked")
     private void deletarUsuario() {
         String cpf = cpfField.getText();
         String tipoUsuario = (String) tipoUsuarioComboBox.getSelectedItem();
@@ -121,24 +130,27 @@ public class GerenciamentoUsuarios extends JFrame {
         if (cpf.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor, insira o CPF.", "Erro", JOptionPane.ERROR_MESSAGE);
         } else {
-            // Lógica de exclusão de usuário com o CPF e tipo fornecidos
-            JOptionPane.showMessageDialog(this, "Deletando " + tipoUsuario + " com CPF: " + cpf);
-            GerenteInterface gerenteinterface = new GerenteInterface();
-            gerenteinterface.setVisible(true);
-            dispose();
+            try {
+                // Chamando o método do JsonHandler para remover o usuário
+                System.out.println("aloooooooooooo4343434343");
+                if (tipoUsuario.equals("Cliente")) {
+                    jsonHandler.removeDataByCpf(cpf, Cliente.class);
+                } else if (tipoUsuario.equals("Caixa")) {
+                    jsonHandler.removeDataByCpf(cpf, Caixa.class);
+                } else if (tipoUsuario.equals("Gerente")) {
+                    jsonHandler.removeDataByCpf(cpf, Gerente.class);
+                }
+                JOptionPane.showMessageDialog(this, tipoUsuario + " com CPF " + cpf + " removido com sucesso.");
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(this, "Erro ao remover o usuário: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            } catch (IllegalArgumentException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
-
-
+    
     public static void main(String[] args) {
-        // Inicializando a janela
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                GerenciamentoUsuarios frame = new GerenciamentoUsuarios();
-                frame.setVisible(true);
-            }
-        });
+        GerenciamentoUsuarios gerenciamentoUsuarios = new GerenciamentoUsuarios();
+        gerenciamentoUsuarios.setVisible(true);
     }
 }
-
