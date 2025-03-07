@@ -194,8 +194,9 @@ public class GerenteInterface extends JFrame {
         botaoGerenciamentoUsuarios.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Lógica de gerenciamento de usuários
-                JOptionPane.showMessageDialog(null, "Gerenciamento de Usuários selecionado.");
+                GerenciamentoUsuarios gerenciamento = new GerenciamentoUsuarios();
+                gerenciamento.setVisible(true);
+                dispose();
             }
         });
 

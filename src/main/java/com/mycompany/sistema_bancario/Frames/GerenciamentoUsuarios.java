@@ -1,0 +1,144 @@
+package com.mycompany.sistema_bancario.Frames;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class GerenciamentoUsuarios extends JFrame {
+
+    private JTextField cpfField;
+    private JButton editarButton;
+    private JButton deletarButton;
+    private JButton sairButton;
+    private JComboBox<String> tipoUsuarioComboBox;
+
+    public GerenciamentoUsuarios() {
+        // Configuração da janela
+        setTitle("Gerenciamento de Usuários");
+        setSize(400, 300); // Aumentei o tamanho da janela para acomodar a combobox
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+
+        // Criação dos componentes
+        JLabel cpfLabel = new JLabel("CPF:");
+        cpfField = new JTextField(20);
+        editarButton = new JButton("Editar");
+        deletarButton = new JButton("Deletar");
+        sairButton = new JButton("Sair");
+
+        // Criando a JComboBox para selecionar o tipo de usuário
+        JLabel tipoUsuarioLabel = new JLabel("Tipo de Usuário:");
+        String[] tiposDeUsuarios = { "Cliente", "Caixa", "Gerente" };
+        tipoUsuarioComboBox = new JComboBox<>(tiposDeUsuarios);
+
+        // Painel para organização dos componentes
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        // Adicionando o campo CPF
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        panel.add(cpfLabel, gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        panel.add(cpfField, gbc);
+
+        // Adicionando o tipo de usuário (combobox)
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        panel.add(tipoUsuarioLabel, gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        panel.add(tipoUsuarioComboBox, gbc);
+
+        // Adicionando os botões com o mesmo tamanho
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.gridwidth = 1;
+        gbc.weightx = 0.33;  // Faz o botão ocupar um terço do espaço disponível
+        panel.add(editarButton, gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        gbc.weightx = 0.33;  // Faz o botão ocupar um terço do espaço disponível
+        panel.add(deletarButton, gbc);
+
+        gbc.gridx = 2;
+        gbc.gridy = 2;
+        gbc.weightx = 0.33;  // Faz o botão ocupar um terço do espaço disponível
+        panel.add(sairButton, gbc);
+
+        // Ações dos botões
+        editarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                editarUsuario();
+            }
+        });
+
+        deletarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                deletarUsuario();
+            }
+        });
+
+        sairButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                GerenteInterface gerenteInterface = new GerenteInterface();
+                gerenteInterface.setVisible(true);
+                dispose();
+            }
+        });
+
+        // Adicionando o painel à janela
+        add(panel);
+    }
+
+    private void editarUsuario() {
+        String cpf = cpfField.getText();
+        String tipoUsuario = (String) tipoUsuarioComboBox.getSelectedItem();
+
+        if (cpf.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, insira o CPF.", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else {
+            EditarUsuario editusuario = new EditarUsuario();
+            editusuario.setVisible(true);
+            dispose();
+        }
+    }
+
+    private void deletarUsuario() {
+        String cpf = cpfField.getText();
+        String tipoUsuario = (String) tipoUsuarioComboBox.getSelectedItem();
+
+        if (cpf.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, insira o CPF.", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else {
+            // Lógica de exclusão de usuário com o CPF e tipo fornecidos
+            JOptionPane.showMessageDialog(this, "Deletando " + tipoUsuario + " com CPF: " + cpf);
+            GerenteInterface gerenteinterface = new GerenteInterface();
+            gerenteinterface.setVisible(true);
+            dispose();
+        }
+    }
+
+
+    public static void main(String[] args) {
+        // Inicializando a janela
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                GerenciamentoUsuarios frame = new GerenciamentoUsuarios();
+                frame.setVisible(true);
+            }
+        });
+    }
+}
+
