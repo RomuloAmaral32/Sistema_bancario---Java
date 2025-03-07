@@ -17,7 +17,7 @@ import java.awt.event.ActionListener;
  */
 /**
  *
- * @author  Ian Nakamura Okano Preste
+ * @author Ian Nakamura Okano Preste
  * @matricula 202335038
  */
 
@@ -92,13 +92,17 @@ public class CadastroRendaFixa extends JFrame {
 
                     if (minimo > 0 && maximo > 0 && taxa > 0 && !nomeOpcao.isEmpty()) {
                         // Registro da opção no sistema (lógica a ser implementada)
-                        JOptionPane.showMessageDialog(null, "Opção de Renda Fixa " + nomeOpcao + " registrada com sucesso!");
+                        JOptionPane.showMessageDialog(null,
+                                "Opção de Renda Fixa " + nomeOpcao + " registrada com sucesso!");
                     } else {
-                        JOptionPane.showMessageDialog(null, "Preencha todos os campos corretamente!", "Erro", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Preencha todos os campos corretamente!", "Erro",
+                                JOptionPane.ERROR_MESSAGE);
                     }
                 } catch (NumberFormatException ex) {
                     // Caso os valores inseridos não sejam numéricos
-                    JOptionPane.showMessageDialog(null, "Taxa de rendimento, prazo mínimo e máximo devem ser valores numéricos válidos.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null,
+                            "Taxa de rendimento, prazo mínimo e máximo devem ser valores numéricos válidos.", "Erro",
+                            JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
