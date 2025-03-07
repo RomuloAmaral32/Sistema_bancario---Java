@@ -59,17 +59,7 @@ public class Gerente extends Usuario {
         return nivelDeAcesso >= 1000000.0;
     }
 
-    public void cadastrarRendaFixa() {
-        System.out.print("Digite o nome do produto de Renda Fixa: ");
-        String nomeProduto = scanner.nextLine();
-        System.out.print("Digite a taxa de rendimento (%): ");
-        double taxaRendimento = scanner.nextDouble();
-        System.out.print("Digite o prazo mínimo para resgatar (meses): ");
-        int prazoMinimo = scanner.nextInt();
-        System.out.print("Digite o prazo máximo para o investimento (meses): ");
-        int prazoMaximo = scanner.nextInt();
-        scanner.nextLine();
-
+    public void cadastrarRendaFixa(String nomeProduto, double taxaRendimento, int prazoMinimo, int prazoMaximo) {
         String produtoRendaFixa = "Produto: " + nomeProduto + ", Taxa de Rendimento: " + taxaRendimento
                 + "%, Prazo Mínimo: " + prazoMinimo + " meses, Prazo Máximo: " + prazoMaximo + " meses";
 

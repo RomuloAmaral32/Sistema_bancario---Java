@@ -1,6 +1,9 @@
 package com.mycompany.sistema_bancario.Frames;
 
 import javax.swing.*;
+
+import com.mycompany.sistema_bancario.Gerente;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,14 +20,14 @@ import java.awt.event.ActionListener;
  */
 /**
  *
- * @author  Ian Nakamura Okano Preste
+ * @author Ian Nakamura Okano Preste
  * @matricula 202335038
  */
 
 public class GerenteInterface extends JFrame {
 
-    private JButton botaoSaque, botaoDeposito, botaoTransferencia, botaoRendaFixa, botaoRendaVariavel, 
-                    botaoAvaliacaoCredito, botaoGerenciamentoUsuarios, botaoSair;
+    private JButton botaoSaque, botaoDeposito, botaoTransferencia, botaoRendaFixa, botaoRendaVariavel,
+            botaoAvaliacaoCredito, botaoGerenciamentoUsuarios, botaoSair;
     private JLabel titulo;
 
     public GerenteInterface() {
@@ -168,8 +171,17 @@ public class GerenteInterface extends JFrame {
         botaoRendaFixa.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               dispose(); // Fecha a janela atual
-                CadastroRendaFixa rendafixa = new CadastroRendaFixa(); // Volta para a tela de login
+                dispose(); // Fecha a janela atual
+                Gerente gerente = new Gerente(
+                        "Joao Silva",
+                        "43236859040",
+                        "senha123",
+                        "joao@email.com",
+                        "gerente",
+                        "12345678",
+                        "123",
+                        1000000.0);
+                CadastroRendaFixa rendafixa = new CadastroRendaFixa(gerente); // Volta para a tela de login
                 rendafixa.setVisible(true);
             }
         });
