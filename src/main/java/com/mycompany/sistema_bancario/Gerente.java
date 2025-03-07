@@ -172,4 +172,8 @@ public class Gerente extends Usuario {
         return aprovado;
     }
 
+    public double getnivelDeAcesso() {
+        return nivelDeAcesso;
+    }
+
 }

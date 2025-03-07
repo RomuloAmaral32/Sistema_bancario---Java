@@ -142,19 +142,5 @@ public class CaixaInterface extends JFrame {
         });
     }
 
-    public static void main(String[] args) {
-        UsuarioService usuarioService = new UsuarioService("src/file/java/com/mycompany/sistema_bancario/usuarios.json");
-        Caixa caixa = new Caixa(
-            "Caixa",
-            "11357820674",
-            "senhaCaixa",
-            "caixa@email.com",
-            "caixa",
-            "36000000",
-            "123",
-            "001",
-            usuarioService);
-        CaixaInterface caixaInterface = new CaixaInterface(caixa);
-        caixaInterface.setVisible(true);
-    }
+
 }

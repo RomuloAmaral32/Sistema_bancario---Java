@@ -35,7 +35,7 @@ public class TransferenciaInterface extends JFrame {
     private JButton botaoConfirmar, botaoCancelar;
     private JLabel mensagemStatus;
 
-    public TransferenciaInterface() {
+    public TransferenciaInterface(Cliente cliente) {
         UsuarioService usuarioService = new UsuarioService("src/file/java/com/mycompany/sistema_bancario/usuarios.json");
 
         // Configurações da janela
@@ -91,16 +91,7 @@ public class TransferenciaInterface extends JFrame {
         botaoConfirmar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Cliente cliente = new Cliente(
-                        "Darlan Silva",
-                        "43236859040",
-                        "123456",
-                        "unico@email.com",
-                        "cliente",
-                        "36000000",
-                        "456",
-                        "0001",
-                        500.0);
+    
 
                 String contaDestino = campoContaDestino.getText();
                 String senha = new String(campoSenha.getPassword());
@@ -151,14 +142,10 @@ public class TransferenciaInterface extends JFrame {
                 campoSenha.setText("");
                 mensagemStatus.setText("");
                 dispose(); // Fecha a janela atual
-                ClienteInterface telacliente = new ClienteInterface();
+                ClienteInterface telacliente = new ClienteInterface(cliente);
                 telacliente.setVisible(true);
             }
         });
     }
 
-    public static void main(String[] args) {
-        TransferenciaInterface transferenciaInterface = new TransferenciaInterface();
-        transferenciaInterface.setVisible(true);
-    }
 }

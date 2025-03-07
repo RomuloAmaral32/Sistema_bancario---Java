@@ -37,14 +37,16 @@ public class Cliente extends Usuario {
     private Scanner scanner;
     private UsuarioService usuarioService;
 
+    private static int contador = 0;
     public Cliente() {
         super();
     }
 
     public Cliente(String nome, String cpf, String senha, String email, String tipo, String cep, String numero,
-            String contaBancaria, double saldoInicial) {
+         double saldoInicial) {
         super(nome, cpf, senha, email, tipo, cep, numero);
-        this.contaBancaria = contaBancaria;
+        contador++;
+        this.contaBancaria = String.valueOf(contador);
         this.saldo = saldoInicial;
         this.extrato = new ArrayList<>();
         this.scanner = new Scanner(System.in);
@@ -328,5 +330,7 @@ public class Cliente extends Usuario {
     public UsuarioService getUsuarioService() {
         return usuarioService;
     }
+
+
 
 }

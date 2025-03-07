@@ -1,6 +1,9 @@
 package com.mycompany.sistema_bancario.Frames;
 
 import javax.swing.*;
+
+import com.mycompany.sistema_bancario.Cliente;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,7 +33,7 @@ public class RendaFixa extends JFrame {
     private JComboBox<String> comboBoxInvestimentos;
     private final String senhaCorreta = "1234";  // Senha fictícia para validação
 
-    public RendaFixa() {
+    public RendaFixa(Cliente cliente) {
         // Configurações da janela
         setTitle("Investimentos em Renda Fixa");
         setSize(400, 300);
@@ -99,15 +102,9 @@ public class RendaFixa extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // Fecha a janela de Renda Fixa
                 dispose();
-                ClienteInterface clienteInterface = new ClienteInterface();
+                ClienteInterface clienteInterface = new ClienteInterface(cliente);
                 clienteInterface.setVisible(true);
             }
         });
-    }
-
-    public static void main(String[] args) {
-        // Criando e exibindo a tela de Renda Fixa
-        RendaFixa rendaFixa = new RendaFixa();
-        rendaFixa.setVisible(true);
     }
 }

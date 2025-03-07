@@ -1,6 +1,9 @@
 package com.mycompany.sistema_bancario.Frames;
 
 import javax.swing.*;
+
+import com.mycompany.sistema_bancario.Gerente;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,7 +30,7 @@ public class CadastroRendaVariavel extends JFrame {
     private JTextField campoNomeOpcao, campoPercentualRisco, campoRentabilidadeEsperada;
     private JButton botaoRegistrar, botaoSair;
 
-    public CadastroRendaVariavel() {
+    public CadastroRendaVariavel(Gerente gerente) {
         // Configurações da janela
         setTitle("Cadastro de Opções de Renda Variável");
         setSize(400, 300);
@@ -103,15 +106,10 @@ public class CadastroRendaVariavel extends JFrame {
                 // Fecha a janela de CadastroRendaVariavel
                 dispose();
                 // Volta para a interface principal ou anterior (a ser definido)
-                GerenteInterface gerenteInterface = new GerenteInterface();
+                GerenteInterface gerenteInterface = new GerenteInterface(gerente);
                 gerenteInterface.setVisible(true);
             }
         });
     }
 
-    public static void main(String[] args) {
-        // Criando e exibindo a tela de CadastroRendaVariavel
-        CadastroRendaVariavel cadastroRendaVariavel = new CadastroRendaVariavel();
-        cadastroRendaVariavel.setVisible(true);
-    }
 }

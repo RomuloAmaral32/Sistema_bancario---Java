@@ -38,11 +38,11 @@ public class ClienteTest {
     @BeforeEach
     void setUp() {
         cliente = new Cliente("Ian Nakamura", "16380276688", "senha123", "ian@email.com", "comum", "36000000", "22",
-                "1234-5", 1000.0);
+                 1000.0);
         cliente2 = new Cliente("Rômulo do Amaral", "16380276688", "senha123", "rômulo@email.com", "comum", "36000000",
-                "22", "1234-5", 1000.0);
+                "22",  1000.0);
         cliente3 = new Cliente("Ian Nakamura", "16380276688", "senha123", "ian@email.com", "comum", "36000000", "22",
-                "1234-5", 1500000.0);
+                 1500000.0);
         gerente = new Gerente("Carlos Silva", "16380276688", "senha123", "carlos@email.com", "Gerente", "36000000",
                 "22", 1000000.0);
         outputStream = new ByteArrayOutputStream();

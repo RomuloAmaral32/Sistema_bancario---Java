@@ -88,9 +88,9 @@ public class GerenteTest {
     @Test
     void testAcompanharTransacaoAutomatizado() {
         Cliente cliente = new Cliente("João", "16380276688", "senha456", "joao@email.com", "Cliente", "36000000", "22",
-                "1234-5", 5000.0);
+                 5000.0);
         Cliente destinatario = new Cliente("Maria", "10006426662", "senha789", "maria@email.com", "Cliente", "36000000",
-                "22", "6789-0", 3000.0);
+                "22", 3000.0);
 
         boolean autorizado = gerente.acompanharTransacao(true, cliente, destinatario, 2000.0);
         assertTrue(autorizado);
@@ -99,7 +99,7 @@ public class GerenteTest {
     @Test
     void testAnalisarCreditoAutomatizadoAprovado() {
         Cliente cliente = new Cliente("Joao", "16380276688", "senha456", "joao@email.com", "Cliente", "36000000", "22",
-                "1234-5", 5000.0);
+                5000.0);
         boolean aprovado = gerente.analisarCreditoAutomatizado(cliente, 1000000.0, true);
         assertTrue(aprovado, "O crédito deveria ser aprovado automaticamente.");
     }
@@ -107,7 +107,7 @@ public class GerenteTest {
     @Test
     void testAnalisarCreditoAutomatizadoRejeitado() {
         Cliente cliente = new Cliente("Joao", "16380276688", "senha456", "joao@email.com", "Cliente", "36000000", "22",
-                "1234-5", 5000.0);
+                 5000.0);
         boolean aprovado = gerente.analisarCreditoAutomatizado(cliente, 1000000.0, false);
         assertFalse(aprovado, "O crédito deveria ser rejeitado automaticamente.");
     }

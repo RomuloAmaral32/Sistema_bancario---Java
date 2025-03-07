@@ -30,7 +30,7 @@ public class GerenteInterface extends JFrame {
             botaoAvaliacaoCredito, botaoGerenciamentoUsuarios, botaoSair;
     private JLabel titulo;
 
-    public GerenteInterface() {
+    public GerenteInterface(Gerente gerente) {
         // Configurações da janela
         setTitle("Área do Gerente");
         setSize(500, 400);
@@ -172,15 +172,7 @@ public class GerenteInterface extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose(); // Fecha a janela atual
-                Gerente gerente = new Gerente(
-                        "Joao Silva",
-                        "43236859040",
-                        "senha123",
-                        "joao@email.com",
-                        "gerente",
-                        "12345678",
-                        "123",
-                        1000000.0);
+        
                 CadastroRendaFixa rendafixa = new CadastroRendaFixa(gerente); // Volta para a tela de login
                 rendafixa.setVisible(true);
             }
@@ -190,7 +182,7 @@ public class GerenteInterface extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose(); // Fecha a janela atual
-                CadastroRendaVariavel rendavariavel = new CadastroRendaVariavel(); // Volta para a tela de login
+                CadastroRendaVariavel rendavariavel = new CadastroRendaVariavel(gerente); // Volta para a tela de login
                 rendavariavel.setVisible(true);
             }
         });
@@ -206,7 +198,7 @@ public class GerenteInterface extends JFrame {
         botaoGerenciamentoUsuarios.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                GerenciamentoUsuarios gerenciamento = new GerenciamentoUsuarios();
+                GerenciamentoUsuarios gerenciamento = new GerenciamentoUsuarios(gerente);
                 gerenciamento.setVisible(true);
                 dispose();
             }
@@ -221,10 +213,5 @@ public class GerenteInterface extends JFrame {
                 telaLogin.setVisible(true);
             }
         });
-    }
-
-    public static void main(String[] args) {
-        GerenteInterface gerenteInterface = new GerenteInterface();
-        gerenteInterface.setVisible(true);
     }
 }

@@ -30,7 +30,7 @@ public class TelaSenhaExtratoInterface extends JFrame {
     private JButton botaoConfirmar, botaoCancelar;
     private JLabel mensagemStatus;
 
-    public TelaSenhaExtratoInterface() {
+    public TelaSenhaExtratoInterface(Cliente cliente) {
         // Configurações da janela
         setTitle("Validação de Senha");
         setSize(300, 200);
@@ -68,22 +68,12 @@ public class TelaSenhaExtratoInterface extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String senha = new String(campoSenha.getPassword());
 
-                Cliente cliente = new Cliente(
-                        "Darlan Silva",
-                        "43236859040",
-                        "123456",
-                        "unico@email.com",
-                        "cliente",
-                        "36000000",
-                        "456",
-                        "0001",
-                        500.0);
 
                 // Verificando se a senha está correta
                 if (senha.equals(cliente.getSenha())) { // Senha correta para validar
                     mensagemStatus.setText("Senha correta! Ação realizada.");
                     mensagemStatus.setForeground(Color.GREEN);
-                    Extrato extrato = new Extrato(); // Volta para a tela de login
+                    Extrato extrato = new Extrato(cliente); // Volta para a tela de login
                     extrato.setVisible(true);
                     dispose(); // Fecha a janela atual
                     ;
@@ -107,10 +97,5 @@ public class TelaSenhaExtratoInterface extends JFrame {
                 dispose();
             }
         });
-    }
-
-    public static void main(String[] args) {
-        TelaSenhaExtratoInterface tela = new TelaSenhaExtratoInterface();
-        tela.setVisible(true);
     }
 }

@@ -75,16 +75,6 @@ public class Deposito extends JFrame {
 
                 try {
                     // Cria uma instância do Caixa
-                    Caixa caixa = new Caixa(
-                            "Caixa",
-                            "11357820674",
-                            "senhaCaixa",
-                            "caixa@email.com",
-                            "caixa",
-                            "36000000",
-                            "123",
-                            "001",
-                            usuarioService);
 
                     // Processa o depósito usando o Caixa
                     boolean depositoRealizado = caixa.deposito(valorDeposito, numeroConta);
@@ -127,20 +117,4 @@ public class Deposito extends JFrame {
         });
     }
 
-    /*public static void main(String[] args) {
-        // Criando e exibindo a tela de Depósito
-        UsuarioService usuarioService = new UsuarioService("src/file/java/com/mycompany/sistema_bancario/usuarios.json");
-        Caixa caixa = new Caixa(
-            "Caixa",
-            "11357820674",
-            "senhaCaixa",
-            "caixa@email.com",
-            "caixa",
-            "36000000",
-            "123",
-            "001",
-            usuarioService);
-        Deposito deposito = new Deposito(caixa);
-        deposito.setVisible(true);
-    }*/
 }

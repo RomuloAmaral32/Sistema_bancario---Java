@@ -1,6 +1,9 @@
 package com.mycompany.sistema_bancario.Frames;
 
 import javax.swing.*;
+
+import com.mycompany.sistema_bancario.Cliente;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,7 +29,7 @@ public class ClienteInterface extends JFrame {
     private JButton botaoTransferencia, botaoSaldo, botaoExtrato, botaoInvestimentoRF, botaoInvestimentoRV, botaoCredito, botaoSair;
     private JLabel titulo;
 
-    public ClienteInterface() {
+    public ClienteInterface(Cliente cliente) {
         setTitle("Área do Cliente");
         setSize(400, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -61,7 +64,7 @@ public class ClienteInterface extends JFrame {
         botaoTransferencia.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                TransferenciaInterface telatransferencia = new TransferenciaInterface(); 
+                TransferenciaInterface telatransferencia = new TransferenciaInterface(cliente); 
                 telatransferencia.setVisible(true);
             }
         });
@@ -69,7 +72,7 @@ public class ClienteInterface extends JFrame {
         botaoSaldo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                TelaSenhaSaldoInterface saldo = new TelaSenhaSaldoInterface(); // Volta para a tela de login
+                TelaSenhaSaldoInterface saldo = new TelaSenhaSaldoInterface(cliente); // Volta para a tela de login
                 saldo.setVisible(true);
             }
         });
@@ -77,7 +80,7 @@ public class ClienteInterface extends JFrame {
         botaoExtrato.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               TelaSenhaExtratoInterface extrato = new TelaSenhaExtratoInterface(); // Volta para a tela de login
+               TelaSenhaExtratoInterface extrato = new TelaSenhaExtratoInterface(cliente); // Volta para a tela de login
                 extrato.setVisible(true);
             }
         });
@@ -86,7 +89,7 @@ public class ClienteInterface extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose(); // Fecha a janela atual
-                RendaFixa rendafixa = new RendaFixa(); // Volta para a tela de login
+                RendaFixa rendafixa = new RendaFixa(cliente); // Volta para a tela de login
                 rendafixa.setVisible(true);
             }
         });
@@ -95,7 +98,7 @@ public class ClienteInterface extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose(); // Fecha a janela atual
-                RendaVariavel rendavariavel = new RendaVariavel(); // Volta para a tela de login
+                RendaVariavel rendavariavel = new RendaVariavel(cliente); // Volta para a tela de login
                 rendavariavel.setVisible(true);
             }
         });
@@ -104,7 +107,7 @@ public class ClienteInterface extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose(); // Fecha a janela atual
-                SolicitarCredito credito = new SolicitarCredito(); // Volta para a tela de login
+                SolicitarCredito credito = new SolicitarCredito(cliente); // Volta para a tela de login
                 credito.setVisible(true);
             }
         });
@@ -120,8 +123,4 @@ public class ClienteInterface extends JFrame {
         });
     }
 
-    public static void main(String[] args) {
-        ClienteInterface clienteInterface = new ClienteInterface();
-        clienteInterface.setVisible(true);
-    }
 }

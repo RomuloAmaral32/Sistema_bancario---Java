@@ -127,13 +127,13 @@ public class Cadastro extends JFrame {
                             // }
             
                             // Criar o novo usuário do tipo Cliente com conta bancária e saldo
-                            Cliente novoCliente = new Cliente(nome, cpf, senha, email, perfil.toLowerCase(), cep, numero, novoIdConta, 0.0);
+                            Cliente novoCliente = new Cliente(nome, cpf, senha, email, perfil.toLowerCase(), cep, numero, 0.0);
                             usuarioService.adicionarUsuario(novoCliente);
                             JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!");
                             dispose(); // Fecha a tela de cadastro
         
                             // Abrir a interface de cliente
-                            ClienteInterface telacliente = new ClienteInterface();
+                            ClienteInterface telacliente = new ClienteInterface(novoCliente);
                             telacliente.setVisible(true);
                         } else if (perfil.equals("Caixa")) {
                     String numeroFuncionario = "12345"; // Valor estático
@@ -159,7 +159,7 @@ public class Cadastro extends JFrame {
                     dispose(); // Fecha a tela de cadastro
 
                     // Abrir a interface de gerente
-                    GerenteInterface telagerente = new GerenteInterface();
+                    GerenteInterface telagerente = new GerenteInterface(novoGerente);
                     telagerente.setVisible(true);
                 } 
                 // Caso o perfil não seja nenhum dos três, exibe mensagem de erro
@@ -190,9 +190,4 @@ public class Cadastro extends JFrame {
         });
     }
 
-    public static void main(String[] args) {
-        // Criando e exibindo a tela de Cadastro
-        Cadastro cadastro = new Cadastro();
-        cadastro.setVisible(true);
-    }
 }

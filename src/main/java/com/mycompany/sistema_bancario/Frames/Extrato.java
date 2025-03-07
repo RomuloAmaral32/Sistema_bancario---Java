@@ -32,7 +32,7 @@ public class Extrato extends JFrame {
     private JTextArea areaExtrato;
     private JScrollPane scrollExtrato;
 
-    public Extrato() {
+    public Extrato(Cliente cliente) {
         // Configurações da janela
         setTitle("Seu Extrato");
         setSize(400, 400);
@@ -49,7 +49,7 @@ public class Extrato extends JFrame {
         areaExtrato.setFont(new Font("Arial", Font.PLAIN, 14));
 
         // Adicionando o histórico de transações
-        List<String> transacoes = obterHistoricoTransacoes();
+        List<String> transacoes = obterHistoricoTransacoes(cliente);
         for (String transacao : transacoes) {
             areaExtrato.append(transacao + "\n");
         }
@@ -77,32 +77,16 @@ public class Extrato extends JFrame {
         botaoSair.addActionListener(e -> {
             // Fecha a janela de extrato
             dispose(); // Fecha a janela atual
-            ClienteInterface cliente = new ClienteInterface(); // Volta para a tela de login
-            cliente.setVisible(true);
+            ClienteInterface clientea = new ClienteInterface(cliente); // Volta para a tela de login
+            clientea.setVisible(true);
         });
     }
 
-    private List<String> obterHistoricoTransacoes() {
+    private List<String> obterHistoricoTransacoes(Cliente cliente) {
 
-        Cliente cliente = new Cliente(
-                "Darlan Silva",
-                "43236859040",
-                "123456",
-                "unico@email.com",
-                "cliente",
-                "36000000",
-                "456",
-                "0001",
-                500.0);
 
         List<String> historicoTransacoes = ExtratoService.exibirExtrato(cliente.getContaBancaria());
 
         return historicoTransacoes;
-    }
-
-    public static void main(String[] args) {
-        // Criando e exibindo a tela de extrato
-        Extrato extrato = new Extrato();
-        extrato.setVisible(true);
     }
 }

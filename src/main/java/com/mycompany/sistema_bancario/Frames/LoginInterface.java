@@ -1,6 +1,8 @@
 package com.mycompany.sistema_bancario.Frames;
 
 import com.mycompany.sistema_bancario.Caixa;
+import com.mycompany.sistema_bancario.Cliente;
+import com.mycompany.sistema_bancario.Gerente;
 import com.mycompany.sistema_bancario.LoginService;
 import com.mycompany.sistema_bancario.Usuario;
 import com.mycompany.sistema_bancario.UsuarioService;
@@ -33,7 +35,46 @@ public class LoginInterface extends JFrame {
     private JPasswordField campoSenha;
     private JButton botaoLogin, botaoCancelar;
     private LoginService loginService; // Instância de LoginService para verificar login
+    private Gerente gerente;
+    private Caixa caixa;
+    private Cliente cliente;
 
+    private void converte(Usuario usuario){
+        if(usuario.getTipo().equals("gerente")){   
+            gerente = new Gerente(
+                usuario.getNome(),
+                usuario.getCpf(),
+                usuario.getSenha(),
+                usuario.getEmail(),
+                usuario.getTipo(),
+                usuario.getCep(),
+                usuario.getNumero(),
+                1000000);
+        } else if(usuario.getTipo().equals("caixa")){       // String numero,
+            UsuarioService usuarioService = new UsuarioService("src/file/java/com/mycompany/sistema_bancario/usuarios.json");
+            Caixa caixa = new Caixa(
+                usuario.getNome(),
+                usuario.getCpf(),
+                usuario.getSenha(),
+                usuario.getEmail(),
+                usuario.getTipo(),
+                usuario.getCep(),
+                usuario.getNumero(),
+                "1",
+                usuarioService);
+        } else if(usuario.getTipo().equals("cliente")){   // String cep, String numero,
+            cliente = new Cliente(
+                usuario.getNome(),
+                usuario.getCpf(),
+                usuario.getSenha(),
+                usuario.getEmail(),
+                usuario.getTipo(),
+                usuario.getCep(),
+                usuario.getNumero(),
+                0.0
+                );
+        }
+    }
     public LoginInterface() {
         // Inicializa o LoginService com o caminho do arquivo JSON
         loginService = new LoginService("src/file/java/com/mycompany/sistema_bancario/usuarios.json");
@@ -77,28 +118,29 @@ public class LoginInterface extends JFrame {
                     // Aqui você pode redirecionar para a tela correspondente ao usuário logado
                     // Por exemplo: abrirTelaCliente() se for Cliente, abrirTelaCaixa() se for Caixa, etc.
                     UsuarioService usuarioService = new UsuarioService("src/file/java/com/mycompany/sistema_bancario/usuarios.json");
-        Caixa caixa = new Caixa(
-            "Caixa",
-            "11357820674",
-            "senhaCaixa",
-            "caixa@email.com",
-            "caixa",
-            "36000000",
-            "123",
-            "001",
-            usuarioService);
+    
 
                     if( usuario.getTipo().equals("cliente") ){
                         dispose(); 
-                        ClienteInterface telacliente = new ClienteInterface();
+                        ClienteInterface telacliente = new ClienteInterface(cliente);
                         telacliente.setVisible(true);
                     } else if( usuario.getTipo().equals("caixa") ){
+                        Caixa caixa = new Caixa(
+                        "Caixa",
+                        "11357820674",
+                        "senhaCaixa",
+                        "caixa@email.com",
+                        "caixa",
+                        "36000000",
+                        "123",
+                        "001",
+                        usuarioService);
                         dispose(); 
                         CaixaInterface telacaixa = new CaixaInterface(caixa);
                         telacaixa.setVisible(true);
                     } else if( usuario.getTipo().equals("gerente") ){
                         dispose(); 
-                        GerenteInterface telagerente = new GerenteInterface();
+                        GerenteInterface telagerente = new GerenteInterface(gerente);
                         telagerente.setVisible(true);
                     } 
 
@@ -119,10 +161,5 @@ public class LoginInterface extends JFrame {
                 cadastrar.setVisible(true);
             }
         });
-    }
-
-    public static void main(String[] args) {
-        LoginInterface telaLogin = new LoginInterface();
-        telaLogin.setVisible(true);
     }
 }

@@ -20,7 +20,7 @@ public class GerenciamentoUsuarios extends JFrame {
     private JComboBox<String> tipoUsuarioComboBox;
     @SuppressWarnings("rawtypes")
     private JsonHandler jsonHandler = new JsonHandler("src/file/java/com/mycompany/sistema_bancario/usuarios.json");
-    public GerenciamentoUsuarios() {
+    public GerenciamentoUsuarios(Gerente gerente) {
         // Configuração da janela
         setTitle("Gerenciamento de Usuários");
         setSize(400, 300); // Aumentei o tamanho da janela para acomodar a combobox
@@ -85,7 +85,7 @@ public class GerenciamentoUsuarios extends JFrame {
         editarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                editarUsuario();
+                editarUsuario(gerente);
             }
         });
 
@@ -99,7 +99,7 @@ public class GerenciamentoUsuarios extends JFrame {
         sairButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                GerenteInterface gerenteInterface = new GerenteInterface();
+                GerenteInterface gerenteInterface = new GerenteInterface(gerente);
                 gerenteInterface.setVisible(true);
                 dispose();
             }
@@ -109,14 +109,14 @@ public class GerenciamentoUsuarios extends JFrame {
         add(panel);
     }
 
-    private void editarUsuario() {
+    private void editarUsuario(Gerente gerente) {
         String cpf = cpfField.getText();
         String tipoUsuario = (String) tipoUsuarioComboBox.getSelectedItem();
 
         if (cpf.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor, insira o CPF.", "Erro", JOptionPane.ERROR_MESSAGE);
         } else {
-            EditarUsuario editusuario = new EditarUsuario();
+            EditarUsuario editusuario = new EditarUsuario(gerente);
             editusuario.setVisible(true);
             dispose();
         }
@@ -149,8 +149,4 @@ public class GerenciamentoUsuarios extends JFrame {
         }
     }
     
-    public static void main(String[] args) {
-        GerenciamentoUsuarios gerenciamentoUsuarios = new GerenciamentoUsuarios();
-        gerenciamentoUsuarios.setVisible(true);
-    }
 }

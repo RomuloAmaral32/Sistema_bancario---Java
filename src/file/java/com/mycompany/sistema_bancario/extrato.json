@@ -302,4 +302,20 @@
     "saldoAtual" : 500.0,
     "tipoDeMovimentacao" : "Saque"
   }
+}, {
+  "0001" : {
+    "data" : "2025-03-06",
+    "saldoAnterior" : 500.0,
+    "valor" : -100.0,
+    "saldoAtual" : 500.0,
+    "tipoDeMovimentacao" : "Transferência"
+  }
+}, {
+  "0001" : {
+    "data" : "2025-03-06",
+    "saldoAnterior" : 500.0,
+    "valor" : 100.0,
+    "saldoAtual" : 500.0,
+    "tipoDeMovimentacao" : "Transferência"
+  }
 } ]

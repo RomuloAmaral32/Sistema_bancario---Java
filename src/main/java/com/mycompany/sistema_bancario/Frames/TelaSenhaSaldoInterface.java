@@ -30,18 +30,9 @@ public class TelaSenhaSaldoInterface extends JFrame {
     private JButton botaoConfirmar, botaoCancelar;
     private JLabel mensagemStatus;
 
-    public TelaSenhaSaldoInterface() {
+    public TelaSenhaSaldoInterface(Cliente cliente) {
 
-        Cliente cliente = new Cliente(
-                "Darlan Silva",
-                "43236859040",
-                "123456",
-                "unico@email.com",
-                "cliente",
-                "36000000",
-                "456",
-                "0001",
-                500.0);
+    
 
         // Configurações da janela
         setTitle("Validação de Senha");
@@ -86,7 +77,7 @@ public class TelaSenhaSaldoInterface extends JFrame {
                     mensagemStatus.setForeground(Color.GREEN);
                     // Ação quando a senha está correta (exemplo)
                     dispose(); // Fecha a janela atual
-                    Saldo saldo = new Saldo(); // Volta para a tela de login
+                    Saldo saldo = new Saldo(cliente); // Volta para a tela de login
                     saldo.setVisible(true);
                 } else {
                     mensagemStatus.setText("Senha incorreta!");
@@ -110,8 +101,4 @@ public class TelaSenhaSaldoInterface extends JFrame {
         });
     }
 
-    public static void main(String[] args) {
-        TelaSenhaSaldoInterface tela = new TelaSenhaSaldoInterface();
-        tela.setVisible(true);
-    }
 }

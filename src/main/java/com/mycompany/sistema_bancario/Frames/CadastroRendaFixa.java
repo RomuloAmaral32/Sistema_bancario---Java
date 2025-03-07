@@ -128,26 +128,10 @@ public class CadastroRendaFixa extends JFrame {
                 // Fecha a janela de CadastroRendaFixa
                 dispose();
                 // Volta para a interface principal ou anterior (a ser definido)
-                GerenteInterface gerenteInterface = new GerenteInterface();
+                GerenteInterface gerenteInterface = new GerenteInterface(gerente);
                 gerenteInterface.setVisible(true);
             }
         });
     }
 
-    public static void main(String[] args) {
-        // Cria um gerente fictício para testar
-        Gerente gerente = new Gerente(
-                "Joao Silva",
-                "43236859040",
-                "senha123",
-                "joao@email.com",
-                "gerente",
-                "12345678",
-                "123",
-                1000000.0);
-
-        // Criando e exibindo a tela de CadastroRendaFixa
-        CadastroRendaFixa cadastroRendaFixa = new CadastroRendaFixa(gerente);
-        cadastroRendaFixa.setVisible(true);
-    }
 }

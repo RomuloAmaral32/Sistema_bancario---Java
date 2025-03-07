@@ -27,19 +27,9 @@ public class Saldo extends JFrame {
     private JLabel labelSaldo, saldoAtual;
     private JButton botaoSair;
 
-    public Saldo() {
+    public Saldo(Cliente cliente) {
 
-        Cliente cliente = new Cliente(
-                "Darlan Silva",
-                "43236859040",
-                "123456",
-                "unico@email.com",
-                "cliente",
-                "36000000",
-                "456",
-                "0001",
-                500.0);
-        // Configurações da janela
+
         setTitle("Extrato de Conta");
         setSize(400, 200);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -78,14 +68,9 @@ public class Saldo extends JFrame {
         botaoSair.addActionListener(e -> {
             // Fecha a janela de extrato
             dispose(); // Fecha a janela atual
-            ClienteInterface clienteInterface = new ClienteInterface(); // Volta para a tela de login
+            ClienteInterface clienteInterface = new ClienteInterface(cliente); // Volta para a tela de login
             clienteInterface.setVisible(true);
         });
     }
 
-    public static void main(String[] args) {
-        // Criando e exibindo a tela de extrato
-        Saldo saldo = new Saldo();
-        saldo.setVisible(true);
-    }
 }

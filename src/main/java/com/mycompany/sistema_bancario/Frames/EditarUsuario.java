@@ -1,5 +1,8 @@
 package com.mycompany.sistema_bancario.Frames;
 import javax.swing.*;
+
+import com.mycompany.sistema_bancario.Gerente;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,7 +12,7 @@ public class EditarUsuario extends JFrame {
     private JTextField nomeField, emailField, senhaField, cepField, numeroField;
     private JButton salvarButton, cancelarButton;
 
-    public EditarUsuario() {
+    public EditarUsuario(Gerente gerente) {
         // Configuração da janela
         setTitle("Editar Usuário");
         setSize(400, 350); // Ajustado o tamanho para acomodar os botões
@@ -104,14 +107,14 @@ public class EditarUsuario extends JFrame {
         salvarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                salvarAlteracoes();
+                salvarAlteracoes(gerente);
             }
         });
 
         cancelarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cancelarEdicao();
+                cancelarEdicao(gerente);
             }
         });
 
@@ -119,7 +122,7 @@ public class EditarUsuario extends JFrame {
         add(panel);
     }
 
-    private void salvarAlteracoes() {
+    private void salvarAlteracoes(Gerente gerente) {
         String nome = nomeField.getText();
         String email = emailField.getText();
         String senha = new String(((JPasswordField) senhaField).getPassword());
@@ -132,13 +135,13 @@ public class EditarUsuario extends JFrame {
         } else {
             // Lógica para salvar as alterações
             JOptionPane.showMessageDialog(this, "Alterações salvas com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-            GerenteInterface gerenteinterface = new GerenteInterface();
+            GerenteInterface gerenteinterface = new GerenteInterface(gerente);
             gerenteinterface.setVisible(true);
             dispose(); // Fecha a janela após salvar
         }
     }
 
-    private void cancelarEdicao() {
+    private void cancelarEdicao(Gerente gerente) {
         int resposta = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja cancelar?", "Confirmar cancelamento", JOptionPane.YES_NO_OPTION);
         if (resposta == JOptionPane.YES_OPTION) {
             nomeField.setText("");
@@ -146,21 +149,10 @@ public class EditarUsuario extends JFrame {
             senhaField.setText("");
             cepField.setText("");
             numeroField.setText("");
-            GerenteInterface gerenteinterface = new GerenteInterface();
+            GerenteInterface gerenteinterface = new GerenteInterface(gerente);
             gerenteinterface.setVisible(true);
             dispose(); 
         }
-    }
-
-    public static void main(String[] args) {
-        // Inicializando a janela
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                EditarUsuario frame = new EditarUsuario();
-                frame.setVisible(true);
-            }
-        });
     }
 }
 
