@@ -1,6 +1,9 @@
 package com.mycompany.sistema_bancario.Frames;
 
 import javax.swing.*;
+
+import com.mycompany.sistema_bancario.Cliente;
+
 import java.awt.*;
 
 /**
@@ -15,7 +18,7 @@ import java.awt.*;
  */
 /**
  *
- * @author  Ian Nakamura Okano Preste
+ * @author Ian Nakamura Okano Preste
  * @matricula 202335038
  */
 
@@ -25,6 +28,17 @@ public class Saldo extends JFrame {
     private JButton botaoSair;
 
     public Saldo() {
+
+        Cliente cliente = new Cliente(
+                "Darlan Silva",
+                "43236859040",
+                "123456",
+                "unico@email.com",
+                "cliente",
+                "36000000",
+                "456",
+                "0001",
+                500.0);
         // Configurações da janela
         setTitle("Extrato de Conta");
         setSize(400, 200);
@@ -33,20 +47,20 @@ public class Saldo extends JFrame {
 
         // Criando os componentes
         labelSaldo = new JLabel("Saldo Atual:");
-        saldoAtual = new JLabel("R$ 1.500,00");  // Exemplo de saldo atual
+        saldoAtual = new JLabel(String.valueOf(cliente.getSaldo())); // Exemplo de saldo atual
         saldoAtual.setFont(new Font("Arial", Font.BOLD, 20));
 
         botaoSair = new JButton("Sair");
 
         // Melhorando a aparência do botão
-        botaoSair.setBackground(new Color(70, 130, 180));  // Cor de fundo azul suave
-        botaoSair.setForeground(Color.WHITE);  // Cor da fonte branca
-        botaoSair.setFont(new Font("Arial", Font.BOLD, 16));  // Fonte em negrito
-        botaoSair.setFocusPainted(false);  // Remove o foco ao clicar
-        botaoSair.setBorder(BorderFactory.createLineBorder(new Color(70, 130, 180), 2));  // Borda azul
-        botaoSair.setPreferredSize(new Dimension(100, 35));  // Tamanho mais discreto
-        botaoSair.setCursor(new Cursor(Cursor.HAND_CURSOR));  // Cursor de mão ao passar o mouse
-        botaoSair.setBorderPainted(true); 
+        botaoSair.setBackground(new Color(70, 130, 180)); // Cor de fundo azul suave
+        botaoSair.setForeground(Color.WHITE); // Cor da fonte branca
+        botaoSair.setFont(new Font("Arial", Font.BOLD, 16)); // Fonte em negrito
+        botaoSair.setFocusPainted(false); // Remove o foco ao clicar
+        botaoSair.setBorder(BorderFactory.createLineBorder(new Color(70, 130, 180), 2)); // Borda azul
+        botaoSair.setPreferredSize(new Dimension(100, 35)); // Tamanho mais discreto
+        botaoSair.setCursor(new Cursor(Cursor.HAND_CURSOR)); // Cursor de mão ao passar o mouse
+        botaoSair.setBorderPainted(true);
         // Layout
         JPanel painel = new JPanel();
         painel.setLayout(new GridLayout(2, 2, 10, 10)); // 2 linhas, 2 colunas
@@ -63,9 +77,9 @@ public class Saldo extends JFrame {
         // Ação do botão Sair
         botaoSair.addActionListener(e -> {
             // Fecha a janela de extrato
-             dispose(); // Fecha a janela atual
-                ClienteInterface cliente = new ClienteInterface(); // Volta para a tela de login
-                cliente.setVisible(true);
+            dispose(); // Fecha a janela atual
+            ClienteInterface clienteInterface = new ClienteInterface(); // Volta para a tela de login
+            clienteInterface.setVisible(true);
         });
     }
 

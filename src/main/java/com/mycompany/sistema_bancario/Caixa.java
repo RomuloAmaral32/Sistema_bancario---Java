@@ -113,6 +113,7 @@ public class Caixa extends Usuario {
         // Realiza o saque
         System.out.println("Saldo antes do saque: " + cliente.getSaldo());
         System.out.println("Valor do saque: " + valor);
+        System.out.println("Valor do saque: " + valor);
         cliente.setSaldo(cliente.getSaldo() - valor);
         System.out.println("Saldo após o saque: " + cliente.getSaldo());
         cliente.registrarMovimentacao("Saque", valor);
