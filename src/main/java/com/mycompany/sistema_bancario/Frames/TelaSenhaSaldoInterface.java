@@ -1,6 +1,9 @@
 package com.mycompany.sistema_bancario.Frames;
 
 import javax.swing.*;
+
+import com.mycompany.sistema_bancario.Cliente;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,7 +20,7 @@ import java.awt.event.ActionListener;
  */
 /**
  *
- * @author  Ian Nakamura Okano Preste
+ * @author Ian Nakamura Okano Preste
  * @matricula 202335038
  */
 
@@ -28,6 +31,18 @@ public class TelaSenhaSaldoInterface extends JFrame {
     private JLabel mensagemStatus;
 
     public TelaSenhaSaldoInterface() {
+
+        Cliente cliente = new Cliente(
+                "Darlan Silva",
+                "43236859040",
+                "123456",
+                "unico@email.com",
+                "cliente",
+                "36000000",
+                "456",
+                "0001",
+                500.0);
+
         // Configurações da janela
         setTitle("Validação de Senha");
         setSize(300, 200);
@@ -66,13 +81,13 @@ public class TelaSenhaSaldoInterface extends JFrame {
                 String senha = new String(campoSenha.getPassword());
 
                 // Verificando se a senha está correta
-                if (senha.equals("1234")) { // Senha correta para validar
+                if (senha.equals(cliente.getSenha())) { // Senha correta para validar
                     mensagemStatus.setText("Senha correta! Ação realizada.");
                     mensagemStatus.setForeground(Color.GREEN);
                     // Ação quando a senha está correta (exemplo)
                     dispose(); // Fecha a janela atual
-                Saldo saldo = new Saldo(); // Volta para a tela de login
-                saldo.setVisible(true);
+                    Saldo saldo = new Saldo(); // Volta para a tela de login
+                    saldo.setVisible(true);
                 } else {
                     mensagemStatus.setText("Senha incorreta!");
                     mensagemStatus.setForeground(Color.RED);
