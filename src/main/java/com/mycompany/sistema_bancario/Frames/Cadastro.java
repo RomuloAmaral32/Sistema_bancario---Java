@@ -120,15 +120,18 @@ public class Cadastro extends JFrame {
                         if (perfil.equals("Cliente")) {
                             // Gerar um novo ID de conta bancária de forma estática
                             String novoIdConta =  usuarioService.gerarNovaContaBancaria(); // Método que gera o novo ID
+                            Cliente novoCliente = new Cliente(nome, cpf, senha, email, perfil.toLowerCase(), cep, numero, 0.0);
+                            usuarioService.adicionarUsuario(novoCliente);
                             JOptionPane.showMessageDialog(null, "Conta bancária gerada com sucesso! Número da conta: " + novoIdConta);
+                            System.out.println(" Número da conta: " + novoIdConta);
                             // if (novoIdConta == null) {
                             //     JOptionPane.showMessageDialog(null, "Erro ao gerar conta bancária. Tente novamente.");
                             //     return;
                             // }
             
                             // Criar o novo usuário do tipo Cliente com conta bancária e saldo
-                            Cliente novoCliente = new Cliente(nome, cpf, senha, email, perfil.toLowerCase(), cep, numero, 0.0);
-                            usuarioService.adicionarUsuario(novoCliente);
+                           // Cliente novoCliente = new Cliente(nome, cpf, senha, email, perfil.toLowerCase(), cep, numero, 0.0);
+                           // usuarioService.adicionarUsuario(novoCliente);
                             JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!");
                             dispose(); // Fecha a tela de cadastro
         

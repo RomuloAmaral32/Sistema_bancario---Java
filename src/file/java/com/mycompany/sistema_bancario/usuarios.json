@@ -9,7 +9,7 @@
     "numero": "123",
     "contaBancaria": "0001",
     "saldo": 500.0,
-    "usuarioService": null
+    "usuarioService": 0
   },
   {
     "nome": "Maria Julia",
@@ -21,7 +21,7 @@
     "numero": "123",
     "contaBancaria": "0002",
     "saldo": 7000.0,
-    "usuarioService": null
+    "usuarioService": 0
   },
   {
     "nome": "Joao Santos",
@@ -32,7 +32,7 @@
     "cep": "36000000",
     "numero": "123",
     "numeroFuncionario": "001",
-    "usuarioService": null
+    "usuarioService": 0
   },
   {
     "nome": "Carlos Silva",
@@ -68,7 +68,7 @@
     "numero": "456",
     "contaBancaria": "0004",
     "saldo": 500.0,
-    "usuarioService": null
+    "usuarioService": 0
   },
   {
     "nome": "Cliente Unico",
@@ -80,7 +80,7 @@
     "numero": "456",
     "contaBancaria": "0005",
     "saldo": 500.0,
-    "usuarioService": null
+    "usuarioService": 0
   },
   {
     "nome": "testandoagora",
@@ -92,7 +92,7 @@
     "numero": "44",
     "contaBancaria": "0006",
     "saldo": 0.0,
-    "usuarioService": null
+    "usuarioService": 0
   },
   {
     "nome": "wewewewe",
@@ -104,7 +104,7 @@
     "numero": "55",
     "contaBancaria": "0007",
     "saldo": 0.0,
-    "usuarioService": null
+    "usuarioService": 0
   },
   {
     "nome": "dfdfdfdfd",
@@ -115,7 +115,7 @@
     "cep": "55555555",
     "numero": "55",
     "numeroFuncionario": "12345",
-    "usuarioService": null
+    "usuarioService": 0
   },
   {
     "nome": "ererere",
@@ -138,6 +138,6 @@
     "cep": "44444444",
     "numero": "44",
     "numeroFuncionario": "12345",
-    "usuarioService": null
+    "usuarioService": 0
   }
 ]

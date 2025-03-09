@@ -1,1 +1,69 @@
-[{"nome":"romulo","cpf":"16158640670","senha":"fdfdfdf","email":"dfdfd@gmail.com","tipo":"cliente","cep":"44444444","numero":"67","contaBancaria":null,"saldo":0.0},{"nome":"oi","cpf":"16158640670","senha":"1234","email":"dffdf@gmail.com","tipo":"cliente","cep":"44444444","numero":"45","contaBancaria":null,"saldo":0.0},{"nome":"darlanheroi","cpf":"16158640670","senha":"ianheroi","email":"sla@gmail.com","tipo":"gerente","cep":"55555555","numero":"55","nivelDeAcesso":0.0,"rendaFixa":null,"rendaVariavel":null},{"nome":"testandonum","cpf":"16158640670","senha":"4321","email":"ddfdf@gmail.com","tipo":"cliente","cep":"55555555","numero":"55","contaBancaria":"2","saldo":0.0},{"nome":"nomequalquer","cpf":"16158640670","senha":"fdfdfdfdf","email":"dfddf@gmail.com","tipo":"cliente","cep":"33333333","numero":"333","contaBancaria":"2","saldo":0.0},{"nome":"nivaldo","cpf":"04390774000","senha":"123456","email":"nivaldo@gmail.com","tipo":"cliente","cep":"12345678","numero":"11","contaBancaria":"11","saldo":0.0}]
+[
+  {
+    "nome": "romulo",
+    "cpf": "16158640670",
+    "senha": "fdfdfdf",
+    "email": "dfdfd@gmail.com",
+    "tipo": "cliente",
+    "cep": "44444444",
+    "numero": "67",
+    "contaBancaria": null,
+    "saldo": 0.0
+  },
+  {
+    "nome": "oi",
+    "cpf": "16158640670",
+    "senha": "1234",
+    "email": "dffdf@gmail.com",
+    "tipo": "cliente",
+    "cep": "44444444",
+    "numero": "45",
+    "contaBancaria": null,
+    "saldo": 0.0
+  },
+  {
+    "nome": "darlanheroi",
+    "cpf": "16158640670",
+    "senha": "ianheroi",
+    "email": "sla@gmail.com",
+    "tipo": "gerente",
+    "cep": "55555555",
+    "numero": "55",
+    "nivelDeAcesso": 0.0,
+    "rendaFixa": null,
+    "rendaVariavel": null
+  },
+  {
+    "nome": "testandonum",
+    "cpf": "16158640670",
+    "senha": "4321",
+    "email": "ddfdf@gmail.com",
+    "tipo": "cliente",
+    "cep": "55555555",
+    "numero": "55",
+    "contaBancaria": "2",
+    "saldo": 0.0
+  },
+  {
+    "nome": "nomequalquer",
+    "cpf": "16158640670",
+    "senha": "fdfdfdfdf",
+    "email": "dfddf@gmail.com",
+    "tipo": "cliente",
+    "cep": "33333333",
+    "numero": "333",
+    "contaBancaria": "2",
+    "saldo": 0.0
+  },
+  {
+    "nome": "nivaldo",
+    "cpf": "04390774000",
+    "senha": "123456",
+    "email": "nivaldo@gmail.com",
+    "tipo": "cliente",
+    "cep": "12345678",
+    "numero": "11",
+    "contaBancaria": "11",
+    "saldo": 0.0
+  }
+]

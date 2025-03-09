@@ -25,6 +25,7 @@ public class UsuarioService {
     private JsonHandler<Usuario> jsonHandler;
 
     public UsuarioService(String filePath) {
+        filePath = "src/main/java/com/mycompany/sistema_bancario/usuarios.json";
         jsonHandler = new JsonHandler<>(filePath);
         try {
             // Tentar carregar os usuários existentes do JSON
@@ -75,17 +76,24 @@ public class UsuarioService {
     }
 
     // Método para buscar cliente por número da conta
-    public Cliente buscarClientePorNumeroConta(String numeroConta) {
-        for (Usuario usuario : usuarios) {
-            if (usuario instanceof Cliente) {  // Verifica se o usuário é um Cliente
-                Cliente cliente = (Cliente) usuario;  // Cast para Cliente
-                if (cliente.getContaBancaria().equals(numeroConta)) {
-                    return cliente;  // Retorna o cliente se a conta bancária for encontrada
-                }
+// Método para buscar cliente por número da conta
+public Cliente buscarClientePorNumeroConta(String numeroConta) {
+    System.out.println("Procurando cliente com a conta: " + numeroConta); // Log para verificar
+
+    for (Usuario usuario : usuarios) {
+        if (usuario instanceof Cliente) {  // Verifica se o usuário é um Cliente
+            Cliente cliente = (Cliente) usuario;  // Cast para Cliente
+            System.out.println("Verificando cliente: " + cliente.getContaBancaria()); // Log para cada cliente
+
+            if (cliente.getContaBancaria().equals(numeroConta)) {
+                System.out.println("Cliente encontrado: " + cliente.getNome());
+                return cliente;  // Retorna o cliente se a conta bancária for encontrada
             }
         }
-        throw new IllegalArgumentException("Cliente não encontrado para a conta: " + numeroConta);
     }
+    throw new IllegalArgumentException("Cliente não encontrado para a conta: " + numeroConta);
+}
+
     
 
     public Usuario buscarUsuarioPorCPF(String cpf) {
@@ -136,7 +144,7 @@ public class UsuarioService {
 
             int novaConta = maiorConta + 1;
 
-            return String.format("%04d", novaConta);
+            return String.format("%01d", novaConta);
         } catch (IOException e) {
             System.out.println("Erro ao carregar usuários para gerar conta bancária: " + e.getMessage());
             return null;
