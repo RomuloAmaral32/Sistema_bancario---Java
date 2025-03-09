@@ -366,4 +366,36 @@
     "saldoAtual" : 1000010.0,
     "tipoDeMovimentacao" : "Transferência"
   }
+}, {
+  "1" : {
+    "data" : "2025-03-09",
+    "saldoAnterior" : 0.0,
+    "valor" : -10.0,
+    "saldoAtual" : 0.0,
+    "tipoDeMovimentacao" : "Transferência"
+  }
+}, {
+  "2" : {
+    "data" : "2025-03-09",
+    "saldoAnterior" : 1000020.0,
+    "valor" : 10.0,
+    "saldoAtual" : 1000020.0,
+    "tipoDeMovimentacao" : "Transferência"
+  }
+}, {
+  "2" : {
+    "data" : "2025-03-09",
+    "saldoAnterior" : 21.0,
+    "valor" : -999999.0,
+    "saldoAtual" : 21.0,
+    "tipoDeMovimentacao" : "Transferência"
+  }
+}, {
+  "1" : {
+    "data" : "2025-03-09",
+    "saldoAnterior" : 999999.0,
+    "valor" : 999999.0,
+    "saldoAtual" : 999999.0,
+    "tipoDeMovimentacao" : "Transferência"
+  }
 } ]

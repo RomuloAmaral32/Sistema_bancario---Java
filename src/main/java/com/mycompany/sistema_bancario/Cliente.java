@@ -294,7 +294,11 @@ public class Cliente extends Usuario {
             System.out.println("Valor inválido para transferência.");
             return false;
         }
-        if (valor > 1000000) {
+        if(valor > cliente.getSaldo()){
+            System.out.println("Saldo insuficiente para realizar a transferência.");
+            return false;
+        }
+        if (valor >= 1000000) {
             System.out.println(
                     "Valor máximo para transferência é de R$1.000.000,00. Para transferências maiores, procurar um gerente.");
             return false;

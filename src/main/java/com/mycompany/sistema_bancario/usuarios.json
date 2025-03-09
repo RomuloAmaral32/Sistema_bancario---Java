@@ -8,7 +8,7 @@
     "cep": "33333333",
     "numero": "333",
     "contaBancaria": "1",
-    "saldo": 10,
+    "saldo": 999999.0,
     "usuarioService": null
   },
   {
@@ -42,7 +42,7 @@
     "cep": "33333333",
     "numero": "333",
     "contaBancaria": "2",
-    "saldo": 1000010.0,
+    "saldo": 21.0,
     "usuarioService": null
   }
 ]
