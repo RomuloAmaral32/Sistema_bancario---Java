@@ -44,7 +44,7 @@ public class ClienteTest {
         cliente3 = new Cliente("Ian Nakamura", "16380276688", "senha123", "ian@email.com", "comum", "36000000", "22",
                  1500000.0);
         gerente = new Gerente("Carlos Silva", "16380276688", "senha123", "carlos@email.com", "Gerente", "36000000",
-                "22", "1", 1000000.0);
+                "22", "1", 1000000.0, null);
         outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
     }

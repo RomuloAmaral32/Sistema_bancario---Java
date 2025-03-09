@@ -157,7 +157,7 @@ public class Cadastro extends JFrame {
                     double nivelDeAcesso = 1000000; // Inicializado com valor de 1 milhão
                     String numeroFuncionario =  usuarioService.gerarNovoNumerodeFuncionario();
                     // Criar o novo usuário do tipo Gerente com nível de acesso e arrays de renda
-                    Gerente novoGerente = new Gerente(nome, cpf, senha, email, perfil.toLowerCase(), cep, numero, numeroFuncionario, 100000);
+                    Gerente novoGerente = new Gerente(nome, cpf, senha, email, perfil.toLowerCase(), cep, numero, numeroFuncionario, 100000, null);
                     usuarioService.adicionarUsuario(novoGerente);
                     JOptionPane.showMessageDialog(null, "Gerente cadastrado com sucesso!");
                     dispose(); // Fecha a tela de cadastro

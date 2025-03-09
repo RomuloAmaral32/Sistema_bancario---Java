@@ -32,16 +32,16 @@ public class GerenteTest {
     @BeforeEach
     void setUp() {
         gerente = new Gerente("Carlos Silva", "16380276688", "senha123", "carlos@email.com", "Gerente", "36000000",
-                "22", "1", 1000000.0);
+                "22", "1", 1000000.0, null);
     }
 
     @Test
     void testVerificarAcesso() {
         Gerente gerente1 = new Gerente("Carlos Silva", "16380276688", "senha123", "carlos@email.com", "Gerente",
                 "36000000", "1" , "22",
-                1000000.0);
+                1000000.0, null);
         Gerente gerente2 = new Gerente("João Souza", "10006426662", "senha456", "joao@email.com", "Gerente", "36000000",
-                "22", "1",  500000.0);
+                "22", "1",  500000.0, null);
 
         // Testa que o gerente com nível de acesso >= 1000000 tem acesso
         assertTrue(gerente1.verificarAcesso());

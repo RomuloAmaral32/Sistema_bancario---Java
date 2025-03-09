@@ -44,5 +44,28 @@
     "contaBancaria": "2",
     "saldo": 21.0,
     "usuarioService": null
+  },
+  {
+    "nome": "ewew",
+    "cpf": "124.111.700-41",
+    "senha": "dfdff",
+    "email": "sdsd@gmail.com",
+    "tipo": "cliente",
+    "cep": "33333333",
+    "numero": "33",
+    "contaBancaria": "1",
+    "saldo": 0.0,
+    "usuarioService": null
+  },
+  {
+    "nome": "dds",
+    "cpf": "124.111.700-41",
+    "senha": "dfdf",
+    "email": "dsdd@gmail.com",
+    "tipo": "caixa",
+    "cep": "33333333",
+    "numero": "33",
+    "numeroFuncionario": "1",
+    "usuarioService": null
   }
 ]

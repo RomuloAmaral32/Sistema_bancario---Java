@@ -40,6 +40,7 @@ public class LoginInterface extends JFrame {
     private Cliente cliente;
 
     private void converte(Usuario usuario){
+        UsuarioService usuarioService = new UsuarioService("src/file/java/com/mycompany/sistema_bancario/usuarios.json");
         if(usuario.getTipo().equals("gerente")){   
             gerente = new Gerente(
                 usuario.getNome(),
@@ -50,9 +51,10 @@ public class LoginInterface extends JFrame {
                 usuario.getCep(),
                 usuario.getNumero(),
                 "1",
-                1000000);
+                1000000,
+                usuarioService);
         } else if(usuario.getTipo().equals("caixa")){       // String numero,
-            UsuarioService usuarioService = new UsuarioService("src/file/java/com/mycompany/sistema_bancario/usuarios.json");
+            //UsuarioService usuarioService = new UsuarioService("src/file/java/com/mycompany/sistema_bancario/usuarios.json");
             Caixa caixa = new Caixa(
                 usuario.getNome(),
                 usuario.getCpf(),

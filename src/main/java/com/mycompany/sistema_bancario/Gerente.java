@@ -36,6 +36,7 @@ public class Gerente extends Usuario {
     private List<String> rendaFixa;
     private List<String> rendaVariavel;
 
+    private UsuarioService usuarioService;
     private JsonHandler<String> jsonHandlerRendaFixa;
     private JsonHandler<String> jsonHandlerRendaVariavel;
 
@@ -44,10 +45,11 @@ public class Gerente extends Usuario {
     }
 
     public Gerente(String nome, String cpf, String senha, String email, String tipo, String cep, String numero,
-    String numeroFuncionario,double nivelDeAcesso) {
+    String numeroFuncionario,double nivelDeAcesso, UsuarioService usuarioService) {
         super(nome, cpf, senha, email, tipo, cep, numero);
         this.nivelDeAcesso = nivelDeAcesso;
         this.numeroFuncionario = numeroFuncionario;
+        this.usuarioService = usuarioService;
         this.scanner = new Scanner(System.in);
         this.rendaFixa = new ArrayList<>();
         this.rendaVariavel = new ArrayList<>();
@@ -55,6 +57,10 @@ public class Gerente extends Usuario {
         this.jsonHandlerRendaFixa = new JsonHandler<>("src/file/java/com/mycompany/sistema_bancario/rendaFixa.json");
         this.jsonHandlerRendaVariavel = new JsonHandler<>(
                 "src/file/java/com/mycompany/sistema_bancario/rendaVariavel.json");
+    }
+
+    public UsuarioService getUsuarioService() {
+        return usuarioService;
     }
 
     public String getNumeroFuncionario() {
