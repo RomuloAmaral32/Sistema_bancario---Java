@@ -105,6 +105,58 @@ public class Gerente extends Usuario {
         return true;
     }
 
+
+    public boolean saque(double valor, String numeroContaCliente, String senhaCliente) {
+        Cliente cliente = usuarioService.buscarClientePorNumeroConta(numeroContaCliente);
+
+        if (cliente == null) {
+            System.out.println("Cliente não encontrado.");
+            return false;
+        }
+        if (valor <= 0) {
+            System.out.println("Valor inválido para saque.");
+            return false;
+        }
+        if (!cliente.verificaSenha(senhaCliente)) {
+            System.out.println("Senha incorreta.");
+            return false;
+        }
+        if (cliente.getSaldo() < valor) {
+            System.out.println("Saldo insuficiente.");
+            return false;
+        }
+        cliente.setSaldo(cliente.getSaldo() - valor);
+        cliente.registrarMovimentacao("Saque", -valor);
+
+        System.out.println("Saque de R$" + valor + " da conta " + numeroContaCliente + " realizado com sucesso."
+                + " Saldo atual: " + cliente.getSaldo());
+
+        return true;
+    }
+
+    public boolean deposito(double valor, String numeroContaCliente) {
+        // Busca o cliente pelo número da conta
+        Cliente cliente = usuarioService.buscarClientePorNumeroConta(numeroContaCliente);
+
+        if (cliente == null) {
+            System.out.println("Cliente não encontrado.");
+            return false;
+        }
+
+        // Validações
+        if (valor <= 0) {
+            System.out.println("Valor inválido para depósito.");
+            return false;
+        }
+
+        // Realiza o depósito
+        cliente.setSaldo(cliente.getSaldo() + valor);
+        cliente.registrarMovimentacao("Depósito", valor);
+        System.out.println("Depósito de R$" + valor + " na conta " + numeroContaCliente + " realizado com sucesso.");
+
+        return true;
+    }
+
     public void cadastrarRendaFixa(String nomeProduto, double taxaRendimento, int prazoMinimo, int prazoMaximo) {
         String produtoRendaFixa = "Produto: " + nomeProduto + ", Taxa de Rendimento: " + taxaRendimento
                 + "%, Prazo Mínimo: " + prazoMinimo + " meses, Prazo Máximo: " + prazoMaximo + " meses";

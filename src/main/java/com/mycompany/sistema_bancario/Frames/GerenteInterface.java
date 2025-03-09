@@ -147,16 +147,18 @@ public class GerenteInterface extends JFrame {
         botaoSaque.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Lógica da operação de saque
-                JOptionPane.showMessageDialog(null, "Operação de Atendimento de Saque selecionada.");
+                dispose(); // Fecha a janela atual
+                SaqueGerente saquegerente = new SaqueGerente(gerente); // Volta para a tela de login
+                saquegerente.setVisible(true);
             }
         });
 
         botaoDeposito.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Lógica da operação de depósito
-                JOptionPane.showMessageDialog(null, "Operação de Processamento de Depósitos selecionada.");
+                dispose(); // Fecha a janela atual
+                DepositoGerente depositogerente = new DepositoGerente(gerente); // Volta para a tela de login
+                depositogerente.setVisible(true);
             }
         });
 
