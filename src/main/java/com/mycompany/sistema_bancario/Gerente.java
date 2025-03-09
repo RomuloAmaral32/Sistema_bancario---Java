@@ -76,6 +76,35 @@ public class Gerente extends Usuario {
         return nivelDeAcesso >= 1000000.0;
     }
 
+    public boolean transferencia(double valor, String numeroContaCliente, String senhaCliente, String contaDestino) {
+        Cliente cliente = usuarioService.buscarClientePorNumeroConta(numeroContaCliente);
+        Cliente destinatario = usuarioService.buscarClientePorNumeroConta(contaDestino);
+
+        if (cliente == null || destinatario == null) {
+            System.out.println("Cliente não encontrado.");
+            return false;
+        }
+        if (valor <= 0) {
+            System.out.println("Valor inválido para transferência.");
+            return false;
+        }
+        if (!cliente.verificaSenha(senhaCliente)) {
+            System.out.println("Senha incorreta.");
+            return false;
+        }
+
+        cliente.setSaldo(cliente.getSaldo() - valor);
+        destinatario.setSaldo(destinatario.getSaldo() + valor);
+        cliente.registrarMovimentacao("Transferência", -valor);
+        destinatario.registrarMovimentacao("Transferência", valor);
+
+        System.out.println(
+                "Transferência de R$" + valor + " da conta " + numeroContaCliente + " para a conta " + contaDestino
+                        + " realizada com sucesso.");
+
+        return true;
+    }
+
     public void cadastrarRendaFixa(String nomeProduto, double taxaRendimento, int prazoMinimo, int prazoMaximo) {
         String produtoRendaFixa = "Produto: " + nomeProduto + ", Taxa de Rendimento: " + taxaRendimento
                 + "%, Prazo Mínimo: " + prazoMinimo + " meses, Prazo Máximo: " + prazoMaximo + " meses";
