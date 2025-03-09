@@ -51,8 +51,8 @@ public class Gerente extends Usuario {
         this.numeroFuncionario = numeroFuncionario;
         this.usuarioService = usuarioService;
         this.scanner = new Scanner(System.in);
-        this.rendaFixa = new ArrayList<>();
-        this.rendaVariavel = new ArrayList<>();
+        //this.rendaFixa = new ArrayList<>();
+        //this.rendaVariavel = new ArrayList<>();
 
         this.jsonHandlerRendaFixa = new JsonHandler<>("src/file/java/com/mycompany/sistema_bancario/rendaFixa.json");
         this.jsonHandlerRendaVariavel = new JsonHandler<>(
@@ -209,10 +209,6 @@ public class Gerente extends Usuario {
         }
     }
 
-    @XmlElement
-    public double getNivelDeAcesso() {
-        return nivelDeAcesso;
-    }
 
     @XmlElement
     public void setNivelDeAcesso(double nivelDeAcesso) {

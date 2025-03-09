@@ -52,13 +52,13 @@ public class GerenteTest {
 
     @Test
     void testGetNivelDeAcesso() {
-        assertEquals(1000000.0, gerente.getNivelDeAcesso());
+        assertEquals(1000000.0, gerente.getnivelDeAcesso());
     }
 
     @Test
     void testSetNivelDeAcesso() {
         gerente.setNivelDeAcesso(2000000.0);
-        assertEquals(2000000.0, gerente.getNivelDeAcesso());
+        assertEquals(2000000.0, gerente.getnivelDeAcesso());
     }
 
     @Test
@@ -66,7 +66,7 @@ public class GerenteTest {
         assertEquals("Carlos Silva", gerente.getNome());
         assertEquals("16380276688", gerente.getCpf());
         assertEquals("carlos@email.com", gerente.getEmail());
-        assertEquals(1000000.0, gerente.getNivelDeAcesso());
+        assertEquals(1000000.0, gerente.getnivelDeAcesso());
     }
 
     @Test
