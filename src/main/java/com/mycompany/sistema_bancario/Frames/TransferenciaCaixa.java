@@ -111,6 +111,11 @@ public class TransferenciaCaixa extends JFrame {
 
             // Processa a transferência usando o Caixa
             boolean transferenciaRealizada = caixa.transferencia(valorTransferencia, contaOrigem, senha, contaDestino);
+
+            if( valorTransferencia >= 1000000){
+                JOptionPane.showMessageDialog(null, "Valores a partir de R$1.000.000,00 devem procurar um gerente.", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+
             if (transferenciaRealizada) {
                 // Busca os clientes atualizados
                 Cliente clienteOrigemAtualizado = usuarioService.buscarClientePorNumeroConta(contaOrigem);
@@ -161,19 +166,4 @@ public class TransferenciaCaixa extends JFrame {
         });
     }
 
-    /*public static void main(String[] args) {
-       UsuarioService usuarioService = new UsuarioService("src/file/java/com/mycompany/sistema_bancario/usuarios.json");
-        Caixa caixa = new Caixa(
-            "Caixa",
-            "11357820674",
-            "senhaCaixa",
-            "caixa@email.com",
-            "caixa",
-            "36000000",
-            "123",
-            "001",
-            usuarioService);
-        TransferenciaCaixa transferenciaCaixa = new TransferenciaCaixa(caixa);
-        transferenciaCaixa.setVisible(true);
-    }*/
 }

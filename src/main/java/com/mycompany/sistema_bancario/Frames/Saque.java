@@ -100,6 +100,10 @@ public class Saque extends JFrame {
                     // Processa o saque usando o Caixa
                     boolean saqueRealizado = caixa.saque(valorSaque, numeroDono, senha);
                     System.out.println(caixa.getNome());
+                    
+                    if( valorSaque >= 1000000){
+                        JOptionPane.showMessageDialog(null, "Valores a partir de R$1.000.000,00 devem procurar um gerente.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    }
 
                     if (saqueRealizado) {
                         // Busca o cliente atualizado

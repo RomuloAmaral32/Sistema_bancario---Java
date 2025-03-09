@@ -139,10 +139,11 @@ public class Cadastro extends JFrame {
                             ClienteInterface telacliente = new ClienteInterface(novoCliente);
                             telacliente.setVisible(true);
                         } else if (perfil.equals("Caixa")) {
-                    String numeroFuncionario = "12345"; // Valor estático
+                            String numeroFuncionario =  usuarioService.gerarNovoNumerodeFuncionario();
+                            System.out.println("Número do funcionário: " + numeroFuncionario);
 
                     // Criar o novo usuário do tipo Caixa com o número de funcionário
-                    Caixa novoCaixa = new Caixa(nome, cpf, senha, email, perfil.toLowerCase(), cep, numero, numeroFuncionario, usuarioService);
+                    Caixa novoCaixa = new Caixa(nome, cpf, senha, email, perfil.toLowerCase(), cep, numero, numeroFuncionario, null); 
                     usuarioService.adicionarUsuario(novoCaixa);
                     JOptionPane.showMessageDialog(null, "Caixa cadastrado com sucesso!");
                     dispose(); // Fecha a tela de cadastro
@@ -154,9 +155,9 @@ public class Cadastro extends JFrame {
                 // Verificar se o perfil é "Gerente"
                 else if (perfil.equals("Gerente")) {
                     double nivelDeAcesso = 1000000; // Inicializado com valor de 1 milhão
-
+                    String numeroFuncionario =  usuarioService.gerarNovoNumerodeFuncionario();
                     // Criar o novo usuário do tipo Gerente com nível de acesso e arrays de renda
-                    Gerente novoGerente = new Gerente(nome, cpf, senha, email, perfil.toLowerCase(), cep, numero, nivelDeAcesso);
+                    Gerente novoGerente = new Gerente(nome, cpf, senha, email, perfil.toLowerCase(), cep, numero, numeroFuncionario, 100000);
                     usuarioService.adicionarUsuario(novoGerente);
                     JOptionPane.showMessageDialog(null, "Gerente cadastrado com sucesso!");
                     dispose(); // Fecha a tela de cadastro

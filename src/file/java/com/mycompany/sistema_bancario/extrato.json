@@ -318,4 +318,52 @@
     "saldoAtual" : 500.0,
     "tipoDeMovimentacao" : "Transferência"
   }
+}, {
+  "1" : {
+    "data" : "2025-03-09",
+    "saldoAnterior" : 120.0,
+    "valor" : 120.0,
+    "saldoAtual" : 120.0,
+    "tipoDeMovimentacao" : "Depósito"
+  }
+}, {
+  "1" : {
+    "data" : "2025-03-09",
+    "saldoAnterior" : 20.0,
+    "valor" : 100.0,
+    "saldoAtual" : 20.0,
+    "tipoDeMovimentacao" : "Saque"
+  }
+}, {
+  "1" : {
+    "data" : "2025-03-09",
+    "saldoAnterior" : 10.0,
+    "valor" : -10.0,
+    "saldoAtual" : 10.0,
+    "tipoDeMovimentacao" : "Transferência"
+  }
+}, {
+  "2" : {
+    "data" : "2025-03-09",
+    "saldoAnterior" : 10.0,
+    "valor" : 10.0,
+    "saldoAtual" : 10.0,
+    "tipoDeMovimentacao" : "Transferência"
+  }
+}, {
+  "1" : {
+    "data" : "2025-03-09",
+    "saldoAnterior" : -999990.0,
+    "valor" : -1000000.0,
+    "saldoAtual" : -999990.0,
+    "tipoDeMovimentacao" : "Transferência"
+  }
+}, {
+  "2" : {
+    "data" : "2025-03-09",
+    "saldoAnterior" : 1000010.0,
+    "valor" : 1000000.0,
+    "saldoAtual" : 1000010.0,
+    "tipoDeMovimentacao" : "Transferência"
+  }
 } ]

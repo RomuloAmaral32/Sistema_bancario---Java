@@ -78,6 +78,9 @@ public class Deposito extends JFrame {
 
                     // Processa o depósito usando o Caixa
                     boolean depositoRealizado = caixa.deposito(valorDeposito, numeroConta);
+                    if( valorDeposito >= 1000000){
+                        JOptionPane.showMessageDialog(null, "Valores a partir de R$1.000.000,00 devem procurar um gerente.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    }
 
                     if (depositoRealizado) {
                         // Busca o cliente atualizado

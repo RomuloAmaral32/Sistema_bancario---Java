@@ -109,6 +109,10 @@ public class TransferenciaInterface extends JFrame {
                         if (senha.equals(cliente.getSenha())) {
                             boolean transferenciaRealizada = cliente.transferencia(valor, senha, contaDestino);
 
+                            if( valor >= 1000000){
+                                JOptionPane.showMessageDialog(null, "Valores a partir de R$1.000.000,00 devem procurar um gerente.", "Erro", JOptionPane.ERROR_MESSAGE);
+                            }
+
                             if (transferenciaRealizada) {
 
                                 // Exibe mensagem de sucesso

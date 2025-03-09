@@ -3,6 +3,7 @@ package com.mycompany.sistema_bancario;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import com.mycompany.sistema_bancario.JsonHandler;
 
 /**
  *
@@ -147,6 +148,44 @@ public Cliente buscarClientePorNumeroConta(String numeroConta) {
             return String.format("%01d", novaConta);
         } catch (IOException e) {
             System.out.println("Erro ao carregar usuários para gerar conta bancária: " + e.getMessage());
+            return null;
+        }
+    }
+    public String gerarNovoNumerodeFuncionario() {
+        try {
+            List<Usuario> usuariosExistentes = jsonHandler.loadFromJson(Usuario.class);
+            int maiorConta = 0;
+
+            for (Usuario usuario : usuariosExistentes) {
+                if (usuario.getTipo().equals("Caixa") || usuario.getTipo().equals("Gerente")) {
+                    if(usuario.getTipo().equals("Caixa")){
+                        System.out.println("Cria um novo caixa");
+                        Caixa caixa = (Caixa) usuario;
+                        String numeroFuncionario = caixa.getNumeroFuncionario();
+                        int numeroConta = Integer.parseInt(numeroFuncionario);
+                        if (numeroConta > maiorConta) {
+                            maiorConta = numeroConta;
+                            System.out.println("valor de caixa: " + maiorConta);
+                        }
+                    }
+                    if(usuario.getTipo().equals("Gerente")){
+                        System.out.println("Cria um novo gerente");
+                        Gerente gerente = (Gerente) usuario;
+                        String numeroFuncionario = gerente.getNumeroFuncionario();
+                        int numeroConta = Integer.parseInt(numeroFuncionario);
+                        if (numeroConta > maiorConta) {
+                            maiorConta = numeroConta;
+                            System.out.println("valor de gerente: " + maiorConta);
+                        }
+                    }
+            }
+        }
+
+            int novaConta = maiorConta + 1;
+
+            return String.format("%01d", novaConta);
+        } catch (IOException e) {
+            System.out.println("Erro ao carregar usuários para gerar número de funcionário: " + e.getMessage());
             return null;
         }
     }

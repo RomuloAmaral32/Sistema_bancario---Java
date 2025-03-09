@@ -29,6 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 public class Gerente extends Usuario {
     private double nivelDeAcesso;
+    private String numeroFuncionario;
     @XmlTransient
     private Scanner scanner;
 
@@ -43,9 +44,10 @@ public class Gerente extends Usuario {
     }
 
     public Gerente(String nome, String cpf, String senha, String email, String tipo, String cep, String numero,
-            double nivelDeAcesso) {
+    String numeroFuncionario,double nivelDeAcesso) {
         super(nome, cpf, senha, email, tipo, cep, numero);
         this.nivelDeAcesso = nivelDeAcesso;
+        this.numeroFuncionario = numeroFuncionario;
         this.scanner = new Scanner(System.in);
         this.rendaFixa = new ArrayList<>();
         this.rendaVariavel = new ArrayList<>();
@@ -54,6 +56,15 @@ public class Gerente extends Usuario {
         this.jsonHandlerRendaVariavel = new JsonHandler<>(
                 "src/file/java/com/mycompany/sistema_bancario/rendaVariavel.json");
     }
+
+    public String getNumeroFuncionario() {
+        return numeroFuncionario;
+    }
+
+    public void setNumeroFuncionario(String numeroFuncionario) {
+        this.numeroFuncionario = numeroFuncionario;
+    }
+
 
     public boolean verificarAcesso() {
         return nivelDeAcesso >= 1000000.0;

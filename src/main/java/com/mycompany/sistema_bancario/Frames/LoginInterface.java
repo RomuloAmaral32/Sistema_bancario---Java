@@ -49,6 +49,7 @@ public class LoginInterface extends JFrame {
                 usuario.getTipo(),
                 usuario.getCep(),
                 usuario.getNumero(),
+                "1",
                 1000000);
         } else if(usuario.getTipo().equals("caixa")){       // String numero,
             UsuarioService usuarioService = new UsuarioService("src/file/java/com/mycompany/sistema_bancario/usuarios.json");

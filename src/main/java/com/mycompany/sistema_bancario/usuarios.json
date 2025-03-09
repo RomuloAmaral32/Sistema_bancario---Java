@@ -1,1 +1,48 @@
-[{"nome":"dfdf","cpf":"16158640670","senha":"123456","email":"fdf@gmail.com","tipo":"cliente","cep":"33333333","numero":"333","contaBancaria":"1","saldo":0.0,"usuarioService":null}]
+[
+  {
+    "nome": "dfdf",
+    "cpf": "16158640670",
+    "senha": "123456",
+    "email": "fdf@gmail.com",
+    "tipo": "cliente",
+    "cep": "33333333",
+    "numero": "333",
+    "contaBancaria": "1",
+    "saldo": 10,
+    "usuarioService": null
+  },
+  {
+    "nome": "ddsds",
+    "cpf": "16158640670",
+    "senha": "123456",
+    "email": "dd@gmail.com",
+    "tipo": "caixa",
+    "cep": "33333333",
+    "numero": "33",
+    "numeroFuncionario": "1",
+    "usuarioService": null
+  },
+  {
+    "nome": "ffdgdf",
+    "cpf": "647.295.110-18",
+    "senha": "1234567",
+    "email": "dfd@gmail.com",
+    "tipo": "caixa",
+    "cep": "44444444",
+    "numero": "44",
+    "numeroFuncionario": "1",
+    "usuarioService": null
+  },
+  {
+    "nome": "sla",
+    "cpf": "865.148.030-08",
+    "senha": "123455",
+    "email": "sds@gmail.com",
+    "tipo": "cliente",
+    "cep": "33333333",
+    "numero": "333",
+    "contaBancaria": "2",
+    "saldo": 1000010.0,
+    "usuarioService": null
+  }
+]
