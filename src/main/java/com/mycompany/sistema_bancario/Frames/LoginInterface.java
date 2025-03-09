@@ -114,16 +114,17 @@ public class LoginInterface extends JFrame {
                     // Verifica o login através do LoginService
                     Usuario usuario = loginService.verificarLogin(cpf, senha);
                     JOptionPane.showMessageDialog(null, "Login bem-sucedido! Bem-vindo(a), " + usuario.getNome());
-
-                    // Aqui você pode redirecionar para a tela correspondente ao usuário logado
-                    // Por exemplo: abrirTelaCliente() se for Cliente, abrirTelaCaixa() se for Caixa, etc.
                     UsuarioService usuarioService = new UsuarioService("src/file/java/com/mycompany/sistema_bancario/usuarios.json");
-    
-
-                    if( usuario.getTipo().equals("cliente") ){
-                        dispose(); 
+                
+                    if (usuario.getTipo().equalsIgnoreCase("cliente")) {
+                        // Fazer o cast de Usuario para Cliente
+                        Cliente cliente = (Cliente) usuario;
+                        
+                        // Passa o cliente correto para a interface de cliente
                         ClienteInterface telacliente = new ClienteInterface(cliente);
                         telacliente.setVisible(true);
+                        dispose(); 
+                    
                     } else if( usuario.getTipo().equals("caixa") ){
                         Caixa caixa = new Caixa(
                         "Caixa",
