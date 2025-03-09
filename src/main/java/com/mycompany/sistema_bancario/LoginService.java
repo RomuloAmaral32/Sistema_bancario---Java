@@ -25,6 +25,7 @@ import java.util.List;
  */
 
 public class LoginService {
+    private final String filePath = "src/main/java/com/mycompany/sistema_bancario/usuarios.json";
     private final JsonHandler<Usuario> jsonHandler;
 
     public LoginService(String filePath) {
@@ -34,7 +35,6 @@ public class LoginService {
 public  Usuario verificarLogin(String cpfInserido, String senhaInserida) throws IllegalArgumentException {
     try {
         List<Usuario> usuarios = jsonHandler.loadFromJson(Usuario.class);
-
         for (Usuario usuario : usuarios) {
             // Adicionando prints para depuração
             System.out.println("Verificando CPF no arquivo JSON: " + usuario.getCpf());  // CPF do arquivo JSON

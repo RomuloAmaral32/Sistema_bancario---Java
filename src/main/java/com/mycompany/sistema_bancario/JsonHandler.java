@@ -30,8 +30,9 @@ import java.util.List;
 public class JsonHandler<T> {
     private final ObjectMapper objectMapper;
     private final String filePath;
-
+    
     public JsonHandler(String filePath) {
+        filePath = "src/main/java/com/mycompany/sistema_bancario/usuarios.json";
         this.filePath = filePath;
         this.objectMapper = new ObjectMapper();
 
