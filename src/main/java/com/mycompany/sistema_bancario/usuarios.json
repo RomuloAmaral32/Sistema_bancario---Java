@@ -56,19 +56,5 @@
     "contaBancaria": "1",
     "saldo": 0.0,
     "usuarioService": null
-  },
-  {
-    "nome": "dsdsds",
-    "cpf": "202.744.420-35",
-    "senha": "12345",
-    "email": "dsdsds@gmail.com",
-    "tipo": "gerente",
-    "cep": "44444444",
-    "numero": "33",
-    "nivelDeAcesso": 100000.0,
-    "numeroFuncionario": "1",
-    "rendaFixa": [],
-    "rendaVariavel": [],
-    "usuarioService": null
   }
 ]
